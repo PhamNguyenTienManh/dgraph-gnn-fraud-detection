@@ -1,0 +1,16 @@
+{
+  "dataset_path": "data/dgraphfin.npz",
+  "directed": true,
+  "feature_dtype": "float32",
+  "feature_normalization": "none",
+  "prediction_labels": [0, 1],
+  "positive_label": 1,
+  "background_labels": [2, 3],
+  "sampling": {
+    "method": "pyg_neighbor_loader",
+    "num_neighbors": [15, 10],
+    "batch_size": 1024,
+    "num_workers": 0,
+    "seed": 42
+  }
+}

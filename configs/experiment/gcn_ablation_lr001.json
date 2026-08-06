@@ -1,0 +1,15 @@
+{
+  "run_name": "gcn_ablation_lr001",
+  "mode": "full",
+  "data_path": "data/dgraphfin.npz",
+  "output_root": "artifacts/runs",
+  "device": "cpu",
+  "feature_mode": "zero_indicator",
+  "feature_standardization": "none",
+  "graph_direction": "directed",
+  "seeds": [42, 43, 44],
+  "models": ["gcn"],
+  "model": {"in_channels": 34, "hidden_channels": 64, "num_layers": 2, "dropout": 0.5},
+  "sampling": {"num_neighbors": [15, 10], "batch_size": 1024, "num_workers": 0},
+  "training": {"epochs": 50, "learning_rate": 0.01, "weight_decay": 0.0005, "early_stopping_patience": 8, "use_pos_weight": true, "gradient_clip_norm": 2.0, "max_train_batches": null, "max_eval_batches": null}
+}

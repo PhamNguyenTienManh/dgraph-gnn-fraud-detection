@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dgraph-fraud-ring-detection"
+version = "0.1.0"
+description = "Data and graph pipeline for fraud detection on DGraphFin"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "numpy>=1.26,<3",
+]
+
+[project.optional-dependencies]
+graph = [
+  "torch==2.12.0",
+  "torch-geometric==2.8.0.post1",
+]
+train = [
+  "scikit-learn==1.9.0",
+  "psutil>=5.8",
+]
+dev = [
+  "pytest>=8,<10",
+  "scikit-learn==1.9.0",
+]
+viz = [
+  "matplotlib>=3.9,<4",
+]
+
+[project.scripts]
+dgraph-profile = "dgraph_fraud.cli.profile:main"
+dgraph-train-baselines = "dgraph_fraud.cli.train_baselines:main"
+dgraph-plot-sprint2 = "dgraph_fraud.cli.plot_sprint2:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+testpaths = ["tests"]
