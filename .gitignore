@@ -24,8 +24,8 @@ data/*.npz
 data/processed/
 data/samples/
 
-# Generated experiment output
-artifacts/
+# Large experiment runs and model checkpoints
+artifacts/runs/
 
 # Editor and OS files
 .vscode/
