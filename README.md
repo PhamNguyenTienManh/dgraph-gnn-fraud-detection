@@ -1,52 +1,107 @@
 # DGraph Fraud-Ring Detection
 
-Đồ án nghiên cứu Graph Neural Networks cho bài toán phát hiện người dùng gian lận trên DGraphFin, hướng tới phân tích fraud-ring và đồ thị động ở các sprint sau.
+Đồ án nghiên cứu ứng dụng **Graph Neural Networks (GNN)** vào bài toán phát hiện người dùng gian lận trên mạng lưới tài chính. Dự án sử dụng bộ dữ liệu **DGraphFin** và hướng tới khai thác cấu trúc liên kết giữa các tài khoản để hỗ trợ nhận diện các nhóm người dùng có dấu hiệu gian lận (fraud ring).
 
-Sprint 1 tập trung vào data contract, kiểm định dữ liệu, profiling, biểu diễn đồ thị có hướng và cấu hình sampling phù hợp máy CPU/16 GB RAM. Xem kế hoạch tại `docs/sprint1_sprint2_plan.md` và từ điển dữ liệu tại `docs/data_dictionary.md`.
+## Giới thiệu
 
-Tệp dữ liệu nguồn được giữ nguyên tại `data/dgraphfin.npz`. Pipeline không ghi đè dữ liệu này.
+Trong các hệ thống tài chính, hành vi gian lận không chỉ thể hiện qua thuộc tính của từng người dùng mà còn có thể xuất hiện trong mối quan hệ giữa nhiều tài khoản. Biểu diễn dữ liệu dưới dạng đồ thị cho phép mô hình học đồng thời:
 
-## Lệnh kiểm tra Sprint 1
+- Đặc trưng của từng người dùng;
+- Quan hệ giữa người dùng và người liên hệ khẩn cấp;
+- Cấu trúc lân cận và hướng của liên kết;
+- Vai trò của các nút nền không trực tiếp tham gia bài toán phân loại.
 
-Sau khi kích hoạt `.venv` và cài project, chạy kiểm thử bằng `python -m pytest`. CLI `dgraph-profile` kiểm định/profiling toàn bộ dataset; module `dgraph_fraud.cli.benchmark_sampling` đo một batch neighbor sampling có hướng. Các báo cáo mặc định của sprint được lưu trong `artifacts/metrics/`.
+Đồ án xây dựng pipeline xử lý dữ liệu đồ thị, huấn luyện và so sánh các mô hình GCN, GraphSAGE, RGCN, GAT và TGAT trong điều kiện dữ liệu mất cân bằng mạnh. Các mô hình khai thác đặc trưng nút, cấu trúc liên kết, cơ chế attention và thông tin thời gian của đồ thị. Kết quả phân loại nút là nền tảng để tiếp tục phân tích cộng đồng và phát hiện fraud ring.
 
-Môi trường graph đã kiểm thử trên Windows CPU gồm PyTorch 2.12, PyG 2.8.0.post1 và `pyg-lib` 0.8.0. Wheel CPU của `pyg-lib` phải được cài từ trang wheel chính thức tương ứng với PyTorch 2.12 tại `data.pyg.org`.
+## Dữ liệu DGraphFin
 
-## Sprint 2: GCN, GraphSAGE và RGCN
+DGraphFin là một đồ thị tài chính động trong thế giới thực, được giới thiệu tại NeurIPS 2022. Trong đồ thị:
 
-Chạy baseline raw 17 chiều:
+- Mỗi nút đại diện cho một người dùng;
+- Mỗi cạnh có hướng biểu diễn một người dùng khai báo người dùng khác làm liên hệ khẩn cấp;
+- Mỗi nút có 17 đặc trưng đã được ẩn danh;
+- Nhãn phân biệt người dùng bình thường, người dùng gian lận và các nút nền;
+- Thời điểm cập nhật cạnh cung cấp thông tin về sự thay đổi của đồ thị theo thời gian.
 
-```powershell
-.\.venv\Scripts\python.exe -m dgraph_fraud.cli.train_baselines --config configs\experiment\baseline_full.json
+Theo paper, DGraph gồm **3.700.550 nút**, **4.300.999 cạnh có hướng** và **1.225.601 nút có nhãn mục tiêu**. Trong số đó có 15.509 người dùng gian lận, khiến đây trở thành bài toán phân loại có mức độ mất cân bằng rất cao.
+
+File dữ liệu `data/dgraphfin.npz` không được lưu trên GitHub vì dung lượng lớn. Sau khi tải dữ liệu, hãy đặt file vào thư mục `data/`.
+
+## Nội dung thực hiện
+
+Dự án hiện bao gồm:
+
+- Kiểm định schema và thống kê dữ liệu DGraphFin;
+- Xây dựng biểu diễn đồ thị có hướng bằng PyTorch Geometric;
+- Xử lý giá trị thiếu và thử nghiệm đặc trưng zero-indicator;
+- Huấn luyện và so sánh các mô hình GCN, GraphSAGE, RGCN, GAT và TGAT;
+- Neighbor sampling để làm việc với đồ thị lớn trên tài nguyên giới hạn;
+- Lưu cấu hình, metric, checkpoint và thông tin môi trường của từng lần chạy;
+- Trực quan hóa và phân tích kết quả thực nghiệm.
+
+## Cấu trúc thư mục
+
+```text
+dgraph-fraud-ring-detection/
+├── configs/       # Cấu hình dữ liệu, mô hình và thí nghiệm
+├── data/          # Dữ liệu cục bộ (không đưa dataset lớn lên GitHub)
+├── docs/          # Tài liệu, kế hoạch và báo cáo thực nghiệm
+├── src/           # Mã nguồn chính
+├── tests/         # Kiểm thử tự động
+├── pyproject.toml
+└── README.md
 ```
 
-Mỗi run lưu config, phiên bản môi trường, fingerprint dữ liệu, metric theo epoch, checkpoint tốt nhất và bảng so sánh trong `artifacts/runs/`. AP validation là tiêu chí duy nhất chọn checkpoint; test chỉ được tính sau khi tải lại trạng thái tốt nhất trong bộ nhớ.
+## Công nghệ sử dụng
 
-Chạy biến thể zero-indicator 34 chiều:
+- Python 3.12
+- PyTorch
+- PyTorch Geometric
+- NumPy
+- scikit-learn
+- Matplotlib
+- pytest
 
-```powershell
-.\.venv\Scripts\python.exe -m dgraph_fraud.cli.train_baselines --config configs\experiment\baseline_full_zero_indicator.json
-```
+## Chạy dự án
 
-Không chạy đồng thời các cấu hình full nếu RAM/CPU của máy chưa được theo dõi. Kết quả ba seed và so sánh 17D/34D được ghi tại `docs/sprint2_report.md`.
-
-Chạy RGCN 34 chiều với bốn relation target/background theo paper:
-
-```powershell
-.\.venv\Scripts\python.exe -m dgraph_fraud.cli.train_baselines --config configs\experiment\rgcn_background_full.json
-```
-
-RGCN dùng hidden size 13 để có 2.289 tham số, gần khớp GCN 34D có 2.305 tham số. Kết quả so sánh và giới hạn diễn giải về background node được ghi tại `docs/sprint2_report.md`.
-
-## Biểu đồ Sprint 2
-
-Cài dependency trực quan hóa và sinh lại các biểu đồ từ số liệu trong
-`docs/sprint2_report.md`:
+Tạo môi trường ảo và cài đặt project:
 
 ```powershell
-.\.venv\Scripts\python.exe -m pip install -e ".[viz]"
-.\.venv\Scripts\python.exe -m dgraph_fraud.cli.plot_sprint2
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+python -m pip install -e ".[graph,train,dev,viz]"
 ```
 
-Mặc định, bốn file PNG được ghi vào `artifacts/figures/sprint2/`. Có thể đổi
-thư mục và độ phân giải bằng `--output-dir` và `--dpi`.
+Chạy kiểm thử:
+
+```powershell
+python -m pytest
+```
+
+Huấn luyện các mô hình baseline:
+
+```powershell
+python -m dgraph_fraud.cli.train_baselines --config configs/experiment/baseline_full.json
+```
+
+Sinh biểu đồ tổng hợp kết quả:
+
+```powershell
+python -m dgraph_fraud.cli.plot_sprint2
+```
+
+Các kết quả được sinh trong thư mục `artifacts/` và không được đưa lên GitHub.
+
+## Tài liệu tham khảo
+
+Đồ án được xây dựng với sự tham khảo chính từ:
+
+> Xuanwen Huang et al. **DGraph: A Large-Scale Financial Dataset for Graph Anomaly Detection**. NeurIPS 2022, Datasets and Benchmarks Track.
+
+- [Đọc paper DGraph](https://proceedings.neurips.cc/paper_files/paper/2022/file/8f1918f71972789db39ec0d85bb31110-Paper-Datasets_and_Benchmarks.pdf)
+- [Trang giới thiệu bộ dữ liệu DGraph](https://dgraph.xinye.com/)
+
+## Lưu ý
+
+Dự án được thực hiện với mục đích học tập và nghiên cứu. Dữ liệu DGraphFin đã được ẩn danh; người sử dụng vẫn cần tuân thủ các điều khoản của đơn vị cung cấp dữ liệu.
