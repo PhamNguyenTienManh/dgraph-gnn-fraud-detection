@@ -199,18 +199,18 @@ Các run full và ablation lưu cùng cấu trúc artifact:
 - `comparison.json`: môi trường, fingerprint dữ liệu, kết quả từng model và aggregate.
 - Hai run baseline và run undirected kết hợp có sáu checkpoint GCN/GraphSAGE; run RGCN và bốn run ablation GCN còn lại có ba checkpoint theo seed 42/43/44, đều chọn theo AP validation.
 - Mỗi thư mục model-seed có `metrics.json`: loss, validation metric theo epoch và test metric của checkpoint tốt nhất.
+- `artifacts/metrics/sprint2_results.json`: catalog gọn, có version schema, được tổng hợp từ tám run để notebook và biểu đồ đọc trực tiếp mà không cần commit checkpoint.
 
-Checkpoint được tải bằng chế độ `weights_only=True`, dựng lại đúng model/config và kiểm tra đầu ra bằng unit test. Sau khi bổ sung điều khiển z-score và hướng graph, toàn bộ **31 test đã pass**; có hai cảnh báo deprecation từ `torch.jit.script`, không có test fail.
+Ba notebook đã được chạy lại đầu-cuối: EDA chạy trên dataset đầy đủ, training chạy quick smoke mode và analysis đọc toàn bộ catalog. Không notebook nào có error output. Checkpoint chính thức vẫn được lưu cùng model config và validation AP để có thể dựng lại model khi chuyển sang giai đoạn đóng gói/deploy.
 
 ## 8. Trạng thái cấu hình thực nghiệm
 
-- `configs/experiment/baseline_full.json`: đã chạy thành công cho GCN và GraphSAGE với raw feature 17 chiều, hidden size 64, fan-out `[15, 10]`, batch 1.024, tối đa 50 epoch, patience 8 và ba seed 42/43/44.
-- `configs/experiment/baseline_full_zero_indicator.json`: đã chạy thành công cho GCN và GraphSAGE với cùng ngân sách, dùng zero-indicator 34 chiều để đánh giá cách xử lý missing value.
-- `configs/experiment/rgcn_background_full.json`: đã chạy thành công RGCN 34D parameter-matched với bốn relation target/background theo paper.
-- Năm config `gcn_ablation_*`: đã chạy thành công năm phép thử one-factor-at-a-time cho z-score, dropout, weight decay, learning rate và graph vô hướng.
-- `configs/experiment/graphsage_ablation_undirected.json`: đã chạy thành công GraphSAGE 34D trên graph vô hướng và kết quả đã được ghép với artifact GCN-undirected.
+- Registry `EXPERIMENTS` trong `02_gnn_training.ipynb` chứa trực tiếp baseline raw 17D, baseline zero-indicator 34D, RGCN-BG và các ablation.
+- Baseline GCN/GraphSAGE dùng hidden size 64, fan-out `[15, 10]`, batch 1.024, tối đa 50 epoch, patience 8 và ba seed 42/43/44.
+- RGCN 34D được parameter-match với bốn relation target/background theo paper.
+- Các phép thử z-score, dropout, weight decay, learning rate và graph vô hướng tuân theo one-factor-at-a-time.
 
-Ba cấu hình full và sáu cấu hình ablation đã được chạy mà không điều chỉnh siêu tham số dựa trên test metric.
+Tám experiment trong catalog đã được chạy mà không điều chỉnh siêu tham số dựa trên test metric.
 
 ## 9. Giới hạn và bước tiếp theo
 

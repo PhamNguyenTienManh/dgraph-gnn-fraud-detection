@@ -1,9 +1,0 @@
-{
-  "model": "graphsage",
-  "in_channels": 17,
-  "hidden_channels": 64,
-  "num_layers": 2,
-  "dropout": 0.5,
-  "aggregation": "mean",
-  "output": "binary_logit"
-}

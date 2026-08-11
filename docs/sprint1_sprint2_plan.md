@@ -63,22 +63,16 @@ Do lớp gian lận rất hiếm so với lớp bình thường, **Average Preci
 | A3 | Đồ thị đã được xác nhận là có hướng | Giữ nguyên cạnh có hướng ở bản dữ liệu chuẩn; chỉ tạo biến thể hai chiều như một ablation riêng nếu được phê duyệt. |
 | A4 | Chưa nói cách dùng lớp 2 và 3 | Cho phép lớp nền tham gia truyền thông tin trên đồ thị, nhưng chỉ tính loss và metric trên node lớp 0/1 thuộc đúng mask. |
 | A5 | Split được cung cấp là ngẫu nhiên, chưa phải temporal split | Giữ split 70/15/15 có sẵn để đúng phạm vi baseline; ghi rõ hạn chế và không tự tạo temporal split. |
-| A6 | Chưa nêu chuẩn hóa đặc trưng | Fit thống kê chuẩn hóa chỉ trên node train hợp lệ, sau đó áp dụng cho validation/test; chỉ thực hiện nếu kiểm tra cho thấy cần thiết. |
+| A6 | Chưa nêu chuẩn hóa đặc trưng | Mặc định không chuẩn hóa. Biến thể `global_zscore` chỉ là ablation transductive được ghi nhãn rõ; không trộn kết quả của nó với protocol inductive. |
 | A7 | Chưa nêu chiến lược mất cân bằng | So sánh tối thiểu cấu hình không trọng số với `class weight` hoặc sampling cân bằng; chọn bằng validation AP, không dùng test. |
 | A8 | Máy có 15,47 GB RAM, CPU Intel Core Ultra 7 155U (12 core/14 luồng), Intel Graphics và không có CUDA | Mặc định CPU + neighbor sampling; `batch_size=1024`, fan-out `[15, 10]`, `num_workers=0` trên Windows là cấu hình khởi đầu và sẽ điều chỉnh bằng benchmark. Không dùng full-batch mặc định. |
 | A9 | Chưa quy định số seed/số lần chạy | Dùng tối thiểu 3 seed cho kết quả chính. |
 | A10 | Chưa định nghĩa “cùng điều kiện” tuyệt đối | Cố định dữ liệu, split, metric, seed, số epoch tối đa, early stopping và cách chọn checkpoint; cho phép tham số kiến trúc khác nhau nhưng phải công khai. |
 
-## 4. Cấu trúc thư mục dự kiến
-
-Đây là **cấu trúc đề xuất để triển khai sau khi được phê duyệt**, không phải các tệp sẽ được tạo trong giai đoạn lập kế hoạch này.
+## 4. Cấu trúc thư mục
 
 ```text
 dgraph-fraud-ring-detection/
-├── configs/
-│   ├── data/
-│   ├── model/
-│   └── experiment/
 ├── data/
 │   ├── dgraphfin.npz
 │   ├── Readme.md
@@ -88,33 +82,23 @@ dgraph-fraud-ring-detection/
 │   ├── sprint1_sprint2_plan.md
 │   ├── data_dictionary.md
 │   └── experiment_protocol.md
-├── notebooks/                 # Chỉ dành cho EDA, không chứa logic pipeline chính
-├── src/
-│   ├── data/
-│   ├── models/
-│   ├── training/
-│   ├── evaluation/
-│   └── utils/
-├── scripts/                   # Điểm chạy pipeline/thực nghiệm
-├── tests/
-│   ├── data/
-│   ├── models/
-│   └── training/
+├── notebooks/
+│   ├── 01_dgraphfin_eda.ipynb
+│   ├── 02_gnn_training.ipynb
+│   └── 03_experiment_analysis.ipynb
 ├── artifacts/
-│   ├── checkpoints/
 │   ├── metrics/
-│   ├── logs/
-│   └── figures/
-├── plan.md
+│   ├── figures/
+│   └── runs/                  # Checkpoint/output timestamp ở local
 ├── README.md
-└── pyproject.toml
+└── requirements.txt
 ```
 
 ### Nguyên tắc tổ chức
 
 - `data/` chứa dữ liệu nguồn và dữ liệu dẫn xuất; dữ liệu lớn không đưa vào version control.
-- `src/` chứa logic có thể tái sử dụng; notebook chỉ phục vụ khám phá và trực quan hóa.
-- `configs/` tách cấu hình khỏi logic, giúp so sánh mô hình công bằng.
+- Notebook chứa trực tiếp các hàm, class và cấu hình research; code được chia thành cell ngắn theo đúng luồng phân tích.
+- Registry cấu hình thí nghiệm nằm trong notebook training để mentor đọc được toàn bộ biến kiểm soát mà không phải mở file khác.
 - Mỗi lần chạy có mã định danh riêng và lưu cấu hình, seed, metric, log, checkpoint.
 - `artifacts/` là đầu ra tái tạo được; chỉ các báo cáo nhỏ cần thiết mới cân nhắc quản lý bằng Git.
 
@@ -128,14 +112,14 @@ dgraph-fraud-ring-detection/
 | Dữ liệu số | NumPy | Đọc và kiểm tra tệp NPZ |
 | Bảng/báo cáo | pandas | Tổng hợp thống kê và kết quả thực nghiệm |
 | Metric | scikit-learn | ROC-AUC, Average Precision, confusion matrix bổ trợ |
-| Cấu hình | YAML + thư viện tải cấu hình nhẹ; cân nhắc Hydra nếu số thí nghiệm tăng | Quản lý tham số có kiểm soát |
+| Cấu hình | Dictionary/registry hiển thị trực tiếp trong notebook | Quản lý tham số có kiểm soát và dễ review |
 | Theo dõi | TensorBoard và tệp CSV/JSON cục bộ | Theo dõi loss, metric, thời gian và cấu hình |
 | Trực quan | Matplotlib, Seaborn | Phân bố nhãn, learning curve, so sánh mô hình |
-| Kiểm thử | pytest | Unit test và integration test cho pipeline |
-| Chất lượng | Ruff, formatter tương thích | Quy ước mã nguồn sau khi bắt đầu triển khai |
+| Kiểm tra | Assert, validation cell và quick smoke run | Dừng sớm khi dữ liệu hoặc pipeline không hợp lệ |
+| Chất lượng | Hàm/class ngắn, docstring, tên rõ nghĩa và cell theo một trách nhiệm | Giữ notebook dễ đọc và dễ review |
 | Tài nguyên | psutil; công cụ CUDA của PyTorch nếu có GPU | Theo dõi RAM/VRAM và thời gian chạy |
 
-> Chưa cài bất kỳ package nào trong bước lập kế hoạch. Phiên bản chính xác chỉ được khóa sau khi xác nhận hệ điều hành, GPU, CUDA và khả năng tương thích PyTorch/PyG.
+> Các dependency đã dùng để chạy notebook được khóa theo khoảng/version trong `requirements.txt`; PyTorch/PyG sampling backend vẫn phải tương thích với hệ điều hành và kiến trúc CPU/GPU.
 
 ### Cấu hình máy mục tiêu và hệ quả thiết kế
 
@@ -151,11 +135,11 @@ dgraph-fraud-ring-detection/
 
 > **Cập nhật trước Sprint 2:** PyTorch 2.12 CPU, PyG 2.8.0.post1 và `pyg-lib` 0.8.0 đã cài thành công. `NeighborLoader` chạy được trên DGraph thật và được chọn làm sampler chính; CSR sampler đã kiểm thử được giữ làm fallback. Việc thay backend không làm thay đổi data contract hoặc split.
 
-## 6. Các module cần xây dựng
+## 6. Các khối code cần xây dựng trong notebook
 
-### 6.1. Module dùng chung và Sprint 1
+### 6.1. Các khối code Sprint 1
 
-| Module | Trách nhiệm chính | Đầu ra |
+| Khối code/cell | Trách nhiệm chính | Đầu ra |
 |---|---|---|
 | Data schema/contract | Định nghĩa key bắt buộc, shape, dtype, ý nghĩa nhãn và mask | Data contract có phiên bản |
 | NPZ loader | Đọc dữ liệu có kiểm soát bộ nhớ; báo lỗi rõ khi thiếu/sai key | Cấu trúc dữ liệu thô |
@@ -167,9 +151,9 @@ dgraph-fraud-ring-detection/
 | Split manager | Dùng mask có sẵn và bảo vệ ranh giới train/valid/test | Split metadata |
 | Reproducibility utility | Quản lý seed, fingerprint dữ liệu và cấu hình | Manifest cho mỗi lần chạy |
 
-### 6.2. Module Sprint 2
+### 6.2. Các khối code Sprint 2
 
-| Module | Trách nhiệm chính | Đầu ra |
+| Khối code/cell | Trách nhiệm chính | Đầu ra |
 |---|---|---|
 | Model interface | Chuẩn hóa input/output và cấu hình mô hình | Giao diện chung cho baseline |
 | GCN baseline | Baseline convolution đồ thị | Logit/xác suất gian lận |
@@ -218,7 +202,7 @@ Quy tắc chống rò rỉ:
 | S1-M2: Validation & profiling | Ngày 3–4 | Thiết kế loader, kiểm tra toàn vẹn, thống kê feature/label/split/edge/timestamp | Báo cáo validation không còn lỗi mức blocker |
 | S1-M3: Graph representation | Ngày 5–6 | Chốt hướng cạnh, lớp nền, self-loop, chuẩn hóa và format PyG | Quyết định có tài liệu; graph artifact tái lập được |
 | S1-M4: Sampling & resource test | Ngày 7–8 | Ước lượng RAM/VRAM; thử cấu hình sampling nhỏ; đánh giá coverage và tốc độ | Có cấu hình chạy được trên máy mục tiêu |
-| S1-M5: Kiểm thử & bàn giao | Ngày 9–10 | Thiết kế unit/integration test, kiểm tra pipeline đầu-cuối, hoàn thiện manifest và báo cáo | Checklist nghiệm thu Sprint 1 đạt |
+| S1-M5: Kiểm tra & bàn giao | Ngày 9–10 | Chạy notebook đầu-cuối, kiểm tra assert/validation, hoàn thiện artifact và báo cáo | Checklist nghiệm thu Sprint 1 đạt |
 
 ### Checklist nghiệm thu Sprint 1
 
@@ -230,7 +214,7 @@ Quy tắc chống rò rỉ:
 - [ ] Không có bước fit tiền xử lý sử dụng validation/test.
 - [ ] Sampling chạy được trong giới hạn RAM/VRAM đã đo.
 - [ ] Pipeline có seed, fingerprint và manifest để tái lập.
-- [ ] Có integration test đầu-cuối trước khi xử lý toàn bộ.
+- [ ] Notebook chạy đầu-cuối trên dữ liệu thật, không có error output.
 
 ### Deliverables Sprint 1
 
@@ -238,7 +222,7 @@ Quy tắc chống rò rỉ:
 2. Báo cáo EDA/validation: node, cạnh, feature, nhãn, split, degree, edge type và timestamp.
 3. Thiết kế và hiện thực pipeline tải/kiểm định/tiền xử lý/graph conversion sau khi bước triển khai được phê duyệt.
 4. Cấu hình sampling hoặc subgraph phù hợp tài nguyên, kèm benchmark RAM/VRAM/thời gian.
-5. Bộ kiểm thử dữ liệu và báo cáo kiểm định.
+5. Output validation, assert và báo cáo kiểm định trong notebook đã chạy.
 6. Manifest của dữ liệu đã xử lý và tài liệu quyết định kỹ thuật.
 
 ## 9. Kế hoạch công việc Sprint 2
@@ -248,7 +232,7 @@ Quy tắc chống rò rỉ:
 | Mốc | Thời gian dự kiến | Công việc | Tiêu chí hoàn thành |
 |---|---:|---|---|
 | S2-M1: Protocol chung | Ngày 1 | Chốt metric, seed, early stopping, checkpoint, loss, sampling và ngân sách | `experiment_protocol` được phê duyệt |
-| S2-M2: GCN baseline | Ngày 2–3 | Xây dựng giao diện và GCN; kiểm thử forward/train/validation | Loss hữu hạn, metric được tính đúng, checkpoint tải lại được |
+| S2-M2: GCN baseline | Ngày 2–3 | Định nghĩa GCN trong notebook; chạy quick forward/train/validation | Loss hữu hạn, metric được tính đúng, checkpoint được lưu đủ metadata |
 | S2-M3: GraphSAGE baseline | Ngày 4–5 | Xây dựng GraphSAGE trên cùng interface và dữ liệu | Chạy qua cùng experiment runner |
 | S2-M4: Thực nghiệm kiểm soát | Ngày 6–8 | Chạy cấu hình chốt, theo dõi tài nguyên, tối thiểu 3 seed nếu khả thi | Có run hoàn chỉnh, không dùng test để tuning |
 | S2-M5: Test & so sánh | Ngày 9 | Khóa cấu hình, test checkpoint tốt nhất, tổng hợp AUC/AP | Bảng kết quả có trung bình và độ phân tán nếu nhiều seed |
@@ -267,7 +251,7 @@ Quy tắc chống rò rỉ:
 ### Checklist nghiệm thu Sprint 2
 
 - [ ] GCN và GraphSAGE dùng chung interface và experiment protocol.
-- [ ] Positive class và cách tính AUC/AP được kiểm thử.
+- [ ] Positive class và cách tính AUC/AP được xác nhận bằng validation cell và output.
 - [ ] Validation quyết định checkpoint; test chỉ được dùng sau khi khóa cấu hình.
 - [ ] Có baseline xử lý mất cân bằng được chốt bằng validation.
 - [ ] Mỗi run lưu cấu hình, seed, phiên bản dữ liệu, log và checkpoint.
@@ -290,14 +274,14 @@ Quy tắc chống rò rỉ:
 |---|---|---|---|
 | Dataset lớn gây hết RAM/VRAM | Cao/Cao | Loader bị kill, CUDA OOM, swap tăng mạnh | Đọc có kiểm soát, giảm precision khi an toàn, neighbor sampling, batch nhỏ, gradient accumulation; ghi benchmark trước full run |
 | Mất cân bằng lớp nghiêm trọng | Cao/Cao | AUC khá nhưng AP thấp; mô hình dự đoán phần lớn lớp 0 | Theo dõi AP là metric chính, class weight/sampling chỉ fit từ train, báo cáo PR curve và metric theo lớp |
-| Rò rỉ dữ liệu qua preprocessing | Trung bình/Cao | Metric validation/test cao bất thường | Fit scaler/weight trên train; kiểm thử mask; lưu provenance từng phép biến đổi |
+| Rò rỉ dữ liệu qua preprocessing | Trung bình/Cao | Metric validation/test cao bất thường | Tách rõ transform mặc định và ablation transductive; validation split; lưu provenance từng phép biến đổi |
 | Rò rỉ cấu trúc trong thiết lập transductive bị hiểu sai | Trung bình/Cao | Kết quả không tái hiện trong inductive deployment | Công bố rõ transductive; tách thí nghiệm inductive/temporal về sau nếu cần |
 | Split ngẫu nhiên không phản ánh diễn biến thời gian | Cao/Cao đối với mục tiêu “dynamic” | Kết quả giảm khi đánh giá theo thời gian | Giữ split gốc cho baseline, ghi hạn chế; đề xuất temporal split ở sprint temporal nhưng không tự thay đổi Sprint 1–2 |
 | Lớp 2/3 bị coi nhầm là normal | Trung bình/Cao | Loss/metric bị pha loãng hoặc sai định nghĩa | Chỉ tính loss/metric lớp 0/1; lớp nền chỉ tham gia cấu trúc theo A4 |
 | Hướng cạnh/self-loop không rõ | Trung bình/Trung bình | Kết quả thay đổi lớn giữa biến thể | Giữ canonical graph, cấu hình hóa biến đổi, chạy ablation nhỏ và ghi quyết định |
 | Neighbor sampling làm metric dao động | Trung bình/Trung bình | Chênh lệch lớn giữa seed/batch | Cố định seed, đánh giá coverage, nhiều seed, inference ổn định theo quy trình chốt |
 | So sánh GCN và GraphSAGE thiếu công bằng | Trung bình/Cao | Một mô hình có ngân sách/tuning nhiều hơn | Dùng ma trận điều kiện chung, ghi mọi ngoại lệ, giới hạn số thử nghiệm tương đương |
-| Metric sai positive class hoặc sai mask | Trung bình/Cao | AP bất thường, số mẫu đánh giá không khớp | Unit test trên dữ liệu nhỏ biết trước kết quả; assert positive class = 1 và số node mỗi mask |
+| Metric sai positive class hoặc sai mask | Trung bình/Cao | AP bất thường, số mẫu đánh giá không khớp | Validation cell xác nhận positive class = 1 và số node mỗi split trước khi tính metric |
 | Không tái lập được kết quả | Trung bình/Cao | Chạy lại sai khác lớn hoặc thiếu cấu hình | Seed, deterministic mode khi khả thi, version lock, data fingerprint, run manifest |
 | Tệp checkpoint/log chiếm nhiều dung lượng | Trung bình/Trung bình | Ổ đĩa đầy trong nhiều seed | Retention policy: giữ best/last, nén metric, dọn artifact theo run manifest sau khi được phê duyệt |
 | Baseline node-level chưa chứng minh fraud-ring | Cao/Cao về diễn giải | Có dự đoán node nhưng không có ring output | Giới hạn tuyên bố; định nghĩa ring-level task/evaluation ở giai đoạn sau với phê duyệt riêng |

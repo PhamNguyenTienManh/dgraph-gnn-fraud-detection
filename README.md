@@ -1,107 +1,105 @@
 # DGraph Fraud-Ring Detection
 
-Đồ án nghiên cứu ứng dụng **Graph Neural Networks (GNN)** vào bài toán phát hiện người dùng gian lận trên mạng lưới tài chính. Dự án sử dụng bộ dữ liệu **DGraphFin** và hướng tới khai thác cấu trúc liên kết giữa các tài khoản để hỗ trợ nhận diện các nhóm người dùng có dấu hiệu gian lận (fraud ring).
+Đồ án nghiên cứu ứng dụng **Graph Neural Networks (GNN)** vào bài toán phát hiện
+người dùng gian lận trên mạng lưới tài chính DGraphFin.
 
-## Giới thiệu
+Phần nghiên cứu được trình bày qua ba Jupyter Notebook theo thứ tự EDA, huấn luyện và
+phân tích kết quả. Người đọc có thể theo dõi lần lượt từng quyết định, bước thực hiện
+và output của thí nghiệm.
 
-Trong các hệ thống tài chính, hành vi gian lận không chỉ thể hiện qua thuộc tính của từng người dùng mà còn có thể xuất hiện trong mối quan hệ giữa nhiều tài khoản. Biểu diễn dữ liệu dưới dạng đồ thị cho phép mô hình học đồng thời:
+## Phạm vi hiện tại
 
-- Đặc trưng của từng người dùng;
-- Quan hệ giữa người dùng và người liên hệ khẩn cấp;
-- Cấu trúc lân cận và hướng của liên kết;
-- Vai trò của các nút nền không trực tiếp tham gia bài toán phân loại.
+Dự án đang giải bài toán phân loại fraud ở cấp node trong thiết lập
+static/transductive:
 
-Đồ án xây dựng pipeline xử lý dữ liệu đồ thị, huấn luyện và so sánh các mô hình GCN, GraphSAGE, RGCN, GAT và TGAT trong điều kiện dữ liệu mất cân bằng mạnh. Các mô hình khai thác đặc trưng nút, cấu trúc liên kết, cơ chế attention và thông tin thời gian của đồ thị. Kết quả phân loại nút là nền tảng để tiếp tục phân tích cộng đồng và phát hiện fraud ring.
+- Kiểm định và khám phá dữ liệu DGraphFin;
+- Xử lý missing sentinel và class imbalance;
+- Huấn luyện, so sánh GCN, GraphSAGE và RGCN;
+- Neighbor sampling trên graph lớn;
+- Phân tích nhiều seed và one-factor-at-a-time ablation.
 
-## Dữ liệu DGraphFin
+GAT, TGAT, temporal modeling và bước trích xuất fraud ring được giữ cho sprint sau.
 
-DGraphFin là một đồ thị tài chính động trong thế giới thực, được giới thiệu tại NeurIPS 2022. Trong đồ thị:
+## Thứ tự đọc và chạy
 
-- Mỗi nút đại diện cho một người dùng;
-- Mỗi cạnh có hướng biểu diễn một người dùng khai báo người dùng khác làm liên hệ khẩn cấp;
-- Mỗi nút có 17 đặc trưng đã được ẩn danh;
-- Nhãn phân biệt người dùng bình thường, người dùng gian lận và các nút nền;
-- Thời điểm cập nhật cạnh cung cấp thông tin về sự thay đổi của đồ thị theo thời gian.
+1. [`notebooks/01_dgraphfin_eda.ipynb`](notebooks/01_dgraphfin_eda.ipynb) — load,
+   validation, EDA và benchmark neighbor sampling;
+2. [`notebooks/02_gnn_training.ipynb`](notebooks/02_gnn_training.ipynb) — feature
+   preprocessing, PyG graph, model definitions, training và lưu raw artifact;
+3. [`notebooks/03_experiment_analysis.ipynb`](notebooks/03_experiment_analysis.ipynb)
+   — tổng hợp nhiều seed, ablation, trực quan hóa và kết luận.
 
-Theo paper, DGraph gồm **3.700.550 nút**, **4.300.999 cạnh có hướng** và **1.225.601 nút có nhãn mục tiêu**. Trong số đó có 15.509 người dùng gian lận, khiến đây trở thành bài toán phân loại có mức độ mất cân bằng rất cao.
+Các notebook đã lưu sẵn output của lần chạy kiểm tra gần nhất. Notebook training mặc
+định dùng `QUICK_MODE=True` với ít epoch/batch để kiểm tra pipeline; kết quả quick mode
+không được dùng làm kết luận nghiên cứu.
 
-File dữ liệu `data/dgraphfin.npz` không được lưu trên GitHub vì dung lượng lớn. Sau khi tải dữ liệu, hãy đặt file vào thư mục `data/`.
-
-## Nội dung thực hiện
-
-Dự án hiện bao gồm:
-
-- Kiểm định schema và thống kê dữ liệu DGraphFin;
-- Xây dựng biểu diễn đồ thị có hướng bằng PyTorch Geometric;
-- Xử lý giá trị thiếu và thử nghiệm đặc trưng zero-indicator;
-- Huấn luyện và so sánh các mô hình GCN, GraphSAGE, RGCN, GAT và TGAT;
-- Neighbor sampling để làm việc với đồ thị lớn trên tài nguyên giới hạn;
-- Lưu cấu hình, metric, checkpoint và thông tin môi trường của từng lần chạy;
-- Trực quan hóa và phân tích kết quả thực nghiệm.
-
-## Cấu trúc thư mục
+## Cấu trúc dự án
 
 ```text
 dgraph-fraud-ring-detection/
-├── configs/       # Cấu hình dữ liệu, mô hình và thí nghiệm
-├── data/          # Dữ liệu cục bộ (không đưa dataset lớn lên GitHub)
-├── docs/          # Tài liệu, kế hoạch và báo cáo thực nghiệm
-├── src/           # Mã nguồn chính
-├── tests/         # Kiểm thử tự động
-├── pyproject.toml
+├── artifacts/
+│   ├── figures/       # Hình dùng trong báo cáo
+│   ├── metrics/       # Profile và result catalog có thể kiểm tra độc lập
+│   └── runs/          # Checkpoint/output thô tại local, được gitignore
+├── data/              # Dataset DGraphFin tại local
+├── docs/              # Báo cáo và protocol của các sprint
+├── notebooks/         # Luồng nghiên cứu chính, chứa toàn bộ research code
+├── requirements.txt
 └── README.md
 ```
 
-## Công nghệ sử dụng
+## Cài đặt môi trường
 
-- Python 3.12
-- PyTorch
-- PyTorch Geometric
-- NumPy
-- scikit-learn
-- Matplotlib
-- pytest
-
-## Chạy dự án
-
-Tạo môi trường ảo và cài đặt project:
+Yêu cầu Python 3.12. Tạo virtual environment và cài dependencies:
 
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
-python -m pip install -e ".[graph,train,dev,viz]"
+python -m pip install -r requirements.txt
+python -m ipykernel install --user --name dgraph-fraud --display-name "Python (DGraph Fraud)"
 ```
 
-Chạy kiểm thử:
+`NeighborLoader` cần sampling backend tương thích với phiên bản PyTorch/PyG của môi
+trường, chẳng hạn `pyg-lib`. Nếu môi trường chưa có backend này, cài wheel tương thích
+theo hướng dẫn của PyTorch Geometric trước khi chạy notebook 02.
+
+Khởi động JupyterLab:
 
 ```powershell
-python -m pytest
+python -m jupyter lab
 ```
 
-Huấn luyện các mô hình baseline:
+Mở notebook theo thứ tự `01 → 02 → 03`. Với notebook 02, chọn kernel
+`Python (DGraph Fraud)`.
 
-```powershell
-python -m dgraph_fraud.cli.train_baselines --config configs/experiment/baseline_full.json
-```
+## Chạy full experiment
 
-Sinh biểu đồ tổng hợp kết quả:
+Trong `02_gnn_training.ipynb`:
 
-```powershell
-python -m dgraph_fraud.cli.plot_sprint2
-```
+1. Chọn tên trong `SELECTED_EXPERIMENT`;
+2. Giữ cấu hình chính thức trong `EXPERIMENTS`;
+3. Đặt `RUN_OFFICIAL_EXPERIMENT=True`;
+4. Chạy lại notebook.
 
-Các kết quả được sinh trong thư mục `artifacts/` và không được đưa lên GitHub.
+Raw output được lưu theo timestamp trong `artifacts/runs/`. Để dựng lại catalog từ
+các raw run, đặt `REBUILD_CATALOG_FROM_LOCAL_RUNS=True` trong notebook 03.
+
+## Artifact policy
+
+`artifacts/runs/` được ignore vì chứa checkpoint lớn và output theo timestamp. Các
+metric đã chuẩn hóa trong `artifacts/metrics/` và hình trong `artifacts/figures/` được
+track để mentor có thể kiểm tra kết quả mà không cần chạy lại toàn bộ experiment.
 
 ## Tài liệu tham khảo
 
-Đồ án được xây dựng với sự tham khảo chính từ:
+> Xuanwen Huang et al. **DGraph: A Large-Scale Financial Dataset for Graph Anomaly
+> Detection**. NeurIPS 2022, Datasets and Benchmarks Track.
 
-> Xuanwen Huang et al. **DGraph: A Large-Scale Financial Dataset for Graph Anomaly Detection**. NeurIPS 2022, Datasets and Benchmarks Track.
-
-- [Đọc paper DGraph](https://proceedings.neurips.cc/paper_files/paper/2022/file/8f1918f71972789db39ec0d85bb31110-Paper-Datasets_and_Benchmarks.pdf)
-- [Trang giới thiệu bộ dữ liệu DGraph](https://dgraph.xinye.com/)
+- [DGraph paper](https://proceedings.neurips.cc/paper_files/paper/2022/file/8f1918f71972789db39ec0d85bb31110-Paper-Datasets_and_Benchmarks.pdf)
+- [DGraph dataset website](https://dgraph.xinye.com/)
 
 ## Lưu ý
 
-Dự án được thực hiện với mục đích học tập và nghiên cứu. Dữ liệu DGraphFin đã được ẩn danh; người sử dụng vẫn cần tuân thủ các điều khoản của đơn vị cung cấp dữ liệu.
+Dự án được thực hiện cho mục đích học tập và nghiên cứu. Dữ liệu đã được ẩn danh;
+người sử dụng vẫn cần tuân thủ điều khoản của đơn vị cung cấp dữ liệu.

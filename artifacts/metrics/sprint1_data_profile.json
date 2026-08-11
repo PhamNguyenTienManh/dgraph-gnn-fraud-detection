@@ -1,5 +1,5 @@
 {
-  "source": "data\\dgraphfin.npz",
+  "source": "data/dgraphfin.npz",
   "sha256": "95470dab2c48523f7118a92204c090de37a957bb053bd5841c7bdba09558ba85",
   "validation": {
     "is_valid": true,

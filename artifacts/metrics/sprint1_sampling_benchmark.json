@@ -6,13 +6,12 @@
       10
     ],
     "batch_size": 1024,
-    "num_workers": 0,
     "seed": 42
   },
   "timing_seconds": {
-    "load_dataset": 0.6367818999569863,
-    "build_csr_index": 0.5698775999480858,
-    "sample_one_batch": 0.03219489997718483
+    "load_dataset": 0.5738258000928909,
+    "build_csr_index": 0.5717831999063492,
+    "sample_one_batch": 0.0034103000070899725
   },
   "memory_bytes": {
     "canonical_numpy_arrays": 428678576,
