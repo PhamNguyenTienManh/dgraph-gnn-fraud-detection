@@ -1,9 +1,10 @@
-# Báo cáo triển khai Sprint 2: GCN, GraphSAGE và RGCN
+# Báo cáo triển khai Sprint 2: MLP, GCN, GraphSAGE và RGCN
 
 ## 1. Phạm vi đã thực hiện
 
-Sprint 2 đã xây dựng pipeline dùng chung cho ba mô hình node classification:
+Sprint 2 đã xây dựng pipeline dùng chung cho bốn mô hình node classification:
 
+- MLP hai lớp chỉ dùng feature node, không nhận `edge_index` hoặc neighbor.
 - GCN hai lớp dùng `GCNConv`, self-loop và chuẩn hóa của PyG.
 - GraphSAGE hai lớp dùng `SAGEConv` với mean aggregation.
 - RGCN hai lớp dùng `RGCNConv` và bốn relation theo loại node ở hai đầu cạnh: `T→T`, `T→B`, `B→T`, `B→B`.
@@ -25,7 +26,7 @@ Thiết lập hiện tại là **static, transductive**. Timestamp và 11 edge t
    - `zero_indicator`: thay `-1` bằng 0 và nối 17 cờ missing, tổng cộng 34 chiều.
 4. Tạo PyG `Data`, giữ đồ thị có hướng canonical.
 5. Với RGCN, chuyển loại node ở source/destination thành relation: `0=T→T`, `1=T→B`, `2=B→T`, `3=B→B`; normal và fraud đều thuộc T nên relation không tiết lộ fraud label.
-6. Tạo mini-batch bằng neighbor sampling với số hop bằng số lớp GNN.
+6. Tạo mini-batch: MLP lấy trực tiếp seed node và graph rỗng; GNN dùng neighbor sampling với số hop bằng số lớp message passing.
 7. Chỉ tính loss và metric trên các seed node của batch.
 8. Đánh giá validation sau mỗi epoch, giữ state có AP tốt nhất, rồi mới đánh giá test.
 
@@ -87,6 +88,42 @@ Chênh lệch trung bình `34D - 17D`:
 Zero-indicator cải thiện cả bốn metric trung bình của GCN. Với GraphSAGE, 34D cải thiện validation ROC-AUC/AP và test AP; test ROC-AUC giảm 0,000010, về thực tế là gần như hòa. Vì checkpoint được chọn bằng validation AP, kết quả 34D tốt hơn về tiêu chí lựa chọn cho cả hai kiến trúc. Tuy nhiên mức cải thiện nhỏ so với việc số tham số lớp đầu gần gấp đôi, và mới có ba seed; do đó nên diễn giải đây là bằng chứng thực nghiệm có lợi cho việc biểu diễn missing value, không phải kết luận thống kê tuyệt đối.
 
 Run 34D mất 1.922,17 giây (khoảng 32 phút 2 giây), so với 2.302,53 giây của run 17D. Không kết luận 34D nhanh hơn vì số epoch do early stopping khác nhau: tổng cộng 192 epoch ở 34D so với 189 epoch ở 17D, đồng thời thời gian hệ thống có thể dao động giữa hai lần chạy.
+
+### 4.1. MLP 34D feature-only: đối chứng không dùng cấu trúc graph
+
+Run chính thức: `artifacts/runs/mlp_zero_indicator_20260813_144227`. MLP gồm hai
+linear layer `34 → 64 → 1`, ReLU và dropout 0,5. Thiết kế này có đúng 2.305 tham số,
+bằng GCN 34D, nhưng không nhận cạnh và không thực hiện message passing. Mỗi mini-batch
+chứa 1.024 node đích cùng feature của chính chúng; artifact ghi
+`sampling_protocol=node_minibatch_no_edges`, `uses_graph_structure=false` và
+`graph_edge_count=0`.
+
+Để so sánh công bằng, MLP giữ nguyên feature zero-indicator 34D, train/validation/test
+split, seed 42/43/44, batch size, Adam, learning rate `0,001`, weight decay `5e-4`,
+dropout `0,5`, `pos_weight`, gradient clipping, tối đa 50 epoch, patience 8 và chọn
+checkpoint bằng validation AP. Fan-out và hướng graph không áp dụng cho MLP vì model
+không sử dụng cấu trúc cạnh.
+
+| Seed | Best epoch | Epoch đã chạy | Valid ROC-AUC | Valid AP | Test ROC-AUC | Test AP | Thời gian (giây) |
+|---:|---:|---:|---:|---:|---:|---:|---:|
+| 42 | 5 | 13 | 0,717907 | 0,025978 | 0,722330 | 0,026540 | 43,6 |
+| 43 | 16 | 24 | 0,719217 | 0,026130 | 0,723412 | 0,026739 | 82,3 |
+| 44 | 8 | 16 | 0,718457 | 0,026225 | 0,722749 | 0,026749 | 56,6 |
+| **Mean ± std** | — | — | **0,718527 ± 0,000537** | **0,026111 ± 0,000102** | **0,722830 ± 0,000446** | **0,026676 ± 0,000096** | **182,5 tổng seed** |
+
+| Model 34D | Dùng graph | Valid ROC-AUC | Valid AP | Test ROC-AUC | Test AP | Tham số |
+|---|---|---:|---:|---:|---:|---:|
+| MLP | Không | 0,718527 ± 0,000537 | 0,026111 ± 0,000102 | 0,722830 ± 0,000446 | 0,026676 ± 0,000096 | 2.305 |
+| GCN directed | Có | 0,673327 ± 0,000777 | 0,025638 ± 0,000107 | 0,685631 ± 0,000929 | 0,028441 ± 0,000212 | 2.305 |
+| GraphSAGE directed | Có | **0,751388 ± 0,000539** | **0,035396 ± 0,000067** | **0,758553 ± 0,000816** | **0,038601 ± 0,000242** | 4.545 |
+
+MLP cao hơn GCN directed `0,037200` test ROC-AUC nhưng thấp hơn `0,001765` test AP.
+Vì AP quan trọng hơn trong dữ liệu fraud mất cân bằng và là tiêu chí chọn model, không
+thể kết luận GCN directed tốt hơn baseline feature-only. Ngược lại, GraphSAGE directed
+cao hơn MLP `0,035722` test ROC-AUC và `0,011925` test AP, đồng thời có validation AP
+cao hơn rõ rệt. Kết quả cho thấy cấu trúc graph có thể cung cấp tín hiệu bổ sung, nhưng
+lợi ích phụ thuộc cách kiến trúc tổng hợp neighbor; chỉ “dùng graph” không tự động bảo
+đảm metric tốt hơn.
 
 ## 5. RGCN 34 chiều và vai trò của background node
 
@@ -189,7 +226,7 @@ Undirected cải thiện cả bốn mean metric của GraphSAGE và cả ba pair
 
 ![Tiến triển kết quả Sprint 2 qua các cấu hình chính](../artifacts/figures/sprint2/04_result_progression.png)
 
-*Hình 4. Tiến triển Test ROC-AUC và AP qua các cấu hình chính; RGCN-BG là thí nghiệm directed độc lập.*
+*Hình 4. MLP feature-only và tiến triển Test ROC-AUC/AP qua các cấu hình GNN chính; RGCN-BG là thí nghiệm directed độc lập.*
 
 ## 7. Artifact và khả năng tái kiểm tra
 
@@ -197,24 +234,26 @@ Các run full và ablation lưu cùng cấu trúc artifact:
 
 - `config.json`: toàn bộ siêu tham số thực nghiệm.
 - `comparison.json`: môi trường, fingerprint dữ liệu, kết quả từng model và aggregate.
-- Hai run baseline và run undirected kết hợp có sáu checkpoint GCN/GraphSAGE; run RGCN và bốn run ablation GCN còn lại có ba checkpoint theo seed 42/43/44, đều chọn theo AP validation.
+- Hai run baseline và run undirected kết hợp có sáu checkpoint GCN/GraphSAGE; run MLP, RGCN và bốn run ablation GCN còn lại có ba checkpoint theo seed 42/43/44, đều chọn theo AP validation.
 - Mỗi thư mục model-seed có `metrics.json`: loss, validation metric theo epoch và test metric của checkpoint tốt nhất.
-- `artifacts/metrics/sprint2_results.json`: catalog gọn, có version schema, được tổng hợp từ tám run để notebook và biểu đồ đọc trực tiếp mà không cần commit checkpoint.
+- `artifacts/metrics/sprint2_results.json`: catalog gọn, có version schema, được tổng hợp từ chín experiment để notebook và biểu đồ đọc trực tiếp mà không cần commit checkpoint.
 
 Ba notebook đã được chạy lại đầu-cuối: EDA chạy trên dataset đầy đủ, training chạy quick smoke mode và analysis đọc toàn bộ catalog. Không notebook nào có error output. Checkpoint chính thức vẫn được lưu cùng model config và validation AP để có thể dựng lại model khi chuyển sang giai đoạn đóng gói/deploy.
 
 ## 8. Trạng thái cấu hình thực nghiệm
 
-- Registry `EXPERIMENTS` trong `02_gnn_training.ipynb` chứa trực tiếp baseline raw 17D, baseline zero-indicator 34D, RGCN-BG và các ablation.
+- Registry `EXPERIMENTS` trong `02_gnn_training.ipynb` chứa trực tiếp MLP feature-only, baseline raw 17D, baseline zero-indicator 34D, RGCN-BG và các ablation.
+- MLP dùng hidden size 64, hai linear layer và 2.305 tham số như GCN 34D; model nhận node mini-batch nhưng không nhận cạnh.
 - Baseline GCN/GraphSAGE dùng hidden size 64, fan-out `[15, 10]`, batch 1.024, tối đa 50 epoch, patience 8 và ba seed 42/43/44.
 - RGCN 34D được parameter-match với bốn relation target/background theo paper.
 - Các phép thử z-score, dropout, weight decay, learning rate và graph vô hướng tuân theo one-factor-at-a-time.
 
-Tám experiment trong catalog đã được chạy mà không điều chỉnh siêu tham số dựa trên test metric.
+Chín experiment trong catalog đã được chạy mà không điều chỉnh siêu tham số dựa trên test metric.
 
 ## 9. Giới hạn và bước tiếp theo
 
 - Neighbor sampling làm prediction có thể dao động; seed evaluation đã được cố định.
+- MLP là đối chứng feature-only; so sánh này đo giá trị end-to-end của từng GNN so với không dùng graph, không cô lập riêng từng cơ chế aggregation.
 - Baseline chưa dùng timestamp, 11 edge type gốc hoặc temporal split; RGCN chỉ dùng relation target/background suy ra từ loại node.
 - So sánh GCN/RGCN chưa thay thế ablation loại bỏ background node; nó đo lợi ích của relation-aware message passing.
 - Node-level fraud classification chưa trực tiếp xuất ra fraud ring.

@@ -14,11 +14,13 @@ static/transductive:
 
 - Kiểm định và khám phá dữ liệu DGraphFin;
 - Xử lý missing sentinel và class imbalance;
-- Huấn luyện, so sánh GCN, GraphSAGE và RGCN;
+- Huấn luyện và so sánh GCN, GraphSAGE, RGCN, GAT và TGAT;
 - Neighbor sampling trên graph lớn;
+- Time encoding `node_time - edge_time` và temporal attention cho TGAT undirected;
 - Phân tích nhiều seed và one-factor-at-a-time ablation.
 
-GAT, TGAT, temporal modeling và bước trích xuất fraud ring được giữ cho sprint sau.
+Bước gom node và đánh giá fraud ring vẫn chưa được triển khai; kết quả hiện tại là
+node classification, không phải fraud-ring extraction.
 
 ## Thứ tự đọc và chạy
 
@@ -84,6 +86,9 @@ Trong `02_gnn_training.ipynb`:
 
 Raw output được lưu theo timestamp trong `artifacts/runs/`. Để dựng lại catalog từ
 các raw run, đặt `REBUILD_CATALOG_FROM_LOCAL_RUNS=True` trong notebook 03.
+
+Kết quả full GAT/TGAT và phần diễn giải được tổng hợp trong
+[`docs/sprint3_report.md`](docs/sprint3_report.md).
 
 ## Artifact policy
 
