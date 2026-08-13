@@ -94,7 +94,7 @@ Kết quả full GAT/TGAT và phần diễn giải được tổng hợp trong
 
 `artifacts/runs/` được ignore vì chứa checkpoint lớn và output theo timestamp. Các
 metric đã chuẩn hóa trong `artifacts/metrics/` và hình trong `artifacts/figures/` được
-track để mentor có thể kiểm tra kết quả mà không cần chạy lại toàn bộ experiment.
+track để kết quả thực nghiệm có thể được kiểm tra mà không cần chạy lại toàn bộ experiment.
 
 ## Tài liệu tham khảo
 

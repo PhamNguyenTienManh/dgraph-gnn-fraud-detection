@@ -41,7 +41,7 @@ Tài liệu tập trung vào sáu vấn đề cốt lõi của giai đoạn hi�
 
 | Câu hỏi con cần giải quyết | Phương pháp (method) áp dụng | Đánh giá kết quả theo method | Kết luận/Ghi chú |
 |---|---|---|---|
-| **6.1. Validator có phát hiện được dữ liệu hoặc split không hợp lệ không?** | Định nghĩa validator trực tiếp trong notebook, kiểm tra schema, dtype, miền ID, nhãn, split overlap, feature hữu hạn và độ dài thuộc tính cạnh; dùng assert để dừng luồng khi invalid. | Full-data validation hoàn thành với 0 lỗi và 0 cảnh báo; output được lưu ngay trong notebook đã chạy. | Validation nằm cạnh phần load và EDA nên mentor có thể đọc điều kiện kiểm tra, lệnh gọi và kết quả theo đúng thứ tự. |
+| **6.1. Validator có phát hiện được dữ liệu hoặc split không hợp lệ không?** | Định nghĩa validator trực tiếp trong notebook, kiểm tra schema, dtype, miền ID, nhãn, split overlap, feature hữu hạn và độ dài thuộc tính cạnh; dùng assert để dừng luồng khi invalid. | Full-data validation hoàn thành với 0 lỗi và 0 cảnh báo; output được lưu ngay trong notebook đã chạy. | Validation nằm cạnh phần load và EDA để điều kiện kiểm tra, lệnh gọi và kết quả có thể được đối chiếu theo đúng thứ tự. |
 | **6.2. Kết quả profiling có thể tạo lại và kiểm tra độc lập không?** | Notebook 01 xuất báo cáo máy đọc được tại `artifacts/metrics/sprint1_data_profile.json`; lưu data dictionary và các quyết định xử lý dữ liệu. | Artifact chứa fingerprint, kết quả validation, thống kê node/cạnh/feature/label/split/degree/edge type/timestamp và có thể được sinh lại từ file nguồn. | Báo cáo Markdown dùng để giải thích; notebook là luồng tái tạo chính và JSON profiling là bằng chứng máy đọc được cho các sprint tiếp theo. |
 
 ## Kết luận ngắn

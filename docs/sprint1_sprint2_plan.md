@@ -98,7 +98,7 @@ dgraph-fraud-ring-detection/
 
 - `data/` chứa dữ liệu nguồn và dữ liệu dẫn xuất; dữ liệu lớn không đưa vào version control.
 - Notebook chứa trực tiếp các hàm, class và cấu hình research; code được chia thành cell ngắn theo đúng luồng phân tích.
-- Registry cấu hình thí nghiệm nằm trong notebook training để mentor đọc được toàn bộ biến kiểm soát mà không phải mở file khác.
+- Registry cấu hình thí nghiệm nằm trong notebook training để toàn bộ biến kiểm soát được trình bày tập trung trong cùng một luồng thực nghiệm.
 - Mỗi lần chạy có mã định danh riêng và lưu cấu hình, seed, metric, log, checkpoint.
 - `artifacts/` là đầu ra tái tạo được; chỉ các báo cáo nhỏ cần thiết mới cân nhắc quản lý bằng Git.
 
