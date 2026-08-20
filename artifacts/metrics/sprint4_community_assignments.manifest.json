@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "data_sha256": "95470dab2c48523f7118a92204c090de37a957bb053bd5841c7bdba09558ba85",
+  "graph_policy": "structural_coalesced_as_unique_undirected_pairs",
+  "algorithm": "leiden",
+  "backend": "igraph",
+  "backend_version": "1.0.0",
+  "objective": "modularity",
+  "resolution": 1.0,
+  "seed": 42,
+  "iterations": 2,
+  "node_count": 3700550,
+  "undirected_pair_count": 3997260,
+  "community_count": 1739,
+  "runtime": {
+    "graph_build_seconds": 1.3350619000848383,
+    "leiden_seconds": 29.08303919993341,
+    "rss_start_mib": 346.796875,
+    "rss_peak_mib": 742.64453125,
+    "rss_delta_mib": 395.84765625
+  },
+  "created_at": "2026-08-18T10:15:20.476722+07:00",
+  "assignment_sha256": "5d0a57e6b8e7c2aa6d5cdfa9e2a1079f59399358177781f2c3a3d015b07c3009"
+}

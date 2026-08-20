@@ -1,4 +1,4 @@
-GRAPH NEURAL NETWORKS FOR DYNAMIC FRAUD-RING DETECTION ON THE DGRAPH
+GRAPH NEURAL NETWORKS FOR FRAUD DETECTION ON THE DGRAPH
 DATASET 
 
 Sprint 1 --- Chuẩn bị bộ dữ liệu và Graph Pipeline Tìm hiểu bộ
@@ -29,27 +29,19 @@ Network. Cài đặt và huấn luyện mô hình TGAT để khai thác thông t
 gian (Temporal Information) trong bộ dữ liệu DGraph. Thực hiện benchmark
 giữa GCN, GraphSAGE, GAT và TGAT trên cùng bộ dữ liệu và cùng bộ chỉ số
 đánh giá. So sánh kết quả thực nghiệm; phân tích ưu, nhược điểm của từng
-kiến trúc GNN đối với bài toán Dynamic Fraud-Ring Detection. Lựa chọn mô
+kiến trúc GNN đối với bài toán phát hiện gian lận cấp node trên graph. Lựa chọn mô
 hình có hiệu năng tốt nhất làm baseline cho bước cải tiến.
 
-Sprint 4 --- Cải tiến mô hình phát hiện Fraud-Ring Nghiên cứu và triển
+Sprint 4 --- Cải tiến mô hình phát hiện gian lận Nghiên cứu và triển
 khai một hướng cải tiến nhằm nâng cao hiệu quả của mô hình baseline,
 chẳng hạn Community Detection hoặc Risk Propagation. Tích hợp thông tin
 Community Detection hoặc Risk Propagation vào pipeline của mô hình và
 đánh giá khả năng cải thiện hiệu năng. So sánh kết quả trước và sau khi
 áp dụng phương pháp cải tiến thông qua các chỉ số AUC và Average
-Precision (AP). Thử nghiệm phương pháp Explainable Graph AI (ví dụ
-GNNExplainer) nhằm xác định các Risky Subgraph để hỗ trợ giải thích kết
-quả dự đoán của mô hình. Phân tích mức độ đóng góp của từng phương pháp
-cải tiến đối với bài toán phát hiện gian lận trên đồ thị động.
+Precision (AP). Phân tích mức độ đóng góp của từng phương pháp cải tiến
+đối với bài toán phát hiện gian lận trên graph.
 
-Sprint 5 --- Tổng hợp kết quả và Hoàn thiện đồ án Tổng hợp toàn bộ kết
-quả thực nghiệm của các mô hình GCN, GraphSAGE, GAT, TGAT và các phương
-pháp cải tiến. So sánh hiệu năng giữa các mô hình; phân tích ưu điểm,
-hạn chế và khả năng ứng dụng của từng phương pháp đối với bài toán
-Dynamic Fraud-Ring Detection. Hoàn thiện báo cáo, biểu đồ, bảng số liệu
-và slide trình bày kết quả nghiên cứu. Đánh giá mức độ hoàn thành mục
-tiêu đề tài; đề xuất các hướng phát triển trong tương lai như mở rộng
-sang các Temporal GNN tiên tiến hơn, kết hợp Community Detection, Risk
-Propagation hoặc Explainable Graph AI để nâng cao hiệu quả và khả năng
-giải thích của mô hình.
+Sprint 5 --- Explainable Graph AI và Hoàn thiện đồ án Thử nghiệm
+GNNExplainer nhằm xác định các Risky Subgraph và hỗ trợ giải thích kết
+quả dự đoán của mô hình. Tổng hợp kết quả các sprint, hoàn thiện báo
+cáo, biểu đồ và slide trình bày.

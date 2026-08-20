@@ -1,11 +1,15 @@
 # Research notebooks
 
-Ba notebook là luồng nghiên cứu chính và được đọc/chạy theo thứ tự:
+Năm notebook là luồng nghiên cứu chính và được đọc/chạy theo thứ tự:
 
 1. `01_dgraphfin_eda.ipynb` — data contract, loader, validation, EDA và sampling;
 2. `02_gnn_training.ipynb` — preprocessing, graph, GCN/GraphSAGE/RGCN/GAT/TGAT
    và training;
-3. `03_experiment_analysis.ipynb` — result catalog, multi-seed comparison và ablation.
+3. `03_experiment_analysis.ipynb` — result catalog, multi-seed comparison và ablation;
+4. `04_community_detection.ipynb` — Community Detection, community-level EDA và
+   tạo community feature cho Sprint 4;
+5. `05_community_ablation.ipynb` — kiểm tra structural community features và
+   community-risk có giúp TGAT trên ba seed hay không.
 
 Markdown trong notebook giải thích mục tiêu, giả định và kết luận; code được chia thành
 các cell theo đúng thứ tự thực hiện.
@@ -23,3 +27,8 @@ Notebook 03 đọc catalog baseline tại `artifacts/metrics/sprint2_results.jso
 catalog GAT/TGAT tại `artifacts/metrics/sprint3_results.json`. Đặt
 `REBUILD_CATALOG_FROM_LOCAL_RUNS=True` nếu muốn dựng lại catalog baseline từ raw
 local runs.
+
+Notebook 04 dùng Leiden qua `igraph`, chạy partition toàn graph, community EDA và tạo
+structural/train-only risk features. Notebook 05 tái sử dụng pipeline TGAT từ notebook
+02. Dùng `RUN_COMMUNITY_ABLATION_TRAIN=1` để train/reuse B/C/D đủ ba seed và chỉ dùng
+`RUN_COMMUNITY_ABLATION_TEST=1` cho lần đánh giá test đã khóa; mặc định cả hai đều tắt.

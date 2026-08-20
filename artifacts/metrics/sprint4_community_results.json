@@ -1,0 +1,200 @@
+{
+  "schema_version": 1,
+  "data_contract": {
+    "status": "passed",
+    "data_sha256": "95470dab2c48523f7118a92204c090de37a957bb053bd5841c7bdba09558ba85",
+    "node_count": 3700550,
+    "directed_edge_count": 4300999,
+    "undirected_pair_count": 3997260,
+    "structural_arc_count": 7994520,
+    "elapsed_seconds": 3.06322759995237
+  },
+  "community_config": {
+    "algorithm": "leiden",
+    "backend": "igraph",
+    "backend_version": "1.0.0",
+    "objective": "modularity",
+    "resolution": 1.0,
+    "seed": 42,
+    "iterations": 2,
+    "graph_policy": "structural_coalesced_as_unique_undirected_pairs",
+    "edge_weighting": "unweighted"
+  },
+  "full_community": {
+    "status": "complete",
+    "assignment_reused": true,
+    "assignment_path": "artifacts/metrics/sprint4_community_assignments.npz",
+    "assignment_manifest_path": "artifacts/metrics/sprint4_community_assignments.manifest.json",
+    "assignment_sha256": "5d0a57e6b8e7c2aa6d5cdfa9e2a1079f59399358177781f2c3a3d015b07c3009",
+    "community_table_path": "artifacts/metrics/sprint4_community_table.csv.gz",
+    "figure_01_path": "artifacts/figures/sprint4/01_community_size_distribution.png",
+    "runtime": {
+      "graph_build_seconds": 1.3350619000848383,
+      "leiden_seconds": 29.08303919993341,
+      "rss_start_mib": 346.796875,
+      "rss_peak_mib": 742.64453125,
+      "rss_delta_mib": 395.84765625
+    },
+    "community_sizes": {
+      "community_count": 1739,
+      "min": 99,
+      "median": 1964.0,
+      "p90": 2705.2,
+      "p99": 6853.95999999995,
+      "max": 16609,
+      "singleton_count": 0,
+      "singleton_rate": 0.0,
+      "largest_community_fraction": 0.004488251746362027,
+      "communities_size_le_5": 0,
+      "communities_size_le_5_rate": 0.0
+    },
+    "structural_metrics": {
+      "modularity": 0.9947258208706508,
+      "coverage": 0.9954653937947494,
+      "internal_edge_ratio_global": 0.9954653937947494,
+      "conductance_median_non_isolated": 0.0036534446764091857,
+      "conductance_p90_non_isolated": 0.007007936668837443,
+      "community_internal_edge_ratio_median_non_isolated": 0.9963465553235908,
+      "isolated_community_count": 0
+    },
+    "metric_definitions": {
+      "coverage": "internal_edges / all_undirected_edges",
+      "internal_edge_ratio": "2 * internal_edges / community_volume",
+      "conductance": "boundary / min(volume, total_volume-volume); 0 if volume=0"
+    }
+  },
+  "fraud_eda": {
+    "status": "complete",
+    "label_policy": {
+      "selection": "train_only",
+      "validation": "evaluation_after_selection_lock",
+      "test_labels_used": false
+    },
+    "global_rates": {
+      "train_fraud_rate": 0.0126553358845272,
+      "validation_fraud_rate": 0.012650792442157706
+    },
+    "risk_rule": {
+      "selection_labels": "train_only",
+      "minimum_community_size": 20,
+      "minimum_train_labeled_count": 20,
+      "minimum_train_fraud_count": 2,
+      "minimum_train_fraud_lift": 2.0,
+      "minimum_internal_edge_ratio": 0.5,
+      "ranking": [
+        "train_fraud_lift desc",
+        "train_fraud_count desc",
+        "internal_edge_ratio desc",
+        "community_id asc"
+      ],
+      "maximum_selected": 5
+    },
+    "eligible_community_count": 51,
+    "selected_community_ids": [
+      54,
+      286,
+      110,
+      296,
+      1544
+    ],
+    "concentration": {
+      "train_global_fraud_rate": 0.0126553358845272,
+      "train_total_fraud_count": 10857,
+      "train_fraud_in_selected": 87,
+      "train_fraud_capture_rate_selected": 0.00801326333241227,
+      "validation": {
+        "global_fraud_rate": 0.012650792442157706,
+        "selected_labeled_count": 368,
+        "selected_fraud_count": 18,
+        "selected_fraud_rate": 0.04891304347826087,
+        "selected_fraud_lift": 3.86640154772141,
+        "selected_with_at_least_one_validation_label": 5,
+        "fraction_selected_with_validation_lift_above_1": 0.6
+      },
+      "train_validation_stability": {
+        "minimum_labels_per_split": 20,
+        "community_count": 1704,
+        "spearman_train_validation": 0.08927222784484477
+      }
+    },
+    "artifacts": {
+      "community_table": "artifacts/metrics/sprint4_community_table.csv.gz",
+      "selection_lock": "artifacts/metrics/sprint4_risky_community_selection.json",
+      "risky_community_table": "artifacts/metrics/sprint4_risky_communities.csv",
+      "figure_02": "artifacts/figures/sprint4/02_fraud_concentration_by_community.png"
+    }
+  },
+  "provenance": {
+    "created_at": "2026-08-18T14:31:25.184972+07:00",
+    "python": "3.12.1",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "numpy": "2.5.1",
+    "pandas": "3.0.5",
+    "psutil": "7.2.2",
+    "igraph": "1.0.0",
+    "updated_at": "2026-08-20T16:09:36.930765+07:00"
+  },
+  "stage2_status": "complete",
+  "stage3_status": "complete",
+  "community_features": {
+    "status": "complete",
+    "artifact_reused": true,
+    "schema_version": 1,
+    "data_sha256": "95470dab2c48523f7118a92204c090de37a957bb053bd5841c7bdba09558ba85",
+    "assignment_sha256": "5d0a57e6b8e7c2aa6d5cdfa9e2a1079f59399358177781f2c3a3d015b07c3009",
+    "feature_path": "artifacts/metrics/sprint4_community_features.npz",
+    "structural_feature_names": [
+      "log_community_size",
+      "log_internal_edge_count",
+      "internal_density",
+      "node_internal_degree_ratio",
+      "community_conductance"
+    ],
+    "risk_feature_name": "train_only_community_fraud_rate_leave_one_out",
+    "minimum_labeled_community": 20,
+    "train_leave_one_out": true,
+    "validation_test_use_train_labels_only": true,
+    "standardization_fit": "train_nodes_only",
+    "safe_for_pre_message_passing": false,
+    "required_gnn_integration": "after_message_passing_seed_output_only",
+    "leakage_note": "Leave-one-out protects the seed feature only; pre-message-passing use lets the seed label return through same-community neighbor features.",
+    "structural_mean": [
+      7.7496007891147025,
+      7.821156484415662,
+      0.001012630908017122,
+      0.996499696075718,
+      0.004485590888758977
+    ],
+    "structural_std": [
+      0.45665493453432526,
+      0.46292096412512257,
+      0.0005618524619365635,
+      0.033021760525960044,
+      0.0024451986832459095
+    ],
+    "risk_mean": 0.01265592594702342,
+    "risk_std": 0.005897110873975591,
+    "shape": {
+      "structural": [
+        3700550,
+        5
+      ],
+      "risk": [
+        3700550
+      ]
+    },
+    "created_at": "2026-08-18T14:31:40.431916+07:00",
+    "feature_sha256": "d5d98446df501381cd39a269273340b13f964e7f3a7e598f7286ef1b626afea1"
+  },
+  "stage4_status": "complete",
+  "model_ablation": {
+    "status": "complete_final_test",
+    "result_path": "artifacts/metrics/sprint4_community_ablation.json",
+    "test_evaluated": true,
+    "test_used_for_selection": false,
+    "validation_selected_variant": "C",
+    "test_descriptive_best_variant": "C",
+    "selected_variant_test_ap_above_A": true,
+    "figure_08": "artifacts/figures/sprint4/08_community_ablation_test_metrics.png"
+  }
+}

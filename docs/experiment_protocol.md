@@ -72,5 +72,5 @@ lệch cho riêng timestamp, attention hay sampler.
   chính và raw artifact đã được xóa.
 
 Kết quả là full-history transductive node classification. Không diễn giải thành dự
-đoán fraud tương lai khi dataset không có timestamp xác lập nhãn, và không gọi là
-fraud-ring extraction.
+đoán fraud tương lai khi dataset không có timestamp xác lập nhãn, hoặc thành phát hiện
+nhóm gian lận có phối hợp.

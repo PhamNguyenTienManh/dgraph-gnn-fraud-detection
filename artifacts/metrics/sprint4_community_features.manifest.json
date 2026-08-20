@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "data_sha256": "95470dab2c48523f7118a92204c090de37a957bb053bd5841c7bdba09558ba85",
+  "assignment_sha256": "5d0a57e6b8e7c2aa6d5cdfa9e2a1079f59399358177781f2c3a3d015b07c3009",
+  "feature_path": "artifacts/metrics/sprint4_community_features.npz",
+  "structural_feature_names": [
+    "log_community_size",
+    "log_internal_edge_count",
+    "internal_density",
+    "node_internal_degree_ratio",
+    "community_conductance"
+  ],
+  "risk_feature_name": "train_only_community_fraud_rate_leave_one_out",
+  "minimum_labeled_community": 20,
+  "train_leave_one_out": true,
+  "validation_test_use_train_labels_only": true,
+  "standardization_fit": "train_nodes_only",
+  "safe_for_pre_message_passing": false,
+  "required_gnn_integration": "after_message_passing_seed_output_only",
+  "leakage_note": "Leave-one-out protects the seed feature only; pre-message-passing use lets the seed label return through same-community neighbor features.",
+  "structural_mean": [
+    7.7496007891147025,
+    7.821156484415662,
+    0.001012630908017122,
+    0.996499696075718,
+    0.004485590888758977
+  ],
+  "structural_std": [
+    0.45665493453432526,
+    0.46292096412512257,
+    0.0005618524619365635,
+    0.033021760525960044,
+    0.0024451986832459095
+  ],
+  "risk_mean": 0.01265592594702342,
+  "risk_std": 0.005897110873975591,
+  "shape": {
+    "structural": [
+      3700550,
+      5
+    ],
+    "risk": [
+      3700550
+    ]
+  },
+  "created_at": "2026-08-18T14:31:40.431916+07:00",
+  "feature_sha256": "d5d98446df501381cd39a269273340b13f964e7f3a7e598f7286ef1b626afea1"
+}

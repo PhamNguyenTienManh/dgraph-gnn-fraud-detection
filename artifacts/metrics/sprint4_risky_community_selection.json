@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "data_sha256": "95470dab2c48523f7118a92204c090de37a957bb053bd5841c7bdba09558ba85",
+  "assignment_sha256": "5d0a57e6b8e7c2aa6d5cdfa9e2a1079f59399358177781f2c3a3d015b07c3009",
+  "rule": {
+    "selection_labels": "train_only",
+    "minimum_community_size": 20,
+    "minimum_train_labeled_count": 20,
+    "minimum_train_fraud_count": 2,
+    "minimum_train_fraud_lift": 2.0,
+    "minimum_internal_edge_ratio": 0.5,
+    "ranking": [
+      "train_fraud_lift desc",
+      "train_fraud_count desc",
+      "internal_edge_ratio desc",
+      "community_id asc"
+    ],
+    "maximum_selected": 5
+  },
+  "eligible_count": 51,
+  "selected_community_ids": [
+    54,
+    286,
+    110,
+    296,
+    1544
+  ],
+  "selected_train_metrics": [
+    {
+      "community_id": 54,
+      "size": 4424,
+      "internal_edge_count": 4871,
+      "boundary_edge_count": 93,
+      "volume": 9835,
+      "conductance": 0.00945602440264362,
+      "internal_edge_ratio": 0.9905439755973564,
+      "train_labeled_count": 731,
+      "train_fraud_count": 45,
+      "train_fraud_rate": 0.06155950752393981,
+      "train_fraud_lift": 4.864312420123463
+    },
+    {
+      "community_id": 286,
+      "size": 2059,
+      "internal_edge_count": 2262,
+      "boundary_edge_count": 13,
+      "volume": 4537,
+      "conductance": 0.0028653295128939827,
+      "internal_edge_ratio": 0.997134670487106,
+      "train_labeled_count": 383,
+      "train_fraud_count": 16,
+      "train_fraud_rate": 0.04177545691906005,
+      "train_fraud_lift": 3.301015263461794
+    },
+    {
+      "community_id": 110,
+      "size": 787,
+      "internal_edge_count": 852,
+      "boundary_edge_count": 1,
+      "volume": 1705,
+      "conductance": 0.0005865102639296188,
+      "internal_edge_ratio": 0.9994134897360704,
+      "train_labeled_count": 174,
+      "train_fraud_count": 7,
+      "train_fraud_rate": 0.040229885057471264,
+      "train_fraud_lift": 3.178887184389752
+    },
+    {
+      "community_id": 296,
+      "size": 1598,
+      "internal_edge_count": 1713,
+      "boundary_edge_count": 22,
+      "volume": 3448,
+      "conductance": 0.0063805104408352666,
+      "internal_edge_ratio": 0.9936194895591647,
+      "train_labeled_count": 401,
+      "train_fraud_count": 16,
+      "train_fraud_rate": 0.0399002493765586,
+      "train_fraud_lift": 3.152840014727848
+    },
+    {
+      "community_id": 1544,
+      "size": 338,
+      "internal_edge_count": 352,
+      "boundary_edge_count": 1,
+      "volume": 705,
+      "conductance": 0.0014184397163120568,
+      "internal_edge_ratio": 0.9985815602836879,
+      "train_labeled_count": 82,
+      "train_fraud_count": 3,
+      "train_fraud_rate": 0.036585365853658534,
+      "train_fraud_lift": 2.890904373260367
+    }
+  ],
+  "validation_labels_used_for_selection": false,
+  "test_labels_used": false,
+  "created_at": "2026-08-20T10:02:37.521260+07:00"
+}

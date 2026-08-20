@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Sprint 4 community detection results",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "data_contract",
+    "community_config",
+    "full_community",
+    "fraud_eda",
+    "model_ablation",
+    "provenance"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "const": 1
+    },
+    "data_contract": {
+      "type": "object",
+      "required": [
+        "data_sha256",
+        "node_count",
+        "directed_edge_count",
+        "undirected_pair_count",
+        "structural_arc_count"
+      ]
+    },
+    "community_config": {
+      "type": "object",
+      "required": [
+        "algorithm",
+        "backend",
+        "objective",
+        "resolution",
+        "seed",
+        "iterations",
+        "graph_policy"
+      ]
+    },
+    "full_community": {
+      "type": "object"
+    },
+    "fraud_eda": {
+      "type": "object"
+    },
+    "provenance": {
+      "type": "object"
+    },
+    "model_ablation": {
+      "type": "object"
+    }
+  }
+}

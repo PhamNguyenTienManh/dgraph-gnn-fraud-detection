@@ -27,6 +27,10 @@ data/samples/
 # Large experiment runs and model checkpoints
 artifacts/runs/
 
+# Neo4j import/export data used only for local visualization
+artifacts/neo4j/
+scripts/
+
 # Editor and OS files
 .vscode/
 .idea/

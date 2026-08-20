@@ -43,7 +43,7 @@ Tài liệu chọn sáu vấn đề quan trọng nhất của Sprint 3, gồm t�
 | Câu hỏi con cần giải quyết | Phương pháp (method) áp dụng | Đánh giá kết quả theo method | Kết luận/Ghi chú |
 |---|---|---|---|
 | **6.1. Kết quả có ổn định và tránh test leakage không?** | Chạy đủ ba seed, đánh giá toàn bộ validation/test split, chọn checkpoint duy nhất bằng validation AP và báo mean ± population standard deviation. | TGAT có validation ROC-AUC/AP std `0,000564/0,000145` và test ROC-AUC/AP std `0,001017/0,000303`; thứ hạng tổng thể không phụ thuộc vào một seed đơn lẻ. | Kết quả có độ ổn định tốt trong ba seed và test không tham gia tuning. Ba seed vẫn là bằng chứng thực nghiệm, không thay thế kiểm định thống kê quy mô lớn. |
-| **6.2. Sprint 3 đã chứng minh phát hiện fraud ring hoặc fraud tương lai chưa?** | Đối chiếu task, output và phạm vi dữ liệu mà model thật sự sử dụng. | Các model trả xác suất fraud ở cấp node. TGAT dùng timestamp trong attention nhưng không có temporal cutoff; pipeline chưa tạo community/ring hoặc đánh giá dự báo tương lai. | Chưa thể kết luận đã phát hiện fraud ring hay dự báo fraud tương lai. Kết quả chỉ chứng minh hiệu quả node classification full-history trên DGraphFin. |
+| **6.2. Sprint 3 đã chứng minh dự đoán fraud tương lai chưa?** | Đối chiếu task, output và phạm vi dữ liệu mà model thật sự sử dụng. | Các model trả xác suất fraud ở cấp node. TGAT dùng timestamp trong attention nhưng không có temporal cutoff; pipeline chưa đánh giá dự báo tương lai. | Chưa thể kết luận đã dự báo fraud tương lai. Kết quả chỉ chứng minh hiệu quả node classification full-history trên DGraphFin. |
 
 ## Kết luận ngắn
 
@@ -56,4 +56,4 @@ Tài liệu chọn sáu vấn đề quan trọng nhất của Sprint 3, gồm t�
 - Lợi thế AP của TGAT so với GraphSAGE nhỏ (`+0,000477`) trong khi TGAT lớn và chậm
   hơn; lựa chọn cuối phụ thuộc ưu tiên chất lượng hay chi phí.
 - Kết quả thuộc full-history transductive node classification, chưa phải temporal
-  forecasting hoặc fraud-ring extraction.
+  forecasting.

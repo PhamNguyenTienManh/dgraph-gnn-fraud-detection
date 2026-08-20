@@ -1,11 +1,11 @@
-# DGraph Fraud-Ring Detection
+# DGraph Fraud Detection
 
 Đồ án nghiên cứu ứng dụng **Graph Neural Networks (GNN)** vào bài toán phát hiện
 người dùng gian lận trên mạng lưới tài chính DGraphFin.
 
-Phần nghiên cứu được trình bày qua ba Jupyter Notebook theo thứ tự EDA, huấn luyện và
-phân tích kết quả. Người đọc có thể theo dõi lần lượt từng quyết định, bước thực hiện
-và output của thí nghiệm.
+Phần nghiên cứu được trình bày qua năm Jupyter Notebook theo thứ tự EDA dữ liệu,
+huấn luyện, phân tích kết quả, Community Detection và community-feature ablation. Người đọc có thể theo dõi lần
+lượt từng quyết định, bước thực hiện và output của thí nghiệm.
 
 ## Phạm vi hiện tại
 
@@ -17,10 +17,11 @@ static/transductive:
 - Huấn luyện và so sánh GCN, GraphSAGE, RGCN, GAT và TGAT;
 - Neighbor sampling trên graph lớn;
 - Time encoding `node_time - edge_time` và temporal attention cho TGAT undirected;
-- Phân tích nhiều seed và one-factor-at-a-time ablation.
+- Leiden Community Detection, risky-community discovery và visualization;
+- Phân tích nhiều seed và community-feature ablation A/B/C/D.
 
-Bước gom node và đánh giá fraud ring vẫn chưa được triển khai; kết quả hiện tại là
-node classification, không phải fraud-ring extraction.
+Community được dùng để khoanh vùng ứng viên rủi ro, không phải xác nhận rằng các node
+trong community có hành vi gian lận phối hợp. Kết quả model vẫn là transductive node classification.
 
 ## Thứ tự đọc và chạy
 
@@ -29,7 +30,11 @@ node classification, không phải fraud-ring extraction.
 2. [`notebooks/02_gnn_training.ipynb`](notebooks/02_gnn_training.ipynb) — feature
    preprocessing, PyG graph, model definitions, training và lưu raw artifact;
 3. [`notebooks/03_experiment_analysis.ipynb`](notebooks/03_experiment_analysis.ipynb)
-   — tổng hợp nhiều seed, ablation, trực quan hóa và kết luận.
+   — tổng hợp nhiều seed, ablation, trực quan hóa và kết luận;
+4. [`notebooks/04_community_detection.ipynb`](notebooks/04_community_detection.ipynb)
+   — Leiden Community Detection, EDA cấp community và tạo community feature;
+5. [`notebooks/05_community_ablation.ipynb`](notebooks/05_community_ablation.ipynb)
+   — kiểm tra structural community features và community-risk có giúp TGAT trên ba seed hay không.
 
 Các notebook đã lưu sẵn output của lần chạy kiểm tra gần nhất. Notebook training mặc
 định dùng `QUICK_MODE=True` với ít epoch/batch để kiểm tra pipeline; kết quả quick mode
@@ -38,13 +43,13 @@ không được dùng làm kết luận nghiên cứu.
 ## Cấu trúc dự án
 
 ```text
-dgraph-fraud-ring-detection/
+dgraph-fraud-detection/
 ├── artifacts/
 │   ├── figures/       # Hình dùng trong báo cáo
 │   ├── metrics/       # Profile và result catalog có thể kiểm tra độc lập
 │   └── runs/          # Checkpoint/output thô tại local, được gitignore
 ├── data/              # Dataset DGraphFin tại local
-├── docs/              # Báo cáo và protocol của các sprint
+├── docs/              # Báo cáo và kế hoạch của các sprint
 ├── notebooks/         # Luồng nghiên cứu chính, chứa toàn bộ research code
 ├── requirements.txt
 └── README.md
@@ -72,7 +77,7 @@ Khởi động JupyterLab:
 python -m jupyter lab
 ```
 
-Mở notebook theo thứ tự `01 → 02 → 03`. Với notebook 02, chọn kernel
+Mở notebook theo thứ tự `01 → 02 → 03 → 04 → 05`. Chọn kernel
 `Python (DGraph Fraud)`.
 
 ## Chạy full experiment
@@ -89,6 +94,11 @@ các raw run, đặt `REBUILD_CATALOG_FROM_LOCAL_RUNS=True` trong notebook 03.
 
 Kết quả full GAT/TGAT và phần diễn giải được tổng hợp trong
 [`docs/sprint3_report.md`](docs/sprint3_report.md).
+
+Kết quả Community Detection, fraud concentration và so sánh A/B/C/D được tổng hợp
+trong [`docs/sprint4_report.md`](docs/sprint4_report.md). Notebook 05 mặc định chỉ hiển thị kết quả
+đã lưu. Dùng `RUN_COMMUNITY_ABLATION_TRAIN=1` để train/reuse ba seed và chỉ dùng
+`RUN_COMMUNITY_ABLATION_TEST=1` cho lần đánh giá test đã khóa.
 
 ## Artifact policy
 

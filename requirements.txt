@@ -8,3 +8,4 @@ torch-geometric==2.8.0.post1
 ipykernel>=6.29,<7
 jupyterlab>=4.2,<5
 nbclient>=0.10,<1
+igraph==1.0.0

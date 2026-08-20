@@ -41,7 +41,7 @@ Tài liệu chọn sáu vấn đề quan trọng nhất của Sprint 2, gồm t�
 | Câu hỏi con cần giải quyết | Phương pháp (method) áp dụng | Đánh giá kết quả theo method | Kết luận/Ghi chú |
 |---|---|---|---|
 | **6.1. Kết quả có tái kiểm tra được và có tránh test leakage không?** | Dùng ba seed; chọn checkpoint chỉ bằng validation AP; test sau khi khóa checkpoint. Lưu config, SHA-256 dữ liệu, phiên bản môi trường, log epoch, checkpoint, `metrics.json` và `comparison.json`; cố định evaluation seed. | Artifact có cấu trúc thống nhất, aggregate mean/std được lưu. Ba notebook đã chạy lại không có error output; kích thước valid/test được đánh giá đầy đủ. | Test không tham gia lựa chọn. Neighbor sampling vẫn có thể tạo dao động nhỏ; ba seed là bằng chứng ban đầu chứ chưa phải kiểm định thống kê tuyệt đối. |
-| **6.2. Kết quả hiện tại đã chứng minh phát hiện fraud ring động chưa?** | Đối chiếu output và input thật sự của pipeline với mục tiêu bài toán fraud-ring detection. | Pipeline dự đoán xác suất fraud ở cấp node; GCN/GraphSAGE dùng graph static; RGCN-BG chỉ dùng bốn relation target/background. Timestamp và 11 edge type gốc chưa tham gia message passing. | Chưa thể kết luận đã phát hiện fraud ring, quan hệ động hoặc ý nghĩa của edge type gốc. Các bước tiếp theo là ring/community extraction, temporal evaluation, relation gốc và background-removal ablation. |
+| **6.2. Phạm vi bài toán hiện tại là gì?** | Đối chiếu output và input thật sự của pipeline với bài toán node-level fraud detection. | Pipeline dự đoán xác suất fraud ở cấp node; GCN/GraphSAGE dùng graph static; RGCN-BG chỉ dùng bốn relation target/background. Timestamp và 11 edge type gốc chưa tham gia message passing. | Chưa thể kết luận về quan hệ động hoặc các nhóm gian lận có phối hợp. Các bước tiếp theo là community analysis, temporal evaluation, relation gốc và background-removal ablation. |
 
 ## Kết luận ngắn
 
@@ -49,4 +49,4 @@ Tài liệu chọn sáu vấn đề quan trọng nhất của Sprint 2, gồm t�
 - `pos_weight` xử lý mất cân bằng tại loss mà không thay đổi phân bố sampling.
 - Missing indicator có lợi nhỏ; relation target/background và message passing hai chiều tạo mức cải thiện lớn hơn.
 - GraphSAGE 34D undirected là cấu hình tốt nhất trong nhánh GCN/GraphSAGE đã thử.
-- Kết quả vẫn thuộc node-level static/transductive classification, chưa phải kết luận hoàn chỉnh về fraud-ring detection.
+- Kết quả thuộc node-level static/transductive fraud classification.

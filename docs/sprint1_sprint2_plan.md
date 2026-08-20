@@ -2,7 +2,7 @@
 
 ## 1. Phạm vi và nguồn thông tin
 
-Tài liệu này chỉ lập kế hoạch cho hai sprint đầu của đề tài **“Graph Neural Networks for Dynamic Fraud-Ring Detection on the DGraph Dataset”**. Tài liệu không bao gồm hoạt động triển khai mã nguồn, tạo môi trường, cài thư viện hoặc huấn luyện mô hình.
+Tài liệu này chỉ lập kế hoạch cho hai sprint đầu của đề tài **“Graph Neural Networks for Fraud Detection on the DGraph Dataset”**. Tài liệu không bao gồm hoạt động triển khai mã nguồn, tạo môi trường, cài thư viện hoặc huấn luyện mô hình.
 
 ### 1.1. Nguồn đã đối chiếu
 
@@ -52,7 +52,7 @@ Do lớp gian lận rất hiếm so với lớp bình thường, **Average Preci
 
 - Sprint 1 phải bảo toàn `edge_timestamp` và kiểm tra chất lượng trường này.
 - Sprint 2 được xem là **baseline đồ thị tĩnh**; timestamp chưa đi vào message passing, trừ khi được phê duyệt bổ sung.
-- Nhãn hiện có hỗ trợ bài toán phân loại node gian lận/không gian lận. Tiêu chí xác định một **fraud ring**, nhãn cấp ring và chỉ số đánh giá cấp ring chưa được nêu. Vì vậy Sprint 1–2 chưa tuyên bố giải quyết đầy đủ phát hiện fraud-ring cấp nhóm.
+- Nhãn hiện có hỗ trợ bài toán phân loại node gian lận/không gian lận. Vì vậy phạm vi Sprint 1–2 được xác định là node-level fraud classification, không phải phát hiện nhóm gian lận ở cấp tập hợp.
 
 ## 3. Các giả định và điểm cần phê duyệt
 
@@ -72,7 +72,7 @@ Do lớp gian lận rất hiếm so với lớp bình thường, **Average Preci
 ## 4. Cấu trúc thư mục
 
 ```text
-dgraph-fraud-ring-detection/
+dgraph-fraud-detection/
 ├── data/
 │   ├── dgraphfin.npz
 │   ├── Readme.md
@@ -257,7 +257,7 @@ Quy tắc chống rò rỉ:
 - [ ] Mỗi run lưu cấu hình, seed, phiên bản dữ liệu, log và checkpoint.
 - [ ] Checkpoint có thể tải lại và tái tạo metric trong sai số cho phép.
 - [ ] Kết quả có AUC, AP, thời gian, RAM/VRAM và độ phân tán giữa seed nếu khả thi.
-- [ ] Báo cáo nêu rõ thiết lập static/transductive và các hạn chế đối với dynamic fraud-ring detection.
+- [ ] Báo cáo nêu rõ thiết lập static/transductive và các giới hạn khi diễn giải kết quả.
 
 ### Deliverables Sprint 2
 
@@ -284,7 +284,7 @@ Quy tắc chống rò rỉ:
 | Metric sai positive class hoặc sai mask | Trung bình/Cao | AP bất thường, số mẫu đánh giá không khớp | Validation cell xác nhận positive class = 1 và số node mỗi split trước khi tính metric |
 | Không tái lập được kết quả | Trung bình/Cao | Chạy lại sai khác lớn hoặc thiếu cấu hình | Seed, deterministic mode khi khả thi, version lock, data fingerprint, run manifest |
 | Tệp checkpoint/log chiếm nhiều dung lượng | Trung bình/Trung bình | Ổ đĩa đầy trong nhiều seed | Retention policy: giữ best/last, nén metric, dọn artifact theo run manifest sau khi được phê duyệt |
-| Baseline node-level chưa chứng minh fraud-ring | Cao/Cao về diễn giải | Có dự đoán node nhưng không có ring output | Giới hạn tuyên bố; định nghĩa ring-level task/evaluation ở giai đoạn sau với phê duyệt riêng |
+| Baseline node-level không tạo đầu ra cấp nhóm | Cao/Cao về diễn giải | Có dự đoán node nhưng không có đầu ra nhóm | Giới hạn tuyên bố; nếu mở rộng sang group-level task/evaluation thì cần một thiết kế và phê duyệt riêng |
 
 ## 11. Cổng phê duyệt giữa hai sprint
 

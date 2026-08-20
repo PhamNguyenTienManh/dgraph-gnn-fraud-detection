@@ -15,7 +15,7 @@ Sprint 2 đã xây dựng pipeline dùng chung cho bốn mô hình node classifi
 - Metric bắt buộc: ROC-AUC và Average Precision (AP).
 - Lưu config, seed, phiên bản thư viện, SHA-256 dữ liệu, log từng epoch, checkpoint và bảng tổng hợp JSON.
 
-Thiết lập hiện tại là **static, transductive**. Timestamp và 11 edge type gốc chưa tham gia message passing. Riêng RGCN dùng bốn relation suy ra từ target/background; vì vậy kết quả vẫn chưa phải đánh giá fraud-ring động hoặc ý nghĩa của 11 loại quan hệ khẩn cấp.
+Thiết lập hiện tại là **static, transductive**. Timestamp và 11 edge type gốc chưa tham gia message passing. Riêng RGCN dùng bốn relation suy ra từ target/background; vì vậy kết quả chưa đánh giá temporal fraud detection hoặc ý nghĩa của 11 loại quan hệ gốc.
 
 ## 2. Data pipeline
 
@@ -50,7 +50,7 @@ Seed 43 của GCN chạy đủ 50 epoch; năm lượt còn lại dừng sớm th
 | GCN | 0,671084 ± 0,000393 | 0,024991 ± 0,000059 | 0,681957 ± 0,000872 | 0,027691 ± 0,000117 | 1.217 |
 | GraphSAGE | **0,750582 ± 0,000443** | **0,034868 ± 0,000036** | **0,758562 ± 0,000857** | **0,038309 ± 0,000074** | 2.369 |
 
-GraphSAGE cao hơn GCN trên cả ROC-AUC và AP ở validation lẫn test cho cả ba seed. So theo trung bình, GraphSAGE tăng 0,079497 valid ROC-AUC, 0,009877 valid AP, 0,076605 test ROC-AUC và 0,010618 test AP. Độ lệch chuẩn giữa ba seed nhỏ ở cả hai mô hình, cho thấy kết quả ổn định trong phạm vi các seed đã chạy. Đây vẫn là baseline node-level static/transductive; kết quả không chứng minh mô hình đã phát hiện fraud ring hoặc khai thác thời gian.
+GraphSAGE cao hơn GCN trên cả ROC-AUC và AP ở validation lẫn test cho cả ba seed. So theo trung bình, GraphSAGE tăng 0,079497 valid ROC-AUC, 0,009877 valid AP, 0,076605 test ROC-AUC và 0,010618 test AP. Độ lệch chuẩn giữa ba seed nhỏ ở cả hai mô hình, cho thấy kết quả ổn định trong phạm vi các seed đã chạy. Đây vẫn là baseline node-level static/transductive; kết quả không chứng minh dự đoán fraud tương lai hoặc khai thác thời gian.
 
 Tổng thời gian toàn run là 2.302,53 giây (khoảng 38 phút 23 giây). Thời gian từng lượt gồm GCN 275,72/604,06/412,42 giây và GraphSAGE 267,08/350,56/390,65 giây cho seed 42/43/44. Không so sánh trực tiếp tốc độ kiến trúc từ các số này vì số epoch khác nhau do early stopping. RSS cuối lượt tăng từ 1.129,6 lên 2.264,4 MiB khi các lượt chạy tuần tự trong cùng tiến trình, nên không phải peak RAM độc lập của từng mô hình.
 
@@ -256,7 +256,7 @@ Chín experiment trong catalog đã được chạy mà không điều chỉnh s
 - MLP là đối chứng feature-only; so sánh này đo giá trị end-to-end của từng GNN so với không dùng graph, không cô lập riêng từng cơ chế aggregation.
 - Baseline chưa dùng timestamp, 11 edge type gốc hoặc temporal split; RGCN chỉ dùng relation target/background suy ra từ loại node.
 - So sánh GCN/RGCN chưa thay thế ablation loại bỏ background node; nó đo lợi ích của relation-aware message passing.
-- Node-level fraud classification chưa trực tiếp xuất ra fraud ring.
+- Node-level fraud classification chỉ xuất xác suất cho từng node, không tạo đầu ra cấp nhóm.
 - So sánh raw và `zero_indicator` phải dựa trên validation; test chỉ báo cáo sau khi khóa lựa chọn.
 - Cần bổ sung đo peak RAM/CPU độc lập nếu muốn so sánh hiệu năng hệ thống giữa hai kiến trúc.
 - Năm ablation GCN đo riêng từng yếu tố; quyết định hiện tại chỉ chọn undirected vì mức tăng lớn và nhất quán. Không cộng thêm weight decay `5e-7`, do cải thiện của nó nhỏ và biến thiên AUC giữa seed lớn hơn baseline.

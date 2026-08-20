@@ -150,5 +150,5 @@ cấu trúc liên kết hữu ích cho phát hiện lớp fraud hiếm, đồng 
 phụ thuộc kiến trúc message passing chứ không chỉ việc có hay không có graph.
 
 Kết luận chỉ áp dụng cho node-level full-history transductive classification trên
-DGraphFin. Nó không chứng minh dự đoán fraud tương lai và chưa phải fraud-ring
-extraction.
+DGraphFin. Nó không chứng minh dự đoán fraud tương lai hoặc phát hiện nhóm gian lận
+có phối hợp.
