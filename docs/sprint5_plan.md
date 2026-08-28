@@ -237,12 +237,12 @@ hợp lệ nếu được báo đầy đủ và trung thực.
 
 ## 13. Công việc mở rộng
 
-1. Time perturbation để kiểm tra TGAT học tín hiệu thời gian đến đâu.
-2. So TGAT một hop với hai hop hoặc GraphSAGE trên một protocol mới.
-3. So GNNExplainer với Integrated Gradients/Captum cho feature attribution.
-4. So TGAT + community-risk với TGAT không có feature này trên cùng target.
-5. Calibration và đánh giá prospective/temporal split.
-6. Xuất HTML/Neo4j khi đã có candidate đủ bằng chứng.
+1. Khóa threshold trên validation, tách false positive/false negative và kiểm tra trực
+   tiếp đầu vào nào đã đẩy model tới dự đoán sai.
+2. Thay đổi riêng timestamp, hàng xóm và message passing để kiểm tra TGAT học thời
+   gian và cấu trúc graph đến đâu.
+3. Báo riêng target có từ hai event và so các phương pháp ở cùng top-1, top-2, top-3
+   thay vì cho phép giữ gần toàn bộ neighborhood.
 
 ## 14. Tài liệu phương pháp
 

@@ -2,7 +2,7 @@
   "schema_version": 3,
   "status": "complete",
   "gate_passed": true,
-  "generated_at": "2026-08-28T02:11:10.829437+00:00",
+  "generated_at": "2026-08-28T03:24:02.669542+00:00",
   "model": "TGAT + community-risk",
   "target_count": 80,
   "canonical_artifacts": [
@@ -28,18 +28,18 @@
     },
     {
       "path": "notebooks/06_gnn_explainer.ipynb",
-      "size_bytes": 367073,
-      "sha256": "ae910462d66cf8af08a5b03506d30f672395554295d920aa2cee995801cdf736"
+      "size_bytes": 366995,
+      "sha256": "5d1c0b2df3203a088cf72a98aa358d6dd13a13cde9ef37e92f499b442c3aaba6"
     },
     {
       "path": "docs/sprint5_report.md",
-      "size_bytes": 18090,
-      "sha256": "018f5d83c48be9e4a68c782e66e501601b0ea927e7611af42af1b602a2f74942"
+      "size_bytes": 17621,
+      "sha256": "fbf20c1e83b7ab6f0a77674a2ecb89aa251374353f99839ebe3f37d7277be074"
     },
     {
       "path": "docs/sprint5_plan.md",
-      "size_bytes": 12659,
-      "sha256": "f50e3cbd39c9002dbab48dd6f90a884be385122805d137c163adba8214ce46a4"
+      "size_bytes": 12669,
+      "sha256": "b6c871426f6aa0dd024c72892f76b2a8ad8255a8e511822dda75934fba0a7c9d"
     },
     {
       "path": "docs/sprint5_problem_method_evaluation.md",

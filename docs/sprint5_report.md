@@ -235,28 +235,25 @@ riêng lẻ vẫn cần kiểm tra trực tiếp.
 Ở phần event, bằng chứng chưa đủ mạnh. GNNExplainer đạt kiểm tra giữ/bỏ ở 73/80 node,
 nhưng ba cách chọn đơn giản cũng đạt 70–71/80 và thường phải giữ gần như toàn bộ
 neighborhood. Trên test, event đứng đầu của GNNExplainer còn khớp phép bỏ từng event
-ít hơn cách chọn event gần nhất. Vì vậy, kết quả event hiện chỉ được dùng để phân tích cách model hoạt động; chưa nên dùng để chọn một nhóm node và event làm thông tin hỗ trợ điều tra.
+ít hơn cách chọn event gần nhất. Vì vậy Sprint 5 **không đề xuất graph con nào cho
+người điều tra**.
 
 Phép kiểm tra với trọng số ngẫu nhiên cho thấy lời giải thích có thay đổi theo những
 gì TGAT đã học. Tuy nhiên, điều này không đủ để chứng minh thứ hạng event là chính xác.
 Kết luận trên chỉ áp dụng cho model, neighborhood một hop và 80 target của thí nghiệm;
 nó không có nghĩa GNNExplainer luôn kém hoặc TGAT chắc chắn không học graph.
 
-### Hướng cải tiến trong tương lai
+### Hướng cải tiến ưu tiên
 
-1. Kiểm tra trực tiếp TGAT có sử dụng thời gian và cấu trúc graph hay không bằng cách
-   thay đổi riêng timestamp, hàng xóm hoặc message passing. GNNExplainer chỉ nên là
-   phần minh họa phụ, không phải bằng chứng chính cho các kết luận này.
-2. Giữ 80 target hiện tại để đối chiếu và bổ sung một nhóm target có nhiều event hơn,
-   được chia trước theo kích thước neighborhood. Không chỉ chọn node nhiều event rồi
-   gộp chung kết quả vì cách đó sẽ làm thay đổi mẫu đánh giá.
-3. So các phương pháp ở cùng số lượng event top-1, top-2, top-3, ... thay vì chỉ tìm
-   một nhóm bất kỳ đạt ngưỡng giữ/bỏ. Cách này cho biết GNNExplainer có tái hiện dự
-   đoán nhanh hơn baseline hay không.
-4. Với target có ít nhất ba event, kiểm tra thêm việc bỏ từng cặp event để phát hiện
-   trường hợp nhiều event chỉ có tác dụng khi xuất hiện cùng nhau.
-5. Nếu mở rộng sang neighborhood hai hop, cần train và đánh giá một TGAT hai hop tương
-   ứng trước khi giải thích; không đưa graph hai hop trực tiếp vào checkpoint một hop.
+1. **Giải thích các dự đoán sai:** khóa threshold trên validation, tách false positive
+   và false negative, rồi kiểm tra trực tiếp feature, community-risk và event nào đã
+   đẩy dự đoán sai. Sprint 5 mới mô tả các nhóm điểm cao/thấp, chưa phân tích nguyên
+   nhân sai một cách có hệ thống.
+2. **Kiểm tra TGAT học gì:** thay đổi riêng timestamp, hàng xóm và message passing để
+   đo trực tiếp vai trò của thời gian và cấu trúc graph. Không dùng riêng event ranking
+   của GNNExplainer để kết luận.
+3. **Đánh giá lại phần event:** báo riêng các node có từ hai event và so các phương
+   pháp ở cùng top-1, top-2, top-3 thay vì cho phép giữ gần toàn bộ neighborhood.
 
 ## Artifact tái lập
 

@@ -3,9 +3,10 @@
 Đồ án nghiên cứu ứng dụng **Graph Neural Networks (GNN)** vào bài toán phát hiện
 người dùng gian lận trên mạng lưới tài chính DGraphFin.
 
-Phần nghiên cứu được trình bày qua năm Jupyter Notebook theo thứ tự EDA dữ liệu,
-huấn luyện, phân tích kết quả, Community Detection và community-feature ablation. Người đọc có thể theo dõi lần
-lượt từng quyết định, bước thực hiện và output của thí nghiệm.
+Phần nghiên cứu được trình bày qua sáu Jupyter Notebook, đi từ khám phá dữ liệu,
+huấn luyện và so sánh mô hình đến Community Detection, community-risk và giải thích
+dự đoán bằng GNNExplainer. Người đọc có thể theo dõi lần lượt câu hỏi, phương pháp,
+kết quả và giới hạn của từng thí nghiệm.
 
 ## Phạm vi hiện tại
 
@@ -18,7 +19,9 @@ static/transductive:
 - Neighbor sampling trên graph lớn;
 - Time encoding `node_time - edge_time` và temporal attention cho TGAT undirected;
 - Leiden Community Detection, risky-community discovery và visualization;
-- Phân tích nhiều seed và community-feature ablation A/B/C/D.
+- Phân tích nhiều seed và community-feature ablation A/B/C/D;
+- Giải thích TGAT + community-risk ở cấp node bằng GNNExplainer, sau đó kiểm tra lại
+  lời giải thích bằng các phép tác động trực tiếp lên feature và event.
 
 Community được dùng để khoanh vùng ứng viên rủi ro, không phải xác nhận rằng các node
 trong community có hành vi gian lận phối hợp. Kết quả model vẫn là transductive node classification.
@@ -35,6 +38,9 @@ trong community có hành vi gian lận phối hợp. Kết quả model vẫn l�
    — Leiden Community Detection, EDA cấp community và tạo community feature;
 5. [`notebooks/05_community_ablation.ipynb`](notebooks/05_community_ablation.ipynb)
    — kiểm tra structural community features và community-risk có giúp TGAT trên ba seed hay không.
+6. [`notebooks/06_gnn_explainer.ipynb`](notebooks/06_gnn_explainer.ipynb)
+   — xem TGAT + community-risk dựa vào feature và event nào, đồng thời đánh giá lời
+   giải thích có đủ ổn định và đáng tin để sử dụng hay không.
 
 Các notebook đã lưu sẵn output của lần chạy kiểm tra gần nhất. Notebook training mặc
 định dùng `QUICK_MODE=True` với ít epoch/batch để kiểm tra pipeline; kết quả quick mode
@@ -50,7 +56,8 @@ dgraph-fraud-detection/
 │   └── runs/          # Checkpoint/output thô tại local, được gitignore
 ├── data/              # Dataset DGraphFin tại local
 ├── docs/              # Báo cáo và kế hoạch của các sprint
-├── notebooks/         # Luồng nghiên cứu chính, chứa toàn bộ research code
+├── notebooks/         # Luồng trình bày và thực thi các thí nghiệm
+├── scripts/           # Code hỗ trợ chạy, tổng hợp và kiểm tra kết quả
 ├── requirements.txt
 └── README.md
 ```
@@ -77,7 +84,7 @@ Khởi động JupyterLab:
 python -m jupyter lab
 ```
 
-Mở notebook theo thứ tự `01 → 02 → 03 → 04 → 05`. Chọn kernel
+Mở notebook theo thứ tự `01 → 02 → 03 → 04 → 05 → 06`. Chọn kernel
 `Python (DGraph Fraud)`.
 
 ## Chạy full experiment
@@ -99,6 +106,14 @@ Kết quả Community Detection, fraud concentration và so sánh A/B/C/D đư�
 trong [`docs/sprint4_report.md`](docs/sprint4_report.md). Notebook 05 mặc định chỉ hiển thị kết quả
 đã lưu. Dùng `RUN_COMMUNITY_ABLATION_TRAIN=1` để train/reuse ba seed và chỉ dùng
 `RUN_COMMUNITY_ABLATION_TEST=1` cho lần đánh giá test đã khóa.
+
+Sprint 4 chọn **TGAT + community-risk** vì mô hình này có validation AP tốt nhất
+trong các cấu hình đã so sánh. Sprint 5 dùng GNNExplainer để tìm hiểu mô hình này chú
+ý đến thông tin nào. Kết quả cho thấy các xu hướng feature có thể dùng để hiểu model ở
+cấp nhóm node, nhưng thứ hạng event chưa vượt rõ các cách chọn đơn giản. Vì vậy Sprint
+5 chưa dùng lời giải thích event làm bằng chứng điều tra. Xem phần diễn giải đầy đủ tại
+[`docs/sprint5_report.md`](docs/sprint5_report.md) và bản tóm tắt thiết kế thí nghiệm tại
+[`docs/sprint5_problem_method_evaluation.md`](docs/sprint5_problem_method_evaluation.md).
 
 ## Artifact policy
 
