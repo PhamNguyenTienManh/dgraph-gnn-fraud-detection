@@ -74,3 +74,42 @@ lệch cho riêng timestamp, attention hay sampler.
 Kết quả là full-history transductive node classification. Không diễn giải thành dự
 đoán fraud tương lai khi dataset không có timestamp xác lập nhãn, hoặc thành phát hiện
 nhóm gian lận có phối hợp.
+
+## Sprint 5 — GNNExplainer
+
+- Model được giải thích là TGAT + community-risk, checkpoint seed 42 đã chọn ở Sprint
+  4; explainer không cập nhật trọng số model.
+- Protocol được tuning chỉ trên validation và khóa trước khi tạo test explanation.
+  Event dùng prefix ngắn nhất theo importance có sufficiency error không quá 0,05 và
+  comprehensiveness dương.
+- Cohort chính gồm 40 validation và 40 test node: high-score fraud, high-score normal,
+  low-score fraud và low-score normal control, mỗi nhóm 10 node/split. Không lọc node
+  theo degree; node không có sampled edge vẫn được giữ và đánh dấu riêng.
+- Cấu hình dùng event-only và feature-only GNNExplainer, mọi mask khởi tạo ở logit 0
+  (trọng số giữ 0,5), 50 epoch, learning rate 0,01 và top-5 feature. Raw artifact giữ
+  continuous mask, binary selected mask, global node/event ID, full/keep/remove
+  logit-score, config và seed của từng explanation.
+- Fidelity gồm sufficiency, comprehensiveness, edge sparsity và feature sparsity; đối
+  chứng gồm random, degree và recency với cùng số edge giữ lại.
+- Ranking event được đối chiếu với phép bỏ lần lượt từng event; ranking feature được
+  đối chiếu với phép đưa lần lượt từng feature về nền. Node chỉ có một event không
+  được tính là bài toán ranking.
+- Robustness audit dùng 12 validation node qua checkpoint seed 42/43/44. Negative
+  control dùng năm validation node dày nhất và ba model có trọng số ngẫu nhiên. Với
+  khởi tạo trung tính và frozen batch, explainer seed chỉ được lưu làm provenance,
+  không dùng các lần lặp giống hệt làm bằng chứng stability.
+- Case thành công, case giới hạn và case community-risk chỉ được chọn bằng rule lưu
+  trong artifact, không chọn theo hình.
+- Community-risk counterfactual thay feature thứ 35 bằng global train prior và giữ
+  nguyên neighborhood. Kết quả được tích hợp vào artifact cuối sau khi kiểm tra cùng
+  dataset hash, checkpoint hash và đúng 80 target. Đây là kiểm tra độ nhạy của model,
+  không phải can thiệp nhân quả.
+- Artifact cuối tổng hợp feature top-5 theo split/cohort, event type/recency/edge_delta
+  và liên hệ với Leiden community. Do 179/179 sampled event đều nội bộ community, dữ
+  liệu này không kiểm tra được explainer có ưu tiên event nội bộ hơn event bên ngoài.
+- Trên test, event đứng đầu của GNNExplainer trùng phép bỏ từng event 8/22, trong khi
+  quy tắc event gần nhất đạt 10/22. Adaptive fidelity đạt 73/80 nhưng các baseline đạt
+  70–71/80 và thường phải giữ toàn bộ neighborhood. Danh sách candidate risky
+  subgraph vì vậy để trống.
+- Kết quả chỉ là local post-hoc explanation cho node-level full-history transductive
+  classification. Candidate risky subgraph không phải fraud ring đã được xác nhận.

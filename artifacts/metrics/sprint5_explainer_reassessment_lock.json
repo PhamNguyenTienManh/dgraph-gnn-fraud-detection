@@ -1,0 +1,141 @@
+{
+  "schema_version": 2,
+  "status": "locked_before_corrected_test_run",
+  "locked_at": "2026-08-26T12:04:32.398548+07:00",
+  "test_used_for_method_selection": false,
+  "reason": "The original joint-mask edge ranking reproduced random initialization on small neighborhoods.",
+  "source_artifacts": {
+    "original_results_sha256": "62b511b11ae46712c54fe4635faafd9c380ba8caa6aa46012542455d7a34335d",
+    "original_masks_sha256": "b8a0e2610af77a4f2c63e330130dd7491b71d1dbc3b42353913219a7497f5b66"
+  },
+  "model_checkpoint_sha256": "558db58e8c788edb8f5862b64093ef5a1a463debadd80e7e119d230ca602b61e",
+  "data_sha256": "95470dab2c48523f7118a92204c090de37a957bb053bd5841c7bdba09558ba85",
+  "validation_target_node_ids": [
+    2961442,
+    1263449,
+    2707134,
+    822922,
+    1476049,
+    1865366,
+    910419,
+    1445319,
+    2522099,
+    1437987,
+    1942636,
+    333139,
+    920517,
+    945475,
+    1333573,
+    1193243,
+    759199,
+    2948849,
+    2795031,
+    131031,
+    2636796,
+    675905,
+    2122757,
+    740442,
+    2287558,
+    1564995,
+    52719,
+    2805025,
+    2165937,
+    1069626,
+    2085609,
+    1089423,
+    490544,
+    497319,
+    1630536,
+    1263965,
+    2723736,
+    2661325,
+    1718900,
+    2300608
+  ],
+  "audit_target_node_ids": [
+    2961442,
+    1263449,
+    2707134,
+    1942636,
+    333139,
+    920517,
+    2636796,
+    675905,
+    2122757,
+    2085609,
+    1089423,
+    490544
+  ],
+  "method": {
+    "edge_pass": "edge-only GNNExplainer",
+    "feature_pass": "feature-only GNNExplainer with common_attributes mask",
+    "mask_initial_logit": 0.0,
+    "mask_initial_probability": 0.5,
+    "epochs": 50,
+    "learning_rate": 0.01,
+    "feature_top_k": 5,
+    "edge_selection": "smallest importance-ranked prefix with sufficiency_error<=0.05 and comprehensiveness>0; failed cases retain the closest prefix but remain explicitly failed",
+    "meaningful_event_ranking_minimum_event_count": 2
+  },
+  "validation_selection_evidence": {
+    "node_count": 40,
+    "event_count": {
+      "min": 1,
+      "median": 1.0,
+      "max": 8,
+      "one_event_count": 23,
+      "at_most_three_count": 36,
+      "meaningful_ranking_count": 17
+    },
+    "edge": {
+      "fidelity_pass_count": 35,
+      "fidelity_failure_count": 5,
+      "median_sufficiency_error": 0.0,
+      "median_comprehensiveness": 0.07298384065519437,
+      "median_sparsity_among_passed": 0.0,
+      "top_matches_leave_one_out_count": 11,
+      "recency_matches_leave_one_out_count": 6,
+      "median_rank_spearman": 0.9999999999999999
+    },
+    "feature": {
+      "fidelity_pass_count": 28,
+      "median_sufficiency_error": 0.02012951734409124,
+      "median_comprehensiveness": 0.4962762151779868,
+      "median_rank_spearman": 0.5205563298213094,
+      "median_top_5_jaccard": 0.6666666666666666
+    },
+    "joint": {
+      "fidelity_pass_count": 28,
+      "median_sufficiency_error": 0.018880886819925946,
+      "median_comprehensiveness": 0.46538716487162435
+    },
+    "model_reliance": {
+      "median_total_graph_effect": 0.05469257812602224,
+      "median_total_feature_effect": 0.3873121563999074,
+      "feature_abs_effect_larger_count": 40
+    },
+    "baselines": {
+      "random": {
+        "adaptive_fidelity_pass_count": 34,
+        "median_sparsity_among_passed": 0.0
+      },
+      "degree": {
+        "adaptive_fidelity_pass_count": 34,
+        "median_sparsity_among_passed": 0.0
+      },
+      "recency": {
+        "adaptive_fidelity_pass_count": 33,
+        "median_sparsity_among_passed": 0.0
+      }
+    }
+  },
+  "negative_control_evidence": {
+    "target_count": 5,
+    "comparison_count": 15,
+    "median_edge_rank_spearman": 0.0035714285714285704,
+    "median_top_3_jaccard": 0.0,
+    "exact_ranking_match_count": 0,
+    "passed": true
+  },
+  "method_gate_passed": true
+}

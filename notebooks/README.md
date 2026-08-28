@@ -1,6 +1,6 @@
 # Research notebooks
 
-Năm notebook là luồng nghiên cứu chính và được đọc/chạy theo thứ tự:
+Sáu notebook là luồng nghiên cứu chính và được đọc/chạy theo thứ tự:
 
 1. `01_dgraphfin_eda.ipynb` — data contract, loader, validation, EDA và sampling;
 2. `02_gnn_training.ipynb` — preprocessing, graph, GCN/GraphSAGE/RGCN/GAT/TGAT
@@ -9,7 +9,10 @@ Năm notebook là luồng nghiên cứu chính và được đọc/chạy theo t
 4. `04_community_detection.ipynb` — Community Detection, community-level EDA và
    tạo community feature cho Sprint 4;
 5. `05_community_ablation.ipynb` — kiểm tra structural community features và
-   community-risk có giúp TGAT trên ba seed hay không.
+   community-risk có giúp TGAT trên ba seed hay không;
+6. `06_gnn_explainer.ipynb` — giải thích 80 node bằng GNNExplainer, kiểm tra trực tiếp
+   event/feature nào tác động đến dự đoán và đánh giá lời giải thích có đủ tin cậy để
+   đề xuất graph con hay không.
 
 Markdown trong notebook giải thích mục tiêu, giả định và kết luận; code được chia thành
 các cell theo đúng thứ tự thực hiện.
@@ -32,3 +35,8 @@ Notebook 04 dùng Leiden qua `igraph`, chạy partition toàn graph, community E
 structural/train-only risk features. Notebook 05 tái sử dụng pipeline TGAT từ notebook
 02. Dùng `RUN_COMMUNITY_ABLATION_TRAIN=1` để train/reuse B/C/D đủ ba seed và chỉ dùng
 `RUN_COMMUNITY_ABLATION_TEST=1` cho lần đánh giá test đã khóa; mặc định cả hai đều tắt.
+
+Notebook 06 đọc kết quả cuối đã lưu và trình bày bốn hình: quy mô neighborhood,
+feature thường được chọn, tác động của community-risk và kiểm tra lời giải thích event.
+Các kết quả graph mô tả phép tính của model, không phải fraud ring đã được xác nhận hay
+danh sách ưu tiên điều tra.

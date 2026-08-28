@@ -1,0 +1,106 @@
+{
+  "schema_version": 3,
+  "status": "complete",
+  "gate_passed": true,
+  "generated_at": "2026-08-28T02:11:10.829437+00:00",
+  "model": "TGAT + community-risk",
+  "target_count": 80,
+  "canonical_artifacts": [
+    {
+      "path": "artifacts/metrics/sprint5_explainer_final.json",
+      "size_bytes": 905015,
+      "sha256": "8eaa5af564179b46dc9edb733933b4d9d723712ac630c41d2605a3ce4b7765ce"
+    },
+    {
+      "path": "artifacts/metrics/sprint5_explanations_final.npz",
+      "size_bytes": 265747,
+      "sha256": "1c8b2a5a09e3afa8382c158cbc979f3cd0af55b43d97808dab8791189f8abcb0"
+    },
+    {
+      "path": "artifacts/metrics/sprint5_explanation_final.csv",
+      "size_bytes": 30142,
+      "sha256": "13d7d24b147107908367c10118288c3ac2ea7afcd1d705b5a3e730171f4a233e"
+    },
+    {
+      "path": "artifacts/metrics/sprint5_model_insights_final.json",
+      "size_bytes": 41858,
+      "sha256": "4443a37ffb7a2f1b7f00a7218088379aec78c2d14ae5a6fd21d55a47e8171302"
+    },
+    {
+      "path": "notebooks/06_gnn_explainer.ipynb",
+      "size_bytes": 367073,
+      "sha256": "ae910462d66cf8af08a5b03506d30f672395554295d920aa2cee995801cdf736"
+    },
+    {
+      "path": "docs/sprint5_report.md",
+      "size_bytes": 18090,
+      "sha256": "018f5d83c48be9e4a68c782e66e501601b0ea927e7611af42af1b602a2f74942"
+    },
+    {
+      "path": "docs/sprint5_plan.md",
+      "size_bytes": 12659,
+      "sha256": "f50e3cbd39c9002dbab48dd6f90a884be385122805d137c163adba8214ce46a4"
+    },
+    {
+      "path": "docs/sprint5_problem_method_evaluation.md",
+      "size_bytes": 14631,
+      "sha256": "597cd2fdea701cc3fb79f77ce10152f3ee88819cf02768521fa9719f20bda181"
+    }
+  ],
+  "final_figures": [
+    {
+      "path": "artifacts/figures/sprint5/01_neighborhood_size.png",
+      "size_bytes": 46223,
+      "sha256": "a5a47fb53ae01ff7006f55fa42fcdca7b5ad73e897309356a80221bd02bc930d"
+    },
+    {
+      "path": "artifacts/figures/sprint5/02_feature_patterns.png",
+      "size_bytes": 59344,
+      "sha256": "105af7cf0cba37472c9ed311b9aa1e8539c09b80b0da001ba1bdc604f20487ef"
+    },
+    {
+      "path": "artifacts/figures/sprint5/03_community_risk_counterfactual.png",
+      "size_bytes": 65922,
+      "sha256": "c0c483d520d64a4cdbde46a2dc6bb73c1f7da39ed500cc97729b59477236bc1e"
+    },
+    {
+      "path": "artifacts/figures/sprint5/04_event_explanation_checks.png",
+      "size_bytes": 72914,
+      "sha256": "4d67e755e6f0d41ddf961c7641a7223b7fde97ccd17e50649aea77b0793b6af6"
+    }
+  ],
+  "checks": {
+    "required_files_exist": true,
+    "experiment_integrity_gate_passed": true,
+    "reader_artifact_gates_passed": true,
+    "exactly_80_explanations": true,
+    "split_is_40_validation_40_test": true,
+    "each_split_cohort_has_10_targets": true,
+    "all_rows_have_feature_event_community_analysis": true,
+    "final_raw_matches_corrected_mask_hash": true,
+    "community_risk_provenance_checks_passed": true,
+    "candidate_risky_subgraphs_empty": true,
+    "exact_final_figure_set_exists": true,
+    "report_references_all_final_figures": true,
+    "report_has_no_old_seven_figure_contract": true,
+    "plan_declares_exact_final_figure_set": true,
+    "notebook_reads_final_artifact": true,
+    "notebook_references_all_final_figures": true,
+    "notebook_all_code_cells_executed": true,
+    "notebook_has_no_error_output": true
+  },
+  "scientific_outcome": {
+    "event_ranking_beats_recency_on_test": false,
+    "candidate_risky_subgraph_count": 0,
+    "feature_patterns_available": true,
+    "community_risk_counterfactual_available": true,
+    "decision": "Feature trends are usable with direct checks; event explanations are not promoted to investigation candidates."
+  },
+  "build_sources": [
+    "scripts/sprint5_build_final_analysis.py",
+    "scripts/sprint5_build_final_figures.py",
+    "scripts/sprint5_build_final_report.py",
+    "scripts/sprint5_finalize_notebook.py",
+    "scripts/sprint5_finalize_artifacts.py"
+  ]
+}

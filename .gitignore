@@ -29,7 +29,10 @@ artifacts/runs/
 
 # Neo4j import/export data used only for local visualization
 artifacts/neo4j/
-scripts/
+scripts/*
+!scripts/sprint5_explainer_feasibility.py
+!scripts/sprint5_explainer_protocol_and_evaluation.py
+!scripts/sprint5_explainer_analysis_and_report.py
 
 # Editor and OS files
 .vscode/

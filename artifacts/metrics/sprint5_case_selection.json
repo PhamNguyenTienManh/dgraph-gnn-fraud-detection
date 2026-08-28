@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "selection_is_deterministic": true,
+  "rules": {
+    "success": "test; 3-5 event; kiểm tra giữ/bỏ đạt; top event trùng phép bỏ từng event; ưu tiên tỷ lệ event cần giữ nhỏ hơn",
+    "limitation": "ít nhất 4 event; kiểm tra giữ/bỏ đạt nhưng top event không trùng phép bỏ từng event; ưu tiên neighborhood lớn hơn",
+    "community_risk": "test high-score fraud; community-risk thuộc top-5 của GNNExplainer và phép đưa từng feature về nền; kiểm tra feature đạt; ưu tiên |logit delta| lớn hơn"
+  },
+  "selected": {
+    "success": {
+      "split": "test",
+      "cohort": "high_score_normal",
+      "node": 1662253,
+      "label": 0,
+      "fraud_score": 0.9954448226068403,
+      "event_n": 4,
+      "selected_n": 1,
+      "edge_pass": true,
+      "top_match": true,
+      "community_id": 356,
+      "community_risk": 0.28796151280403137,
+      "risk_gnn_rank": 16,
+      "risk_direct_rank": 7,
+      "risk_logit_delta": 0.023647785186767578
+    },
+    "limitation": {
+      "split": "validation",
+      "cohort": "low_score_fraud",
+      "node": 2287558,
+      "label": 1,
+      "fraud_score": 0.03637486867393743,
+      "event_n": 8,
+      "selected_n": 1,
+      "edge_pass": true,
+      "top_match": false,
+      "community_id": 4,
+      "community_risk": -1.2211709022521973,
+      "risk_gnn_rank": 7,
+      "risk_direct_rank": 7,
+      "risk_logit_delta": -0.10598087310791016
+    },
+    "community_risk": {
+      "split": "test",
+      "cohort": "high_score_fraud",
+      "node": 2789400,
+      "label": 1,
+      "fraud_score": 0.9650746689523217,
+      "event_n": 2,
+      "selected_n": 2,
+      "edge_pass": true,
+      "top_match": false,
+      "community_id": 54,
+      "community_risk": 8.292803764343262,
+      "risk_gnn_rank": 1,
+      "risk_direct_rank": 3,
+      "risk_logit_delta": 0.7112326622009277
+    }
+  },
+  "candidate_risky_subgraphs": [],
+  "candidate_decision": "Không đề xuất risky subgraph vì lời giải thích event chưa hơn rõ baseline trên test."
+}

@@ -1,0 +1,326 @@
+{
+  "schema_version": 1,
+  "status": "locked_before_test_explanations",
+  "locked_at": "2026-08-26T10:22:59.943118+07:00",
+  "test_used_for_tuning": false,
+  "model_variant": "C",
+  "model_seed": 42,
+  "checkpoint_sha256": "558db58e8c788edb8f5862b64093ef5a1a463debadd80e7e119d230ca602b61e",
+  "model_checkpoints": [
+    {
+      "seed": 42,
+      "path": "artifacts/runs/sprint4_community_ablation_C_20260818_144249/tgat_seed42/best.pt",
+      "sha256": "558db58e8c788edb8f5862b64093ef5a1a463debadd80e7e119d230ca602b61e"
+    },
+    {
+      "seed": 43,
+      "path": "artifacts/runs/sprint4_community_ablation_C_20260818_144249/tgat_seed43/best.pt",
+      "sha256": "70bb34cba046eebcec05a3d67ebc05648345300a59e638c51367d4fb0d36e280"
+    },
+    {
+      "seed": 44,
+      "path": "artifacts/runs/sprint4_community_ablation_C_20260818_144249/tgat_seed44/best.pt",
+      "sha256": "7496c3166e751f2f1e05ed3a760bdff1384e100af0e23c92d6ac446ff0065c3c"
+    }
+  ],
+  "explainer_seeds": [
+    42,
+    43,
+    44
+  ],
+  "model_seeds": [
+    42,
+    43,
+    44
+  ],
+  "neighborhood_seeds": [
+    42,
+    43,
+    44
+  ],
+  "data_sha256": "95470dab2c48523f7118a92204c090de37a957bb053bd5841c7bdba09558ba85",
+  "community_feature_sha256": "d5d98446df501381cd39a269273340b13f964e7f3a7e598f7286ef1b626afea1",
+  "cohort_size_per_group": 10,
+  "cohort_rule": {
+    "high_score_fraud": "top fraud score among labeled fraud nodes; zero-edge nodes are retained",
+    "high_score_normal": "top fraud score among labeled normal nodes; zero-edge nodes are retained",
+    "low_score_fraud": "lowest fraud score among labeled fraud nodes; zero-edge nodes are retained",
+    "low_score_normal_control": "normal nodes in bottom score quartile greedily matched to high-score normal nodes by log1p(in_degree) and community-size feature"
+  },
+  "validation_target_node_ids": [
+    2961442,
+    1263449,
+    2707134,
+    822922,
+    1476049,
+    1865366,
+    910419,
+    1445319,
+    2522099,
+    1437987,
+    1942636,
+    333139,
+    920517,
+    945475,
+    1333573,
+    1193243,
+    759199,
+    2948849,
+    2795031,
+    131031,
+    2636796,
+    675905,
+    2122757,
+    740442,
+    2287558,
+    1564995,
+    52719,
+    2805025,
+    2165937,
+    1069626,
+    2085609,
+    1089423,
+    490544,
+    497319,
+    1630536,
+    1263965,
+    2723736,
+    2661325,
+    1718900,
+    2300608
+  ],
+  "audit_target_node_ids": [
+    2961442,
+    1263449,
+    2707134,
+    1942636,
+    333139,
+    920517,
+    2636796,
+    675905,
+    2122757,
+    2085609,
+    1089423,
+    490544
+  ],
+  "tuning_configs": [
+    {
+      "id": "epochs50_lr001_default",
+      "epochs": 50,
+      "lr": 0.01
+    },
+    {
+      "id": "epochs100_lr001_default",
+      "epochs": 100,
+      "lr": 0.01
+    },
+    {
+      "id": "epochs100_lr0005_default",
+      "epochs": 100,
+      "lr": 0.005
+    },
+    {
+      "id": "epochs100_lr001_edge001",
+      "epochs": 100,
+      "lr": 0.01,
+      "edge_size": 0.001
+    }
+  ],
+  "edge_top_k_candidates": [
+    1,
+    3,
+    5,
+    10
+  ],
+  "feature_top_k": 5,
+  "sufficiency_threshold": 0.05,
+  "selection_rule": "Among validation candidates with median sufficiency_error<=0.05, maximize edge sparsity, then minimize sufficiency error and maximize comprehensiveness; deterministic tie-breaks. If none pass, minimize median sufficiency error.",
+  "tuning_summary": [
+    {
+      "config_id": "epochs50_lr001_default",
+      "top_k": 1,
+      "node_count": 12,
+      "median_sufficiency_error": 0.0007484396601904475,
+      "median_comprehensiveness": 0.0018807242032512494,
+      "median_edge_sparsity": 0.6666666666666667,
+      "mean_runtime_seconds": 0.18364177499825018
+    },
+    {
+      "config_id": "epochs50_lr001_default",
+      "top_k": 3,
+      "node_count": 12,
+      "median_sufficiency_error": 0.0,
+      "median_comprehensiveness": 0.008179025588158695,
+      "median_edge_sparsity": 0.0,
+      "mean_runtime_seconds": 0.18364177499825018
+    },
+    {
+      "config_id": "epochs50_lr001_default",
+      "top_k": 5,
+      "node_count": 12,
+      "median_sufficiency_error": 0.0,
+      "median_comprehensiveness": 0.007849187343312025,
+      "median_edge_sparsity": 0.0,
+      "mean_runtime_seconds": 0.18364177499825018
+    },
+    {
+      "config_id": "epochs50_lr001_default",
+      "top_k": 10,
+      "node_count": 12,
+      "median_sufficiency_error": 0.0,
+      "median_comprehensiveness": 0.007849187343312025,
+      "median_edge_sparsity": 0.0,
+      "mean_runtime_seconds": 0.18364177499825018
+    },
+    {
+      "config_id": "epochs100_lr001_default",
+      "top_k": 1,
+      "node_count": 12,
+      "median_sufficiency_error": 0.0007484396601904475,
+      "median_comprehensiveness": 0.0018807242032512494,
+      "median_edge_sparsity": 0.6666666666666667,
+      "mean_runtime_seconds": 0.28161196667012217
+    },
+    {
+      "config_id": "epochs100_lr001_default",
+      "top_k": 3,
+      "node_count": 12,
+      "median_sufficiency_error": 0.0,
+      "median_comprehensiveness": 0.008179025588158695,
+      "median_edge_sparsity": 0.0,
+      "mean_runtime_seconds": 0.28161196667012217
+    },
+    {
+      "config_id": "epochs100_lr001_default",
+      "top_k": 5,
+      "node_count": 12,
+      "median_sufficiency_error": 0.0,
+      "median_comprehensiveness": 0.007849187343312025,
+      "median_edge_sparsity": 0.0,
+      "mean_runtime_seconds": 0.28161196667012217
+    },
+    {
+      "config_id": "epochs100_lr001_default",
+      "top_k": 10,
+      "node_count": 12,
+      "median_sufficiency_error": 0.0,
+      "median_comprehensiveness": 0.007849187343312025,
+      "median_edge_sparsity": 0.0,
+      "mean_runtime_seconds": 0.28161196667012217
+    },
+    {
+      "config_id": "epochs100_lr0005_default",
+      "top_k": 1,
+      "node_count": 12,
+      "median_sufficiency_error": 0.0007484396601904475,
+      "median_comprehensiveness": 0.0018807242032512494,
+      "median_edge_sparsity": 0.6666666666666667,
+      "mean_runtime_seconds": 0.26645137499993626
+    },
+    {
+      "config_id": "epochs100_lr0005_default",
+      "top_k": 3,
+      "node_count": 12,
+      "median_sufficiency_error": 0.0,
+      "median_comprehensiveness": 0.008179025588158695,
+      "median_edge_sparsity": 0.0,
+      "mean_runtime_seconds": 0.26645137499993626
+    },
+    {
+      "config_id": "epochs100_lr0005_default",
+      "top_k": 5,
+      "node_count": 12,
+      "median_sufficiency_error": 0.0,
+      "median_comprehensiveness": 0.007849187343312025,
+      "median_edge_sparsity": 0.0,
+      "mean_runtime_seconds": 0.26645137499993626
+    },
+    {
+      "config_id": "epochs100_lr0005_default",
+      "top_k": 10,
+      "node_count": 12,
+      "median_sufficiency_error": 0.0,
+      "median_comprehensiveness": 0.007849187343312025,
+      "median_edge_sparsity": 0.0,
+      "mean_runtime_seconds": 0.26645137499993626
+    },
+    {
+      "config_id": "epochs100_lr001_edge001",
+      "top_k": 1,
+      "node_count": 12,
+      "median_sufficiency_error": 0.0007484396601904475,
+      "median_comprehensiveness": 0.0018807242032512494,
+      "median_edge_sparsity": 0.6666666666666667,
+      "mean_runtime_seconds": 0.2671498166649447
+    },
+    {
+      "config_id": "epochs100_lr001_edge001",
+      "top_k": 3,
+      "node_count": 12,
+      "median_sufficiency_error": 0.0,
+      "median_comprehensiveness": 0.008179025588158695,
+      "median_edge_sparsity": 0.0,
+      "mean_runtime_seconds": 0.2671498166649447
+    },
+    {
+      "config_id": "epochs100_lr001_edge001",
+      "top_k": 5,
+      "node_count": 12,
+      "median_sufficiency_error": 0.0,
+      "median_comprehensiveness": 0.007849187343312025,
+      "median_edge_sparsity": 0.0,
+      "mean_runtime_seconds": 0.2671498166649447
+    },
+    {
+      "config_id": "epochs100_lr001_edge001",
+      "top_k": 10,
+      "node_count": 12,
+      "median_sufficiency_error": 0.0,
+      "median_comprehensiveness": 0.007849187343312025,
+      "median_edge_sparsity": 0.0,
+      "mean_runtime_seconds": 0.2671498166649447
+    }
+  ],
+  "selected": {
+    "config": {
+      "id": "epochs50_lr001_default",
+      "epochs": 50,
+      "lr": 0.01
+    },
+    "edge_top_k": 1,
+    "feature_top_k": 5,
+    "validation_metrics": {
+      "config_id": "epochs50_lr001_default",
+      "top_k": 1,
+      "node_count": 12,
+      "median_sufficiency_error": 0.0007484396601904475,
+      "median_comprehensiveness": 0.0018807242032512494,
+      "median_edge_sparsity": 0.6666666666666667,
+      "mean_runtime_seconds": 0.18364177499825018
+    }
+  },
+  "tuning_rows_sha256": "317f81ab66e318c1ffe18ddf8992bb4401fe730bca2a79c0c34faf34150285b3",
+  "supersedes": {
+    "lock_payload_sha256": "4fd68d427db865001bd1d2afb13a13de23cf3e565b44afdecbaec724367560ec",
+    "selected": {
+      "config": {
+        "id": "epochs50_lr001_default",
+        "epochs": 50,
+        "lr": 0.01
+      },
+      "edge_top_k": 1,
+      "feature_top_k": 5,
+      "validation_metrics": {
+        "config_id": "epochs50_lr001_default",
+        "top_k": 1,
+        "node_count": 12,
+        "median_sufficiency_error": 0.0007484396601904475,
+        "median_comprehensiveness": 0.0018807242032512494,
+        "median_edge_sparsity": 0.6666666666666667,
+        "mean_runtime_seconds": 0.2081585500006137
+      }
+    },
+    "reason": "Protocol regenerated after the Sprint 5 completeness audit. Cohort selection and tuning remain validation-only; no test metric is used to choose or alter the protocol."
+  },
+  "lock_payload_sha256": "733ec79e7c75d98c8f4598d266923643c8d4eda977a95a8e2629f0562e407709"
+}

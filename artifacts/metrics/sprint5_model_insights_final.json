@@ -1,0 +1,1537 @@
+{
+  "schema_version": 1,
+  "feature_dictionary": {
+    "F01_to_F17": "17 anonymized DGraphFin node features",
+    "F01_missing_to_F17_missing": "missing indicator for each anonymized feature",
+    "community-risk": "community-level risk feature added in Sprint 4",
+    "warning": "DGraphFin does not publish semantic names for F01-F17; no meaning is invented."
+  },
+  "feature_patterns": {
+    "all": {
+      "target_count": 80,
+      "gnnexplainer_top_5_frequency": [
+        {
+          "feature_index": 2,
+          "feature_name": "F03",
+          "top_5_count": 46,
+          "top_5_fraction": 0.575
+        },
+        {
+          "feature_index": 6,
+          "feature_name": "F07",
+          "top_5_count": 42,
+          "top_5_fraction": 0.525
+        },
+        {
+          "feature_index": 10,
+          "feature_name": "F11",
+          "top_5_count": 41,
+          "top_5_fraction": 0.5125
+        },
+        {
+          "feature_index": 9,
+          "feature_name": "F10",
+          "top_5_count": 38,
+          "top_5_fraction": 0.475
+        },
+        {
+          "feature_index": 16,
+          "feature_name": "F17",
+          "top_5_count": 34,
+          "top_5_fraction": 0.425
+        },
+        {
+          "feature_index": 11,
+          "feature_name": "F12",
+          "top_5_count": 24,
+          "top_5_fraction": 0.3
+        },
+        {
+          "feature_index": 1,
+          "feature_name": "F02",
+          "top_5_count": 23,
+          "top_5_fraction": 0.2875
+        },
+        {
+          "feature_index": 4,
+          "feature_name": "F05",
+          "top_5_count": 22,
+          "top_5_fraction": 0.275
+        },
+        {
+          "feature_index": 5,
+          "feature_name": "F06",
+          "top_5_count": 21,
+          "top_5_fraction": 0.2625
+        },
+        {
+          "feature_index": 0,
+          "feature_name": "F01",
+          "top_5_count": 18,
+          "top_5_fraction": 0.225
+        },
+        {
+          "feature_index": 7,
+          "feature_name": "F08",
+          "top_5_count": 17,
+          "top_5_fraction": 0.2125
+        },
+        {
+          "feature_index": 34,
+          "feature_name": "community-risk",
+          "top_5_count": 17,
+          "top_5_fraction": 0.2125
+        },
+        {
+          "feature_index": 14,
+          "feature_name": "F15",
+          "top_5_count": 14,
+          "top_5_fraction": 0.175
+        },
+        {
+          "feature_index": 3,
+          "feature_name": "F04",
+          "top_5_count": 12,
+          "top_5_fraction": 0.15
+        },
+        {
+          "feature_index": 8,
+          "feature_name": "F09",
+          "top_5_count": 8,
+          "top_5_fraction": 0.1
+        },
+        {
+          "feature_index": 12,
+          "feature_name": "F13",
+          "top_5_count": 6,
+          "top_5_fraction": 0.075
+        },
+        {
+          "feature_index": 33,
+          "feature_name": "F17-missing",
+          "top_5_count": 6,
+          "top_5_fraction": 0.075
+        },
+        {
+          "feature_index": 31,
+          "feature_name": "F15-missing",
+          "top_5_count": 3,
+          "top_5_fraction": 0.0375
+        },
+        {
+          "feature_index": 13,
+          "feature_name": "F14",
+          "top_5_count": 2,
+          "top_5_fraction": 0.025
+        },
+        {
+          "feature_index": 15,
+          "feature_name": "F16",
+          "top_5_count": 2,
+          "top_5_fraction": 0.025
+        },
+        {
+          "feature_index": 32,
+          "feature_name": "F16-missing",
+          "top_5_count": 2,
+          "top_5_fraction": 0.025
+        },
+        {
+          "feature_index": 22,
+          "feature_name": "F06-missing",
+          "top_5_count": 1,
+          "top_5_fraction": 0.0125
+        },
+        {
+          "feature_index": 24,
+          "feature_name": "F08-missing",
+          "top_5_count": 1,
+          "top_5_fraction": 0.0125
+        }
+      ],
+      "direct_ablation_top_5_frequency": [
+        {
+          "feature_index": 6,
+          "feature_name": "F07",
+          "top_5_count": 41,
+          "top_5_fraction": 0.5125
+        },
+        {
+          "feature_index": 2,
+          "feature_name": "F03",
+          "top_5_count": 40,
+          "top_5_fraction": 0.5
+        },
+        {
+          "feature_index": 9,
+          "feature_name": "F10",
+          "top_5_count": 39,
+          "top_5_fraction": 0.4875
+        },
+        {
+          "feature_index": 10,
+          "feature_name": "F11",
+          "top_5_count": 39,
+          "top_5_fraction": 0.4875
+        },
+        {
+          "feature_index": 16,
+          "feature_name": "F17",
+          "top_5_count": 39,
+          "top_5_fraction": 0.4875
+        },
+        {
+          "feature_index": 4,
+          "feature_name": "F05",
+          "top_5_count": 37,
+          "top_5_fraction": 0.4625
+        },
+        {
+          "feature_index": 14,
+          "feature_name": "F15",
+          "top_5_count": 33,
+          "top_5_fraction": 0.4125
+        },
+        {
+          "feature_index": 11,
+          "feature_name": "F12",
+          "top_5_count": 26,
+          "top_5_fraction": 0.325
+        },
+        {
+          "feature_index": 0,
+          "feature_name": "F01",
+          "top_5_count": 22,
+          "top_5_fraction": 0.275
+        },
+        {
+          "feature_index": 7,
+          "feature_name": "F08",
+          "top_5_count": 20,
+          "top_5_fraction": 0.25
+        },
+        {
+          "feature_index": 1,
+          "feature_name": "F02",
+          "top_5_count": 18,
+          "top_5_fraction": 0.225
+        },
+        {
+          "feature_index": 34,
+          "feature_name": "community-risk",
+          "top_5_count": 18,
+          "top_5_fraction": 0.225
+        },
+        {
+          "feature_index": 5,
+          "feature_name": "F06",
+          "top_5_count": 8,
+          "top_5_fraction": 0.1
+        },
+        {
+          "feature_index": 8,
+          "feature_name": "F09",
+          "top_5_count": 6,
+          "top_5_fraction": 0.075
+        },
+        {
+          "feature_index": 33,
+          "feature_name": "F17-missing",
+          "top_5_count": 5,
+          "top_5_fraction": 0.0625
+        },
+        {
+          "feature_index": 32,
+          "feature_name": "F16-missing",
+          "top_5_count": 4,
+          "top_5_fraction": 0.05
+        },
+        {
+          "feature_index": 31,
+          "feature_name": "F15-missing",
+          "top_5_count": 3,
+          "top_5_fraction": 0.0375
+        },
+        {
+          "feature_index": 12,
+          "feature_name": "F13",
+          "top_5_count": 1,
+          "top_5_fraction": 0.0125
+        },
+        {
+          "feature_index": 24,
+          "feature_name": "F08-missing",
+          "top_5_count": 1,
+          "top_5_fraction": 0.0125
+        }
+      ]
+    },
+    "validation": {
+      "target_count": 40,
+      "gnnexplainer_top_5_frequency": [
+        {
+          "feature_index": 2,
+          "feature_name": "F03",
+          "top_5_count": 22,
+          "top_5_fraction": 0.55
+        },
+        {
+          "feature_index": 6,
+          "feature_name": "F07",
+          "top_5_count": 21,
+          "top_5_fraction": 0.525
+        },
+        {
+          "feature_index": 9,
+          "feature_name": "F10",
+          "top_5_count": 20,
+          "top_5_fraction": 0.5
+        },
+        {
+          "feature_index": 10,
+          "feature_name": "F11",
+          "top_5_count": 20,
+          "top_5_fraction": 0.5
+        },
+        {
+          "feature_index": 16,
+          "feature_name": "F17",
+          "top_5_count": 18,
+          "top_5_fraction": 0.45
+        },
+        {
+          "feature_index": 1,
+          "feature_name": "F02",
+          "top_5_count": 13,
+          "top_5_fraction": 0.325
+        },
+        {
+          "feature_index": 11,
+          "feature_name": "F12",
+          "top_5_count": 12,
+          "top_5_fraction": 0.3
+        },
+        {
+          "feature_index": 0,
+          "feature_name": "F01",
+          "top_5_count": 11,
+          "top_5_fraction": 0.275
+        },
+        {
+          "feature_index": 4,
+          "feature_name": "F05",
+          "top_5_count": 11,
+          "top_5_fraction": 0.275
+        },
+        {
+          "feature_index": 5,
+          "feature_name": "F06",
+          "top_5_count": 8,
+          "top_5_fraction": 0.2
+        },
+        {
+          "feature_index": 7,
+          "feature_name": "F08",
+          "top_5_count": 8,
+          "top_5_fraction": 0.2
+        },
+        {
+          "feature_index": 14,
+          "feature_name": "F15",
+          "top_5_count": 8,
+          "top_5_fraction": 0.2
+        },
+        {
+          "feature_index": 34,
+          "feature_name": "community-risk",
+          "top_5_count": 7,
+          "top_5_fraction": 0.175
+        },
+        {
+          "feature_index": 3,
+          "feature_name": "F04",
+          "top_5_count": 5,
+          "top_5_fraction": 0.125
+        },
+        {
+          "feature_index": 12,
+          "feature_name": "F13",
+          "top_5_count": 5,
+          "top_5_fraction": 0.125
+        },
+        {
+          "feature_index": 33,
+          "feature_name": "F17-missing",
+          "top_5_count": 4,
+          "top_5_fraction": 0.1
+        },
+        {
+          "feature_index": 8,
+          "feature_name": "F09",
+          "top_5_count": 3,
+          "top_5_fraction": 0.075
+        },
+        {
+          "feature_index": 13,
+          "feature_name": "F14",
+          "top_5_count": 2,
+          "top_5_fraction": 0.05
+        },
+        {
+          "feature_index": 22,
+          "feature_name": "F06-missing",
+          "top_5_count": 1,
+          "top_5_fraction": 0.025
+        },
+        {
+          "feature_index": 32,
+          "feature_name": "F16-missing",
+          "top_5_count": 1,
+          "top_5_fraction": 0.025
+        }
+      ],
+      "direct_ablation_top_5_frequency": [
+        {
+          "feature_index": 6,
+          "feature_name": "F07",
+          "top_5_count": 21,
+          "top_5_fraction": 0.525
+        },
+        {
+          "feature_index": 2,
+          "feature_name": "F03",
+          "top_5_count": 20,
+          "top_5_fraction": 0.5
+        },
+        {
+          "feature_index": 9,
+          "feature_name": "F10",
+          "top_5_count": 20,
+          "top_5_fraction": 0.5
+        },
+        {
+          "feature_index": 16,
+          "feature_name": "F17",
+          "top_5_count": 20,
+          "top_5_fraction": 0.5
+        },
+        {
+          "feature_index": 10,
+          "feature_name": "F11",
+          "top_5_count": 19,
+          "top_5_fraction": 0.475
+        },
+        {
+          "feature_index": 4,
+          "feature_name": "F05",
+          "top_5_count": 18,
+          "top_5_fraction": 0.45
+        },
+        {
+          "feature_index": 14,
+          "feature_name": "F15",
+          "top_5_count": 16,
+          "top_5_fraction": 0.4
+        },
+        {
+          "feature_index": 11,
+          "feature_name": "F12",
+          "top_5_count": 14,
+          "top_5_fraction": 0.35
+        },
+        {
+          "feature_index": 0,
+          "feature_name": "F01",
+          "top_5_count": 12,
+          "top_5_fraction": 0.3
+        },
+        {
+          "feature_index": 1,
+          "feature_name": "F02",
+          "top_5_count": 12,
+          "top_5_fraction": 0.3
+        },
+        {
+          "feature_index": 7,
+          "feature_name": "F08",
+          "top_5_count": 8,
+          "top_5_fraction": 0.2
+        },
+        {
+          "feature_index": 34,
+          "feature_name": "community-risk",
+          "top_5_count": 8,
+          "top_5_fraction": 0.2
+        },
+        {
+          "feature_index": 5,
+          "feature_name": "F06",
+          "top_5_count": 4,
+          "top_5_fraction": 0.1
+        },
+        {
+          "feature_index": 33,
+          "feature_name": "F17-missing",
+          "top_5_count": 3,
+          "top_5_fraction": 0.075
+        },
+        {
+          "feature_index": 8,
+          "feature_name": "F09",
+          "top_5_count": 2,
+          "top_5_fraction": 0.05
+        },
+        {
+          "feature_index": 32,
+          "feature_name": "F16-missing",
+          "top_5_count": 2,
+          "top_5_fraction": 0.05
+        },
+        {
+          "feature_index": 24,
+          "feature_name": "F08-missing",
+          "top_5_count": 1,
+          "top_5_fraction": 0.025
+        }
+      ]
+    },
+    "test": {
+      "target_count": 40,
+      "gnnexplainer_top_5_frequency": [
+        {
+          "feature_index": 2,
+          "feature_name": "F03",
+          "top_5_count": 24,
+          "top_5_fraction": 0.6
+        },
+        {
+          "feature_index": 6,
+          "feature_name": "F07",
+          "top_5_count": 21,
+          "top_5_fraction": 0.525
+        },
+        {
+          "feature_index": 10,
+          "feature_name": "F11",
+          "top_5_count": 21,
+          "top_5_fraction": 0.525
+        },
+        {
+          "feature_index": 9,
+          "feature_name": "F10",
+          "top_5_count": 18,
+          "top_5_fraction": 0.45
+        },
+        {
+          "feature_index": 16,
+          "feature_name": "F17",
+          "top_5_count": 16,
+          "top_5_fraction": 0.4
+        },
+        {
+          "feature_index": 5,
+          "feature_name": "F06",
+          "top_5_count": 13,
+          "top_5_fraction": 0.325
+        },
+        {
+          "feature_index": 11,
+          "feature_name": "F12",
+          "top_5_count": 12,
+          "top_5_fraction": 0.3
+        },
+        {
+          "feature_index": 4,
+          "feature_name": "F05",
+          "top_5_count": 11,
+          "top_5_fraction": 0.275
+        },
+        {
+          "feature_index": 1,
+          "feature_name": "F02",
+          "top_5_count": 10,
+          "top_5_fraction": 0.25
+        },
+        {
+          "feature_index": 34,
+          "feature_name": "community-risk",
+          "top_5_count": 10,
+          "top_5_fraction": 0.25
+        },
+        {
+          "feature_index": 7,
+          "feature_name": "F08",
+          "top_5_count": 9,
+          "top_5_fraction": 0.225
+        },
+        {
+          "feature_index": 0,
+          "feature_name": "F01",
+          "top_5_count": 7,
+          "top_5_fraction": 0.175
+        },
+        {
+          "feature_index": 3,
+          "feature_name": "F04",
+          "top_5_count": 7,
+          "top_5_fraction": 0.175
+        },
+        {
+          "feature_index": 14,
+          "feature_name": "F15",
+          "top_5_count": 6,
+          "top_5_fraction": 0.15
+        },
+        {
+          "feature_index": 8,
+          "feature_name": "F09",
+          "top_5_count": 5,
+          "top_5_fraction": 0.125
+        },
+        {
+          "feature_index": 31,
+          "feature_name": "F15-missing",
+          "top_5_count": 3,
+          "top_5_fraction": 0.075
+        },
+        {
+          "feature_index": 15,
+          "feature_name": "F16",
+          "top_5_count": 2,
+          "top_5_fraction": 0.05
+        },
+        {
+          "feature_index": 33,
+          "feature_name": "F17-missing",
+          "top_5_count": 2,
+          "top_5_fraction": 0.05
+        },
+        {
+          "feature_index": 12,
+          "feature_name": "F13",
+          "top_5_count": 1,
+          "top_5_fraction": 0.025
+        },
+        {
+          "feature_index": 24,
+          "feature_name": "F08-missing",
+          "top_5_count": 1,
+          "top_5_fraction": 0.025
+        },
+        {
+          "feature_index": 32,
+          "feature_name": "F16-missing",
+          "top_5_count": 1,
+          "top_5_fraction": 0.025
+        }
+      ],
+      "direct_ablation_top_5_frequency": [
+        {
+          "feature_index": 2,
+          "feature_name": "F03",
+          "top_5_count": 20,
+          "top_5_fraction": 0.5
+        },
+        {
+          "feature_index": 6,
+          "feature_name": "F07",
+          "top_5_count": 20,
+          "top_5_fraction": 0.5
+        },
+        {
+          "feature_index": 10,
+          "feature_name": "F11",
+          "top_5_count": 20,
+          "top_5_fraction": 0.5
+        },
+        {
+          "feature_index": 4,
+          "feature_name": "F05",
+          "top_5_count": 19,
+          "top_5_fraction": 0.475
+        },
+        {
+          "feature_index": 9,
+          "feature_name": "F10",
+          "top_5_count": 19,
+          "top_5_fraction": 0.475
+        },
+        {
+          "feature_index": 16,
+          "feature_name": "F17",
+          "top_5_count": 19,
+          "top_5_fraction": 0.475
+        },
+        {
+          "feature_index": 14,
+          "feature_name": "F15",
+          "top_5_count": 17,
+          "top_5_fraction": 0.425
+        },
+        {
+          "feature_index": 7,
+          "feature_name": "F08",
+          "top_5_count": 12,
+          "top_5_fraction": 0.3
+        },
+        {
+          "feature_index": 11,
+          "feature_name": "F12",
+          "top_5_count": 12,
+          "top_5_fraction": 0.3
+        },
+        {
+          "feature_index": 0,
+          "feature_name": "F01",
+          "top_5_count": 10,
+          "top_5_fraction": 0.25
+        },
+        {
+          "feature_index": 34,
+          "feature_name": "community-risk",
+          "top_5_count": 10,
+          "top_5_fraction": 0.25
+        },
+        {
+          "feature_index": 1,
+          "feature_name": "F02",
+          "top_5_count": 6,
+          "top_5_fraction": 0.15
+        },
+        {
+          "feature_index": 5,
+          "feature_name": "F06",
+          "top_5_count": 4,
+          "top_5_fraction": 0.1
+        },
+        {
+          "feature_index": 8,
+          "feature_name": "F09",
+          "top_5_count": 4,
+          "top_5_fraction": 0.1
+        },
+        {
+          "feature_index": 31,
+          "feature_name": "F15-missing",
+          "top_5_count": 3,
+          "top_5_fraction": 0.075
+        },
+        {
+          "feature_index": 32,
+          "feature_name": "F16-missing",
+          "top_5_count": 2,
+          "top_5_fraction": 0.05
+        },
+        {
+          "feature_index": 33,
+          "feature_name": "F17-missing",
+          "top_5_count": 2,
+          "top_5_fraction": 0.05
+        },
+        {
+          "feature_index": 12,
+          "feature_name": "F13",
+          "top_5_count": 1,
+          "top_5_fraction": 0.025
+        }
+      ]
+    },
+    "cohort:high_score_fraud": {
+      "target_count": 20,
+      "gnnexplainer_top_5_frequency": [
+        {
+          "feature_index": 16,
+          "feature_name": "F17",
+          "top_5_count": 20,
+          "top_5_fraction": 1.0
+        },
+        {
+          "feature_index": 10,
+          "feature_name": "F11",
+          "top_5_count": 18,
+          "top_5_fraction": 0.9
+        },
+        {
+          "feature_index": 4,
+          "feature_name": "F05",
+          "top_5_count": 16,
+          "top_5_fraction": 0.8
+        },
+        {
+          "feature_index": 1,
+          "feature_name": "F02",
+          "top_5_count": 15,
+          "top_5_fraction": 0.75
+        },
+        {
+          "feature_index": 0,
+          "feature_name": "F01",
+          "top_5_count": 11,
+          "top_5_fraction": 0.55
+        },
+        {
+          "feature_index": 34,
+          "feature_name": "community-risk",
+          "top_5_count": 11,
+          "top_5_fraction": 0.55
+        },
+        {
+          "feature_index": 14,
+          "feature_name": "F15",
+          "top_5_count": 8,
+          "top_5_fraction": 0.4
+        },
+        {
+          "feature_index": 9,
+          "feature_name": "F10",
+          "top_5_count": 1,
+          "top_5_fraction": 0.05
+        }
+      ],
+      "direct_ablation_top_5_frequency": [
+        {
+          "feature_index": 16,
+          "feature_name": "F17",
+          "top_5_count": 20,
+          "top_5_fraction": 1.0
+        },
+        {
+          "feature_index": 4,
+          "feature_name": "F05",
+          "top_5_count": 19,
+          "top_5_fraction": 0.95
+        },
+        {
+          "feature_index": 10,
+          "feature_name": "F11",
+          "top_5_count": 19,
+          "top_5_fraction": 0.95
+        },
+        {
+          "feature_index": 14,
+          "feature_name": "F15",
+          "top_5_count": 16,
+          "top_5_fraction": 0.8
+        },
+        {
+          "feature_index": 0,
+          "feature_name": "F01",
+          "top_5_count": 12,
+          "top_5_fraction": 0.6
+        },
+        {
+          "feature_index": 34,
+          "feature_name": "community-risk",
+          "top_5_count": 10,
+          "top_5_fraction": 0.5
+        },
+        {
+          "feature_index": 1,
+          "feature_name": "F02",
+          "top_5_count": 2,
+          "top_5_fraction": 0.1
+        },
+        {
+          "feature_index": 9,
+          "feature_name": "F10",
+          "top_5_count": 2,
+          "top_5_fraction": 0.1
+        }
+      ]
+    },
+    "cohort:high_score_normal": {
+      "target_count": 20,
+      "gnnexplainer_top_5_frequency": [
+        {
+          "feature_index": 10,
+          "feature_name": "F11",
+          "top_5_count": 20,
+          "top_5_fraction": 1.0
+        },
+        {
+          "feature_index": 16,
+          "feature_name": "F17",
+          "top_5_count": 14,
+          "top_5_fraction": 0.7
+        },
+        {
+          "feature_index": 5,
+          "feature_name": "F06",
+          "top_5_count": 11,
+          "top_5_fraction": 0.55
+        },
+        {
+          "feature_index": 0,
+          "feature_name": "F01",
+          "top_5_count": 7,
+          "top_5_fraction": 0.35
+        },
+        {
+          "feature_index": 1,
+          "feature_name": "F02",
+          "top_5_count": 7,
+          "top_5_fraction": 0.35
+        },
+        {
+          "feature_index": 2,
+          "feature_name": "F03",
+          "top_5_count": 6,
+          "top_5_fraction": 0.3
+        },
+        {
+          "feature_index": 4,
+          "feature_name": "F05",
+          "top_5_count": 6,
+          "top_5_fraction": 0.3
+        },
+        {
+          "feature_index": 14,
+          "feature_name": "F15",
+          "top_5_count": 6,
+          "top_5_fraction": 0.3
+        },
+        {
+          "feature_index": 3,
+          "feature_name": "F04",
+          "top_5_count": 5,
+          "top_5_fraction": 0.25
+        },
+        {
+          "feature_index": 8,
+          "feature_name": "F09",
+          "top_5_count": 4,
+          "top_5_fraction": 0.2
+        },
+        {
+          "feature_index": 31,
+          "feature_name": "F15-missing",
+          "top_5_count": 3,
+          "top_5_fraction": 0.15
+        },
+        {
+          "feature_index": 34,
+          "feature_name": "community-risk",
+          "top_5_count": 3,
+          "top_5_fraction": 0.15
+        },
+        {
+          "feature_index": 6,
+          "feature_name": "F07",
+          "top_5_count": 2,
+          "top_5_fraction": 0.1
+        },
+        {
+          "feature_index": 15,
+          "feature_name": "F16",
+          "top_5_count": 2,
+          "top_5_fraction": 0.1
+        },
+        {
+          "feature_index": 9,
+          "feature_name": "F10",
+          "top_5_count": 1,
+          "top_5_fraction": 0.05
+        },
+        {
+          "feature_index": 22,
+          "feature_name": "F06-missing",
+          "top_5_count": 1,
+          "top_5_fraction": 0.05
+        },
+        {
+          "feature_index": 24,
+          "feature_name": "F08-missing",
+          "top_5_count": 1,
+          "top_5_fraction": 0.05
+        },
+        {
+          "feature_index": 33,
+          "feature_name": "F17-missing",
+          "top_5_count": 1,
+          "top_5_fraction": 0.05
+        }
+      ],
+      "direct_ablation_top_5_frequency": [
+        {
+          "feature_index": 10,
+          "feature_name": "F11",
+          "top_5_count": 20,
+          "top_5_fraction": 1.0
+        },
+        {
+          "feature_index": 16,
+          "feature_name": "F17",
+          "top_5_count": 19,
+          "top_5_fraction": 0.95
+        },
+        {
+          "feature_index": 4,
+          "feature_name": "F05",
+          "top_5_count": 18,
+          "top_5_fraction": 0.9
+        },
+        {
+          "feature_index": 14,
+          "feature_name": "F15",
+          "top_5_count": 17,
+          "top_5_fraction": 0.85
+        },
+        {
+          "feature_index": 0,
+          "feature_name": "F01",
+          "top_5_count": 10,
+          "top_5_fraction": 0.5
+        },
+        {
+          "feature_index": 34,
+          "feature_name": "community-risk",
+          "top_5_count": 5,
+          "top_5_fraction": 0.25
+        },
+        {
+          "feature_index": 8,
+          "feature_name": "F09",
+          "top_5_count": 3,
+          "top_5_fraction": 0.15
+        },
+        {
+          "feature_index": 31,
+          "feature_name": "F15-missing",
+          "top_5_count": 3,
+          "top_5_fraction": 0.15
+        },
+        {
+          "feature_index": 1,
+          "feature_name": "F02",
+          "top_5_count": 2,
+          "top_5_fraction": 0.1
+        },
+        {
+          "feature_index": 6,
+          "feature_name": "F07",
+          "top_5_count": 1,
+          "top_5_fraction": 0.05
+        },
+        {
+          "feature_index": 9,
+          "feature_name": "F10",
+          "top_5_count": 1,
+          "top_5_fraction": 0.05
+        },
+        {
+          "feature_index": 24,
+          "feature_name": "F08-missing",
+          "top_5_count": 1,
+          "top_5_fraction": 0.05
+        }
+      ]
+    },
+    "cohort:low_score_fraud": {
+      "target_count": 20,
+      "gnnexplainer_top_5_frequency": [
+        {
+          "feature_index": 2,
+          "feature_name": "F03",
+          "top_5_count": 20,
+          "top_5_fraction": 1.0
+        },
+        {
+          "feature_index": 6,
+          "feature_name": "F07",
+          "top_5_count": 20,
+          "top_5_fraction": 1.0
+        },
+        {
+          "feature_index": 9,
+          "feature_name": "F10",
+          "top_5_count": 18,
+          "top_5_fraction": 0.9
+        },
+        {
+          "feature_index": 7,
+          "feature_name": "F08",
+          "top_5_count": 10,
+          "top_5_fraction": 0.5
+        },
+        {
+          "feature_index": 11,
+          "feature_name": "F12",
+          "top_5_count": 9,
+          "top_5_fraction": 0.45
+        },
+        {
+          "feature_index": 3,
+          "feature_name": "F04",
+          "top_5_count": 7,
+          "top_5_fraction": 0.35
+        },
+        {
+          "feature_index": 5,
+          "feature_name": "F06",
+          "top_5_count": 5,
+          "top_5_fraction": 0.25
+        },
+        {
+          "feature_index": 8,
+          "feature_name": "F09",
+          "top_5_count": 3,
+          "top_5_fraction": 0.15
+        },
+        {
+          "feature_index": 12,
+          "feature_name": "F13",
+          "top_5_count": 3,
+          "top_5_fraction": 0.15
+        },
+        {
+          "feature_index": 10,
+          "feature_name": "F11",
+          "top_5_count": 2,
+          "top_5_fraction": 0.1
+        },
+        {
+          "feature_index": 34,
+          "feature_name": "community-risk",
+          "top_5_count": 2,
+          "top_5_fraction": 0.1
+        },
+        {
+          "feature_index": 13,
+          "feature_name": "F14",
+          "top_5_count": 1,
+          "top_5_fraction": 0.05
+        }
+      ],
+      "direct_ablation_top_5_frequency": [
+        {
+          "feature_index": 2,
+          "feature_name": "F03",
+          "top_5_count": 20,
+          "top_5_fraction": 1.0
+        },
+        {
+          "feature_index": 6,
+          "feature_name": "F07",
+          "top_5_count": 20,
+          "top_5_fraction": 1.0
+        },
+        {
+          "feature_index": 9,
+          "feature_name": "F10",
+          "top_5_count": 19,
+          "top_5_fraction": 0.95
+        },
+        {
+          "feature_index": 7,
+          "feature_name": "F08",
+          "top_5_count": 12,
+          "top_5_fraction": 0.6
+        },
+        {
+          "feature_index": 11,
+          "feature_name": "F12",
+          "top_5_count": 11,
+          "top_5_fraction": 0.55
+        },
+        {
+          "feature_index": 1,
+          "feature_name": "F02",
+          "top_5_count": 6,
+          "top_5_fraction": 0.3
+        },
+        {
+          "feature_index": 5,
+          "feature_name": "F06",
+          "top_5_count": 3,
+          "top_5_fraction": 0.15
+        },
+        {
+          "feature_index": 8,
+          "feature_name": "F09",
+          "top_5_count": 3,
+          "top_5_fraction": 0.15
+        },
+        {
+          "feature_index": 32,
+          "feature_name": "F16-missing",
+          "top_5_count": 2,
+          "top_5_fraction": 0.1
+        },
+        {
+          "feature_index": 34,
+          "feature_name": "community-risk",
+          "top_5_count": 2,
+          "top_5_fraction": 0.1
+        },
+        {
+          "feature_index": 12,
+          "feature_name": "F13",
+          "top_5_count": 1,
+          "top_5_fraction": 0.05
+        },
+        {
+          "feature_index": 33,
+          "feature_name": "F17-missing",
+          "top_5_count": 1,
+          "top_5_fraction": 0.05
+        }
+      ]
+    },
+    "cohort:low_score_normal_control": {
+      "target_count": 20,
+      "gnnexplainer_top_5_frequency": [
+        {
+          "feature_index": 2,
+          "feature_name": "F03",
+          "top_5_count": 20,
+          "top_5_fraction": 1.0
+        },
+        {
+          "feature_index": 6,
+          "feature_name": "F07",
+          "top_5_count": 20,
+          "top_5_fraction": 1.0
+        },
+        {
+          "feature_index": 9,
+          "feature_name": "F10",
+          "top_5_count": 18,
+          "top_5_fraction": 0.9
+        },
+        {
+          "feature_index": 11,
+          "feature_name": "F12",
+          "top_5_count": 15,
+          "top_5_fraction": 0.75
+        },
+        {
+          "feature_index": 7,
+          "feature_name": "F08",
+          "top_5_count": 7,
+          "top_5_fraction": 0.35
+        },
+        {
+          "feature_index": 5,
+          "feature_name": "F06",
+          "top_5_count": 5,
+          "top_5_fraction": 0.25
+        },
+        {
+          "feature_index": 33,
+          "feature_name": "F17-missing",
+          "top_5_count": 5,
+          "top_5_fraction": 0.25
+        },
+        {
+          "feature_index": 12,
+          "feature_name": "F13",
+          "top_5_count": 3,
+          "top_5_fraction": 0.15
+        },
+        {
+          "feature_index": 32,
+          "feature_name": "F16-missing",
+          "top_5_count": 2,
+          "top_5_fraction": 0.1
+        },
+        {
+          "feature_index": 1,
+          "feature_name": "F02",
+          "top_5_count": 1,
+          "top_5_fraction": 0.05
+        },
+        {
+          "feature_index": 8,
+          "feature_name": "F09",
+          "top_5_count": 1,
+          "top_5_fraction": 0.05
+        },
+        {
+          "feature_index": 10,
+          "feature_name": "F11",
+          "top_5_count": 1,
+          "top_5_fraction": 0.05
+        },
+        {
+          "feature_index": 13,
+          "feature_name": "F14",
+          "top_5_count": 1,
+          "top_5_fraction": 0.05
+        },
+        {
+          "feature_index": 34,
+          "feature_name": "community-risk",
+          "top_5_count": 1,
+          "top_5_fraction": 0.05
+        }
+      ],
+      "direct_ablation_top_5_frequency": [
+        {
+          "feature_index": 2,
+          "feature_name": "F03",
+          "top_5_count": 20,
+          "top_5_fraction": 1.0
+        },
+        {
+          "feature_index": 6,
+          "feature_name": "F07",
+          "top_5_count": 20,
+          "top_5_fraction": 1.0
+        },
+        {
+          "feature_index": 9,
+          "feature_name": "F10",
+          "top_5_count": 17,
+          "top_5_fraction": 0.85
+        },
+        {
+          "feature_index": 11,
+          "feature_name": "F12",
+          "top_5_count": 15,
+          "top_5_fraction": 0.75
+        },
+        {
+          "feature_index": 1,
+          "feature_name": "F02",
+          "top_5_count": 8,
+          "top_5_fraction": 0.4
+        },
+        {
+          "feature_index": 7,
+          "feature_name": "F08",
+          "top_5_count": 8,
+          "top_5_fraction": 0.4
+        },
+        {
+          "feature_index": 5,
+          "feature_name": "F06",
+          "top_5_count": 5,
+          "top_5_fraction": 0.25
+        },
+        {
+          "feature_index": 33,
+          "feature_name": "F17-missing",
+          "top_5_count": 4,
+          "top_5_fraction": 0.2
+        },
+        {
+          "feature_index": 32,
+          "feature_name": "F16-missing",
+          "top_5_count": 2,
+          "top_5_fraction": 0.1
+        },
+        {
+          "feature_index": 34,
+          "feature_name": "community-risk",
+          "top_5_count": 1,
+          "top_5_fraction": 0.05
+        }
+      ]
+    }
+  },
+  "community_risk": {
+    "all": {
+      "target_count": 80,
+      "gnnexplainer_top_5_count": 17,
+      "gnnexplainer_top_1_count": 2,
+      "gnnexplainer_median_rank": 11.0,
+      "direct_ablation_top_5_count": 18,
+      "direct_ablation_median_rank": 8.0,
+      "mean_logit_delta": 0.07249438017606735,
+      "median_logit_delta": 0.02314966917037964,
+      "mean_absolute_logit_delta": 0.12249077409505844,
+      "median_absolute_logit_delta": 0.07699793577194214,
+      "median_absolute_probability_delta": 0.0032353319783427377
+    },
+    "validation": {
+      "target_count": 40,
+      "gnnexplainer_top_5_count": 7,
+      "gnnexplainer_top_1_count": 1,
+      "gnnexplainer_median_rank": 10.5,
+      "direct_ablation_top_5_count": 8,
+      "direct_ablation_median_rank": 8.0,
+      "mean_logit_delta": 0.08095458447933197,
+      "median_logit_delta": 0.03989458084106445,
+      "mean_absolute_logit_delta": 0.1314447909593582,
+      "median_absolute_logit_delta": 0.08642041683197021,
+      "median_absolute_probability_delta": 0.003569721457340521
+    },
+    "test": {
+      "target_count": 40,
+      "gnnexplainer_top_5_count": 10,
+      "gnnexplainer_top_1_count": 1,
+      "gnnexplainer_median_rank": 11.0,
+      "direct_ablation_top_5_count": 10,
+      "direct_ablation_median_rank": 7.5,
+      "mean_logit_delta": 0.06403417587280273,
+      "median_logit_delta": -0.004011273384094238,
+      "mean_absolute_logit_delta": 0.11353675723075866,
+      "median_absolute_logit_delta": 0.05082237720489502,
+      "median_absolute_probability_delta": 0.0027695647205311074
+    },
+    "cohort:high_score_fraud": {
+      "target_count": 20,
+      "gnnexplainer_top_5_count": 11,
+      "gnnexplainer_top_1_count": 2,
+      "gnnexplainer_median_rank": 5.0,
+      "direct_ablation_top_5_count": 10,
+      "direct_ablation_median_rank": 5.0,
+      "mean_logit_delta": 0.25721449255943296,
+      "median_logit_delta": 0.2580230236053467,
+      "mean_absolute_logit_delta": 0.2623018443584442,
+      "median_absolute_logit_delta": 0.2580230236053467,
+      "median_absolute_probability_delta": 0.009139911395080191
+    },
+    "cohort:high_score_normal": {
+      "target_count": 20,
+      "gnnexplainer_top_5_count": 3,
+      "gnnexplainer_top_1_count": 0,
+      "gnnexplainer_median_rank": 15.5,
+      "direct_ablation_top_5_count": 5,
+      "direct_ablation_median_rank": 8.0,
+      "mean_logit_delta": 0.040291786193847656,
+      "median_logit_delta": 0.023149728775024414,
+      "mean_absolute_logit_delta": 0.08284525871276856,
+      "median_absolute_logit_delta": 0.05972099304199219,
+      "median_absolute_probability_delta": 0.0002891310018015014
+    },
+    "cohort:low_score_fraud": {
+      "target_count": 20,
+      "gnnexplainer_top_5_count": 2,
+      "gnnexplainer_top_1_count": 0,
+      "gnnexplainer_median_rank": 14.0,
+      "direct_ablation_top_5_count": 2,
+      "direct_ablation_median_rank": 8.5,
+      "mean_logit_delta": -0.03862695693969727,
+      "median_logit_delta": -0.02589881420135498,
+      "mean_absolute_logit_delta": 0.06823444366455078,
+      "median_absolute_logit_delta": 0.06987762451171875,
+      "median_absolute_probability_delta": 0.002337759878393979
+    },
+    "cohort:low_score_normal_control": {
+      "target_count": 20,
+      "gnnexplainer_top_5_count": 1,
+      "gnnexplainer_top_1_count": 0,
+      "gnnexplainer_median_rank": 12.0,
+      "direct_ablation_top_5_count": 1,
+      "direct_ablation_median_rank": 12.0,
+      "mean_logit_delta": 0.031098198890686036,
+      "median_logit_delta": -0.01761150360107422,
+      "mean_absolute_logit_delta": 0.07658154964447021,
+      "median_absolute_logit_delta": 0.04192519187927246,
+      "median_absolute_probability_delta": 0.004003984514547143
+    }
+  },
+  "event_patterns": {
+    "all_sampled_event_count": 179,
+    "meaningfully_rankable_target_count": 39,
+    "gnnexplainer_top_is_most_recent_count": 20,
+    "direct_ablation_top_is_most_recent_count": 16,
+    "all_event_type_counts": {
+      "1": 23,
+      "2": 1,
+      "3": 9,
+      "4": 39,
+      "5": 60,
+      "6": 30,
+      "8": 3,
+      "9": 4,
+      "10": 10
+    },
+    "gnnexplainer_top_event_type_counts": {
+      "1": 2,
+      "3": 4,
+      "4": 12,
+      "5": 11,
+      "6": 9,
+      "9": 1
+    },
+    "direct_ablation_top_event_type_counts": {
+      "1": 1,
+      "3": 2,
+      "4": 10,
+      "5": 15,
+      "6": 8,
+      "8": 1,
+      "10": 2
+    },
+    "note": "Types 4/5/6 are common both globally and among top-ranked events; no unique preference is claimed."
+  },
+  "community_relation": {
+    "all_sampled_events_internal_count": 179,
+    "all_sampled_event_count": 179,
+    "all_sampled_events_internal_fraction": 1.0,
+    "target_count_with_only_internal_sampled_events": 80,
+    "interpretation_limit": "All sampled events are internal, so this sample cannot test preference for internal versus external events."
+  },
+  "case_selection": {
+    "rules": {
+      "success": "test; 3-5 event; kiểm tra giữ/bỏ đạt; top event trùng phép bỏ từng event; ưu tiên tỷ lệ event cần giữ nhỏ hơn",
+      "limitation": "ít nhất 4 event; kiểm tra giữ/bỏ đạt nhưng top event không trùng phép bỏ từng event; ưu tiên neighborhood lớn hơn",
+      "community_risk": "test high-score fraud; community-risk thuộc top-5 của GNNExplainer và phép đưa từng feature về nền; kiểm tra feature đạt; ưu tiên |logit delta| lớn hơn"
+    },
+    "selected": {
+      "success": {
+        "split": "test",
+        "cohort": "high_score_normal",
+        "node": 1662253,
+        "label": 0,
+        "fraud_score": 0.9954448226068403,
+        "event_n": 4,
+        "selected_n": 1,
+        "edge_pass": true,
+        "top_match": true,
+        "community_id": 356,
+        "community_risk": 0.28796151280403137,
+        "risk_gnn_rank": 16,
+        "risk_direct_rank": 7,
+        "risk_logit_delta": 0.023647785186767578
+      },
+      "limitation": {
+        "split": "validation",
+        "cohort": "low_score_fraud",
+        "node": 2287558,
+        "label": 1,
+        "fraud_score": 0.03637486867393743,
+        "event_n": 8,
+        "selected_n": 1,
+        "edge_pass": true,
+        "top_match": false,
+        "community_id": 4,
+        "community_risk": -1.2211709022521973,
+        "risk_gnn_rank": 7,
+        "risk_direct_rank": 7,
+        "risk_logit_delta": -0.10598087310791016
+      },
+      "community_risk": {
+        "split": "test",
+        "cohort": "high_score_fraud",
+        "node": 2789400,
+        "label": 1,
+        "fraud_score": 0.9650746689523217,
+        "event_n": 2,
+        "selected_n": 2,
+        "edge_pass": true,
+        "top_match": false,
+        "community_id": 54,
+        "community_risk": 8.292803764343262,
+        "risk_gnn_rank": 1,
+        "risk_direct_rank": 3,
+        "risk_logit_delta": 0.7112326622009277
+      }
+    }
+  },
+  "provenance": {
+    "corrected_raw_masks": "artifacts/metrics/sprint5_explanations_reassessment.npz",
+    "corrected_raw_masks_sha256": "1c8b2a5a09e3afa8382c158cbc979f3cd0af55b43d97808dab8791189f8abcb0",
+    "community_risk_counterfactual_source": "artifacts/metrics/sprint5_explainer_results.json",
+    "counterfactual_mask_independent": true,
+    "checks": {
+      "same_80_targets": true,
+      "old_result_sha_matches": true,
+      "old_mask_sha_matches": true,
+      "dataset_sha_matches": true,
+      "checkpoint_sha_matches": true
+    }
+  }
+}

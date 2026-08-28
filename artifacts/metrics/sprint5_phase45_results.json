@@ -1,0 +1,32 @@
+{
+  "schema_version": 3,
+  "status": "complete",
+  "gate_passed": true,
+  "final_figure_paths": [
+    "artifacts/figures/sprint5/01_neighborhood_size.png",
+    "artifacts/figures/sprint5/02_feature_patterns.png",
+    "artifacts/figures/sprint5/03_community_risk_counterfactual.png",
+    "artifacts/figures/sprint5/04_event_explanation_checks.png"
+  ],
+  "candidate_risky_subgraphs": [],
+  "checks": {
+    "required_files_exist": true,
+    "experiment_integrity_gate_passed": true,
+    "reader_artifact_gates_passed": true,
+    "exactly_80_explanations": true,
+    "split_is_40_validation_40_test": true,
+    "each_split_cohort_has_10_targets": true,
+    "all_rows_have_feature_event_community_analysis": true,
+    "final_raw_matches_corrected_mask_hash": true,
+    "community_risk_provenance_checks_passed": true,
+    "candidate_risky_subgraphs_empty": true,
+    "exact_final_figure_set_exists": true,
+    "report_references_all_final_figures": true,
+    "report_has_no_old_seven_figure_contract": true,
+    "plan_declares_exact_final_figure_set": true,
+    "notebook_reads_final_artifact": true,
+    "notebook_references_all_final_figures": true,
+    "notebook_all_code_cells_executed": true,
+    "notebook_has_no_error_output": true
+  }
+}

@@ -1,0 +1,262 @@
+{
+  "schema_version": 1,
+  "status": "phase1_complete",
+  "gate_passed": true,
+  "completed_at": "2026-08-26T10:20:59.138802+07:00",
+  "scope": "sprint5_gnnexplainer_phase1_feasibility",
+  "model": {
+    "variant": "C",
+    "seed": 42,
+    "checkpoint_path": "artifacts/runs/sprint4_community_ablation_C_20260818_144249/tgat_seed42/best.pt",
+    "checkpoint_sha256": "558db58e8c788edb8f5862b64093ef5a1a463debadd80e7e119d230ca602b61e",
+    "state_sha256_before": "4919fc5d8d388bc9ee9bdaf014a60f609f20bdaa7897be16a4abae7e0d0f7a38",
+    "state_sha256_after": "4919fc5d8d388bc9ee9bdaf014a60f609f20bdaa7897be16a4abae7e0d0f7a38"
+  },
+  "data": {
+    "path": "data/dgraphfin.npz",
+    "sha256": "95470dab2c48523f7118a92204c090de37a957bb053bd5841c7bdba09558ba85",
+    "community_feature_path": "artifacts/metrics/sprint4_community_features.npz",
+    "community_feature_sha256": "d5d98446df501381cd39a269273340b13f964e7f3a7e598f7286ef1b626afea1",
+    "community_assignment_sha256": "5d0a57e6b8e7c2aa6d5cdfa9e2a1079f59399358177781f2c3a3d015b07c3009"
+  },
+  "environment": {
+    "python": "3.12.1",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "torch": "2.12.0+cpu",
+    "torch_geometric": "2.8.0.post1",
+    "numpy": "2.5.1",
+    "device": "cpu"
+  },
+  "explainer_config": {
+    "algorithm": "GNNExplainer",
+    "explanation_type": "model",
+    "node_mask_type": "attributes",
+    "edge_mask_type": "object",
+    "epochs": 100,
+    "learning_rate": 0.01,
+    "model_seed": 42,
+    "neighborhood_seed": 42,
+    "explainer_seed": 42,
+    "num_neighbors": [
+      15
+    ]
+  },
+  "validation_reproduction": {
+    "expected_average_precision": 0.04148019508425553,
+    "observed_average_precision": 0.04148019508425553,
+    "absolute_difference": 0.0,
+    "sample_count": 183862,
+    "positive_count": 2326
+  },
+  "pilot_target_rule": "validation nodes with in_degree>0: highest-score fraud, highest-score normal, lowest-score fraud",
+  "pilot_targets": [
+    {
+      "cohort": "high_score_fraud",
+      "node_id": 2961442,
+      "label": 1,
+      "fraud_score": 0.9685918688774109,
+      "in_degree": 3
+    },
+    {
+      "cohort": "high_score_normal",
+      "node_id": 1942636,
+      "label": 0,
+      "fraud_score": 0.9999874830245972,
+      "in_degree": 3
+    },
+    {
+      "cohort": "low_score_fraud",
+      "node_id": 2636796,
+      "label": 1,
+      "fraud_score": 0.009813944809138775,
+      "in_degree": 1
+    }
+  ],
+  "pilot_results": [
+    {
+      "cohort": "high_score_fraud",
+      "target_node_id": 2961442,
+      "label": 1,
+      "predicted_class": 1,
+      "full_logit": 3.428776741027832,
+      "fraud_score": 0.9685918688774109,
+      "target_class_score": 0.9685918755139261,
+      "adapter_logit_abs_difference": 0.0,
+      "sampled_node_count": 4,
+      "sampled_event_count": 3,
+      "node_mask_shape": [
+        4,
+        35
+      ],
+      "edge_mask_shape": [
+        3
+      ],
+      "masks_finite": true,
+      "mask_shapes_valid": true,
+      "edge_mask_min": 0.15909001231193542,
+      "edge_mask_max": 0.8277783393859863,
+      "node_mask_min": 0.0,
+      "node_mask_max": 0.7382473945617676,
+      "top_edge": {
+        "event_position": 1,
+        "source_node_id": 2363800,
+        "target_node_id": 2961442,
+        "importance": 0.8277783393859863,
+        "edge_timestamp": 279,
+        "edge_delta": 15.0,
+        "edge_type": 6,
+        "global_event_id": 6037097
+      },
+      "top_feature": {
+        "local_node": 1,
+        "global_node_id": 2790371,
+        "feature_index": 10,
+        "feature_name": "zero_indicator_10",
+        "importance": 0.7382473945617676
+      },
+      "edge_removal_logit_delta": -0.2875669002532959,
+      "top_feature_removal_logit_delta": 1.3555409908294678,
+      "community_risk_prior": 0.01265533547848463,
+      "community_risk_prior_logit_delta": 0.26274776458740234,
+      "runtime_seconds": 0.2974218000017572,
+      "rss_before_mib": 1648.74609375,
+      "peak_rss_mib": 1650.84765625,
+      "peak_rss_delta_mib": 2.1015625,
+      "node_mask_has_nonzero_gradient": true,
+      "edge_mask_has_nonzero_gradient": true,
+      "validation_selection_score": 0.9685918688774109,
+      "validation_in_degree": 3
+    },
+    {
+      "cohort": "high_score_normal",
+      "target_node_id": 1942636,
+      "label": 0,
+      "predicted_class": 1,
+      "full_logit": 11.286685943603516,
+      "fraud_score": 0.9999874830245972,
+      "target_class_score": 0.9999874613976246,
+      "adapter_logit_abs_difference": 0.0,
+      "sampled_node_count": 4,
+      "sampled_event_count": 3,
+      "node_mask_shape": [
+        4,
+        35
+      ],
+      "edge_mask_shape": [
+        3
+      ],
+      "masks_finite": true,
+      "mask_shapes_valid": true,
+      "edge_mask_min": 0.16262103617191315,
+      "edge_mask_max": 0.8297207355499268,
+      "node_mask_min": 0.0,
+      "node_mask_max": 0.4710262417793274,
+      "top_edge": {
+        "event_position": 1,
+        "source_node_id": 2862460,
+        "target_node_id": 1942636,
+        "importance": 0.8297207355499268,
+        "edge_timestamp": 235,
+        "edge_delta": 0.0,
+        "edge_type": 4,
+        "global_event_id": 2926924
+      },
+      "top_feature": {
+        "local_node": 0,
+        "global_node_id": 1942636,
+        "feature_index": 10,
+        "feature_name": "zero_indicator_10",
+        "importance": 0.4710262417793274
+      },
+      "edge_removal_logit_delta": 0.018323898315429688,
+      "top_feature_removal_logit_delta": 20.6884822845459,
+      "community_risk_prior": 0.01265533547848463,
+      "community_risk_prior_logit_delta": 0.032433509826660156,
+      "runtime_seconds": 0.2755410999961896,
+      "rss_before_mib": 1647.5546875,
+      "peak_rss_mib": 1647.57421875,
+      "peak_rss_delta_mib": 0.01953125,
+      "node_mask_has_nonzero_gradient": true,
+      "edge_mask_has_nonzero_gradient": true,
+      "validation_selection_score": 0.9999874830245972,
+      "validation_in_degree": 3
+    },
+    {
+      "cohort": "low_score_fraud",
+      "target_node_id": 2636796,
+      "label": 1,
+      "predicted_class": 0,
+      "full_logit": -4.614088535308838,
+      "fraud_score": 0.009813944809138775,
+      "target_class_score": 0.9901860550865587,
+      "adapter_logit_abs_difference": 0.0,
+      "sampled_node_count": 2,
+      "sampled_event_count": 1,
+      "node_mask_shape": [
+        2,
+        35
+      ],
+      "edge_mask_shape": [
+        1
+      ],
+      "masks_finite": true,
+      "mask_shapes_valid": true,
+      "edge_mask_min": 0.1507360339164734,
+      "edge_mask_max": 0.1507360339164734,
+      "node_mask_min": 0.0,
+      "node_mask_max": 0.6822389960289001,
+      "top_edge": {
+        "event_position": 0,
+        "source_node_id": 1772272,
+        "target_node_id": 2636796,
+        "importance": 0.1507360339164734,
+        "edge_timestamp": 305,
+        "edge_delta": -305.0,
+        "edge_type": 9,
+        "global_event_id": 4558611
+      },
+      "top_feature": {
+        "local_node": 0,
+        "global_node_id": 2636796,
+        "feature_index": 2,
+        "feature_name": "zero_indicator_2",
+        "importance": 0.6822389960289001
+      },
+      "edge_removal_logit_delta": -0.18894386291503906,
+      "top_feature_removal_logit_delta": -3.2190895080566406,
+      "community_risk_prior": 0.01265533547848463,
+      "community_risk_prior_logit_delta": 0.017435550689697266,
+      "runtime_seconds": 0.28047489999153186,
+      "rss_before_mib": 1647.5546875,
+      "peak_rss_mib": 1647.578125,
+      "peak_rss_delta_mib": 0.0234375,
+      "node_mask_has_nonzero_gradient": true,
+      "edge_mask_has_nonzero_gradient": true,
+      "validation_selection_score": 0.009813944809138775,
+      "validation_in_degree": 1
+    }
+  ],
+  "randomized_model_sanity": {
+    "target_rule": "validation node with largest in-degree; lowest node ID tie-break",
+    "target_node_id": 1501963,
+    "sampled_event_count": 15,
+    "random_model_seed": 20260824,
+    "edge_rank_spearman": 0.9714285714285713,
+    "top_3_edge_jaccard": 0.5,
+    "exact_edge_ranking_match": false,
+    "passed": true
+  },
+  "gate_checks": {
+    "checkpoint_hash_matches_final_lock": true,
+    "validation_ap_reproduced": true,
+    "adapter_logit_equivalence": true,
+    "all_masks_finite": true,
+    "all_mask_shapes_valid": true,
+    "all_explanations_have_edges": true,
+    "mask_gradient_path_valid": true,
+    "randomized_model_ranking_differs": true,
+    "perturbation_changes_output": true,
+    "model_state_unchanged": true
+  },
+  "raw_mask_path": "artifacts/metrics/sprint5_phase1_explanations.npz"
+}
