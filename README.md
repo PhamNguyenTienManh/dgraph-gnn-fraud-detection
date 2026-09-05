@@ -3,7 +3,7 @@
 Đồ án nghiên cứu ứng dụng **Graph Neural Networks (GNN)** vào bài toán phát hiện
 người dùng gian lận trên mạng lưới tài chính DGraphFin.
 
-Phần nghiên cứu được trình bày qua sáu Jupyter Notebook, đi từ khám phá dữ liệu,
+Phần nghiên cứu được trình bày qua bảy Jupyter Notebook, đi từ khám phá dữ liệu,
 huấn luyện và so sánh mô hình đến Community Detection, community-risk và giải thích
 dự đoán bằng GNNExplainer. Người đọc có thể theo dõi lần lượt câu hỏi, phương pháp,
 kết quả và giới hạn của từng thí nghiệm.
@@ -40,7 +40,10 @@ trong community có hành vi gian lận phối hợp. Kết quả model vẫn l�
    — kiểm tra structural community features và community-risk có giúp TGAT trên ba seed hay không.
 6. [`notebooks/06_gnn_explainer.ipynb`](notebooks/06_gnn_explainer.ipynb)
    — xem TGAT + community-risk dựa vào feature và event nào, đồng thời đánh giá lời
-   giải thích có đủ ổn định và đáng tin để sử dụng hay không.
+   giải thích có đủ ổn định và đáng tin để sử dụng hay không;
+7. [`notebooks/07_tgat_error_analysis.ipynb`](notebooks/07_tgat_error_analysis.ipynb)
+   — khóa threshold trên validation, phân tích trực tiếp FP/FN và control, kiểm tra
+   feature/community-risk, rồi đo độ nhạy của frozen TGAT bằng sáu inference-time ablation.
 
 Các notebook đã lưu sẵn output của lần chạy kiểm tra gần nhất. Notebook training mặc
 định dùng `QUICK_MODE=True` với ít epoch/batch để kiểm tra pipeline; kết quả quick mode
@@ -114,6 +117,10 @@ cấp nhóm node, nhưng thứ hạng event chưa vượt rõ các cách chọn 
 5 chưa dùng lời giải thích event làm bằng chứng điều tra. Xem phần diễn giải đầy đủ tại
 [`docs/sprint5_report.md`](docs/sprint5_report.md) và bản tóm tắt thiết kế thí nghiệm tại
 [`docs/sprint5_problem_method_evaluation.md`](docs/sprint5_problem_method_evaluation.md).
+
+Sprint 5.2 phân tích trực tiếp false positive/false negative và kiểm tra độ nhạy của
+TGAT với thời gian, hàng xóm và message passing. Xem kết quả và giới hạn tại
+[`docs/sprint5.2_report.md`](docs/sprint5.2_report.md).
 
 ## Artifact policy
 

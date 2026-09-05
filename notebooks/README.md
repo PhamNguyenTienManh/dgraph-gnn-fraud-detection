@@ -1,6 +1,6 @@
 # Research notebooks
 
-Sáu notebook là luồng nghiên cứu chính và được đọc/chạy theo thứ tự:
+Bảy notebook là luồng nghiên cứu chính và được đọc/chạy theo thứ tự:
 
 1. `01_dgraphfin_eda.ipynb` — data contract, loader, validation, EDA và sampling;
 2. `02_gnn_training.ipynb` — preprocessing, graph, GCN/GraphSAGE/RGCN/GAT/TGAT
@@ -12,7 +12,9 @@ Sáu notebook là luồng nghiên cứu chính và được đọc/chạy theo t
    community-risk có giúp TGAT trên ba seed hay không;
 6. `06_gnn_explainer.ipynb` — giải thích 80 node bằng GNNExplainer, kiểm tra trực tiếp
    event/feature nào tác động đến dự đoán và đánh giá lời giải thích có đủ tin cậy để
-   đề xuất graph con hay không.
+   đề xuất graph con hay không;
+7. `07_tgat_error_analysis.ipynb` — khóa threshold từ validation, phân tích
+   feature/community-risk trên error-control đã ghép và chạy full-split TGAT input ablation.
 
 Markdown trong notebook giải thích mục tiêu, giả định và kết luận; code được chia thành
 các cell theo đúng thứ tự thực hiện.
@@ -40,3 +42,7 @@ Notebook 06 đọc kết quả cuối đã lưu và trình bày bốn hình: quy
 feature thường được chọn, tác động của community-risk và kiểm tra lời giải thích event.
 Các kết quả graph mô tả phép tính của model, không phải fraud ring đã được xác nhận hay
 danh sách ưu tiên điều tra.
+
+Notebook 07 mặc định đọc các artifact đã khóa. Có thể chạy lại từng phần bằng
+`RUN_SPRINT5_2_PREPARATION=1`, `RUN_ERROR_ATTRIBUTION=1` hoặc `RUN_TGAT_ABLATION=1`;
+không bật các cờ này khi chỉ cần đọc kết quả đã kiểm chứng.

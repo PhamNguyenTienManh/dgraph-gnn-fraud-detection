@@ -183,7 +183,7 @@ Ta xếp event theo từng phương pháp rồi thử lần lượt top-1, top-2
 “Chọn ngẫu nhiên” không có nghĩa model dự đoán ngẫu nhiên. Nó chỉ xáo thứ tự event
 bằng seed cố định, rồi chịu đúng phép thử giữ/bỏ như GNNExplainer.
 
-| Cách xếp event | Node có một nhóm đạt kiểm tra giữ/bỏ |
+| Cách xếp event | Node có một nhóm đạt kiểm tra |
 |---|---:|
 | GNNExplainer | 73/80 |
 | Thứ tự ngẫu nhiên | 70/80 |
@@ -235,8 +235,9 @@ riêng lẻ vẫn cần kiểm tra trực tiếp.
 Ở phần event, bằng chứng chưa đủ mạnh. GNNExplainer đạt kiểm tra giữ/bỏ ở 73/80 node,
 nhưng ba cách chọn đơn giản cũng đạt 70–71/80 và thường phải giữ gần như toàn bộ
 neighborhood. Trên test, event đứng đầu của GNNExplainer còn khớp phép bỏ từng event
-ít hơn cách chọn event gần nhất. Vì vậy Sprint 5 **không đề xuất graph con nào cho
-người điều tra**.
+ít hơn cách chọn event gần nhất. Vì vậy, kết quả xếp hạng event hiện chỉ được dùng để
+quan sát cách model dự đoán; chưa đủ tin cậy để kết luận event nào thực sự đáng ngờ
+hoặc nên được ưu tiên kiểm tra.
 
 Phép kiểm tra với trọng số ngẫu nhiên cho thấy lời giải thích có thay đổi theo những
 gì TGAT đã học. Tuy nhiên, điều này không đủ để chứng minh thứ hạng event là chính xác.

@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-09-04T10:46:12.199990+07:00",
+  "protocol_lock_sha256": "fb0fb542eb695b23fbcc8bc3c059504863b753e1430e263188cb3aac733f321f",
+  "interpretation_scope": "frozen-model sensitivity under inference-time counterfactual inputs; not a causal effect",
+  "variants": [
+    "FULL",
+    "T-CONST",
+    "N-BASE",
+    "MP-OFF"
+  ],
+  "split_results": [
+    {
+      "split": "validation",
+      "variant": "FULL",
+      "n": 183862,
+      "average_precision": 0.041480213812008004,
+      "roc_auc": 0.7816806745332728
+    },
+    {
+      "split": "validation",
+      "variant": "T-CONST",
+      "n": 183862,
+      "average_precision": 0.03915505331466894,
+      "roc_auc": 0.7670657165380688
+    },
+    {
+      "split": "validation",
+      "variant": "N-BASE",
+      "n": 183862,
+      "average_precision": 0.03482634926268301,
+      "roc_auc": 0.7624307376897612
+    },
+    {
+      "split": "validation",
+      "variant": "MP-OFF",
+      "n": 183862,
+      "average_precision": 0.027261174530337568,
+      "roc_auc": 0.7224472418812224
+    },
+    {
+      "split": "test",
+      "variant": "FULL",
+      "n": 183840,
+      "average_precision": 0.044531118336891655,
+      "roc_auc": 0.7855832007292138
+    },
+    {
+      "split": "test",
+      "variant": "T-CONST",
+      "n": 183840,
+      "average_precision": 0.04261024484514629,
+      "roc_auc": 0.7736143701258293
+    },
+    {
+      "split": "test",
+      "variant": "N-BASE",
+      "n": 183840,
+      "average_precision": 0.035621839038770066,
+      "roc_auc": 0.7625408251685206
+    },
+    {
+      "split": "test",
+      "variant": "MP-OFF",
+      "n": 183840,
+      "average_precision": 0.028574552292251244,
+      "roc_auc": 0.7257614161751423
+    }
+  ],
+  "full_reproduction": {
+    "validation": {
+      "max_absolute_logit_difference": 7.105427357601002e-15,
+      "passed": true
+    },
+    "test": {
+      "max_absolute_logit_difference": 3.552713678800501e-15,
+      "passed": true
+    }
+  },
+  "mp_off_root_path_check": {
+    "target_node_id": 1809844,
+    "base_logit": 0.12363573163747787,
+    "target_core_change_absolute_logit_delta": 0.9659012779593468,
+    "target_risk_change_absolute_logit_delta": 0.008779942989349365,
+    "neighbor_change_absolute_logit_delta": 0.0,
+    "passed": true
+  },
+  "technical_gates": {
+    "full_predictions_reproduced": true,
+    "all_variants_both_splits": true,
+    "all_outputs_finite": true,
+    "model_state_unchanged": true,
+    "mp_off_retains_target_root_and_risk_only": true
+  },
+  "artifacts": {
+    "variant_predictions": "artifacts/metrics/sprint5_2_ablation_predictions.npz",
+    "figure": "artifacts/figures/sprint5_2/03_tgat_input_ablation.png"
+  },
+  "runtime_seconds": 29.59531699999934
+}

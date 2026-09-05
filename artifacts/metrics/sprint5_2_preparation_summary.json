@@ -1,0 +1,165 @@
+{
+  "schema_version": 1,
+  "status": "preparation_complete",
+  "gate_passed": true,
+  "completed_at": "2026-09-03T09:24:40.267806+07:00",
+  "test_predictions_started_at": "2026-09-03T09:23:59.774934+07:00",
+  "protocol": {
+    "path": "artifacts/metrics/sprint5_2_protocol_lock.json",
+    "created_in_this_run": false,
+    "file_sha256": "74029ce8d33e5d8cd13810a678acd09e500a709d5bcec279fc03bf6dfe322faf",
+    "payload_sha256": "fb0fb542eb695b23fbcc8bc3c059504863b753e1430e263188cb3aac733f321f"
+  },
+  "environment": {
+    "python": "3.12.1",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "numpy": "2.5.1",
+    "pandas": "3.0.5",
+    "torch": "2.12.0+cpu",
+    "torch_geometric": "2.8.0.post1",
+    "device": "cpu",
+    "omp_num_threads": "1"
+  },
+  "threshold": {
+    "threshold": 0.7573873996734619,
+    "precision": 0.05103720777082647,
+    "recall": 0.26655202063628547,
+    "f1": 0.08567085809036892,
+    "true_positive": 620,
+    "false_positive": 11528,
+    "false_negative": 1706,
+    "candidate_count": 182612,
+    "final_tie_count": 1
+  },
+  "reproduction": {
+    "validation": {
+      "average_precision_absolute_difference": 0.0,
+      "roc_auc_absolute_difference": 2.220446049250313e-16
+    },
+    "test": {
+      "average_precision_absolute_difference": 6.938893903907228e-18,
+      "roc_auc_absolute_difference": 2.220446049250313e-16
+    }
+  },
+  "split_metrics": {
+    "validation": {
+      "sample_count": 183862,
+      "positive_count": 2326,
+      "threshold": 0.7573873996734619,
+      "confusion_matrix": {
+        "TN": 170008,
+        "FP": 11528,
+        "FN": 1706,
+        "TP": 620
+      },
+      "precision": 0.05103720777082647,
+      "recall": 0.26655202063628547,
+      "f1": 0.08567085809036892,
+      "predicted_positive_rate": 0.0660712925998847,
+      "average_precision": 0.04148019508425553,
+      "roc_auc": 0.781680673349148
+    },
+    "test": {
+      "sample_count": 183840,
+      "positive_count": 2326,
+      "threshold": 0.7573873996734619,
+      "confusion_matrix": {
+        "TN": 169925,
+        "FP": 11589,
+        "FN": 1716,
+        "TP": 610
+      },
+      "precision": 0.05000409869661448,
+      "recall": 0.2622527944969905,
+      "f1": 0.08399311531841652,
+      "predicted_positive_rate": 0.06635661444734552,
+      "average_precision": 0.04453105399155254,
+      "roc_auc": 0.7855831959921398
+    }
+  },
+  "cohort_counts": {
+    "validation": {
+      "TP": 620,
+      "FP": 11528,
+      "FN": 1706,
+      "TN": 170008
+    },
+    "test": {
+      "TP": 610,
+      "FP": 11589,
+      "FN": 1716,
+      "TN": 169925
+    }
+  },
+  "selected_target_counts": {
+    "validation": {
+      "TP": 20,
+      "FP": 20,
+      "FN": 20,
+      "TN": 20
+    },
+    "test": {
+      "TP": 20,
+      "FP": 20,
+      "FN": 20,
+      "TN": 20
+    }
+  },
+  "artifacts": {
+    "predictions": {
+      "path": "artifacts/metrics/sprint5_2_predictions.csv.gz",
+      "sha256": "cd27032a52716dcb61f39f0cf654b699ce7009e476449264ca8dde64d69e3ac0",
+      "row_count": 367702
+    },
+    "threshold_curve": {
+      "path": "artifacts/metrics/sprint5_2_threshold_curve.csv.gz",
+      "sha256": "0c8859caf01afdaaca17089f13dffba38feeef1662c9d95ba8e65714e89bd693",
+      "row_count": 182612,
+      "logical_content_sha256": "68f439a47fb38c93acef618e9dc71b29ee8db47fb252518e95b2341d1e93839d"
+    },
+    "targets": {
+      "path": "artifacts/metrics/sprint5_2_targets.csv",
+      "sha256": "27b422787e155ec2b3e784007fd3cafdd04909833d2428977a0e1a0c977e41f2",
+      "row_count": 160,
+      "pair_count": 80
+    },
+    "validation_target_batches": {
+      "path": "artifacts/metrics/sprint5_2_validation_target_batches.npz",
+      "sha256": "0af14e8367275708220d06973bb4d01430f0926ef41985a1bd76c2c77da4a792",
+      "logical_content_sha256": "bd29615a70db5501d50e26432486dcc3257f58b6a01f8811f4eb80a1b465b479"
+    },
+    "test_target_batches": {
+      "path": "artifacts/metrics/sprint5_2_test_target_batches.npz",
+      "sha256": "3d2106ddfc268646b8854ac9994b2827a02235e677457646a35bc3a9c46c8f53",
+      "logical_content_sha256": "9f5469be60aefcc44d7f2b8e540e412ffc649c029946f70bb52e9f67b8729826"
+    },
+    "threshold_figure": {
+      "path": "artifacts/figures/sprint5_2/01_threshold_and_errors.png",
+      "sha256": "90027d07afbbb8794ecc64b29f5f17338a500942e7cea90c8e0181669546bc9b"
+    }
+  },
+  "gate_checks": {
+    "dataset_hash_matches_plan": true,
+    "checkpoint_hash_matches_plan": true,
+    "community_feature_hash_matches_plan": true,
+    "validation_ap_reproduced": true,
+    "validation_roc_auc_reproduced": true,
+    "test_ap_reproduced": true,
+    "test_roc_auc_reproduced": true,
+    "protocol_locked_before_test_predictions": true,
+    "threshold_uses_validation_only": true,
+    "validation_counts_match_checkpoint": true,
+    "test_counts_match_checkpoint": true,
+    "prediction_nodes_unique": true,
+    "cohorts_exhaustive": true,
+    "selected_targets_unique": true,
+    "matched_pairs_valid": true,
+    "target_limit_respected": true,
+    "validation_adapter_equivalence": true,
+    "test_adapter_equivalence": true,
+    "validation_batch_event_counts_match": true,
+    "test_batch_event_counts_match": true,
+    "model_state_unchanged": true,
+    "required_artifacts_exist": true
+  }
+}

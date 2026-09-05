@@ -33,6 +33,10 @@ scripts/*
 !scripts/sprint5_explainer_feasibility.py
 !scripts/sprint5_explainer_protocol_and_evaluation.py
 !scripts/sprint5_explainer_analysis_and_report.py
+!scripts/sprint5_2_prepare_error_cohorts.py
+!scripts/sprint5_2_error_attribution.py
+!scripts/sprint5_2_tgat_ablation.py
+!scripts/build_tgat_error_notebook.py
 
 # Editor and OS files
 .vscode/
